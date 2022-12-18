@@ -31,12 +31,7 @@ body {
 
 .form .btn{
     margin: .5em 0;
-    text-align: center;
-}
-
-.form .btn-new-account{
-    margin: auto;
-    text-align: center;
+    text-align: end;
 }
 
 .footer {
@@ -89,39 +84,15 @@ body {
     font-family: 500;
     color: var(--bg-clr);
     background-color: var(--tertiary-clr);
-    border-radius: 5px;
+    border-radius: 6px;
     border:0;
     cursor:pointer;
-}
-
-.btn:hover button {
-    background-color:#ec2c04;
-}
-
-.btn-new-account button {
-    font-size: 1rem;
-    padding: .5em 2em;
-    font-family: 'Montserrat', sans-serif;
-    font-family: 500;
-    color: var(--bg-clr);
-    background-color: #49be25;
-    border-radius: 5px;
-    border:0;
-    cursor:pointer;
-}
-
-.btn-new-account:hover button {
-    background-color: #389f0a;
 }
 
 /*TYPOGRAPHY*/
 
 a {
     text-decoration: none;
-}
-
-p {
-    text-align: center;
 }
 
 p,
