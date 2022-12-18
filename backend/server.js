@@ -12,13 +12,24 @@ app.use(express.static(path.join(__dirname, '../frontend/views')))
 app.use(express.urlencoded({extended: true}))
 
 
+
+
 app.use('/', require('./routes/indexRoute'))
+app.use('/',  require('./routes/commuterRegister'))
 app.use('/admin', require('./routes/adminLogin'))
-app.use('/',  require('./routes/register'))
+
 app.use('/admin', verifyJWT, (require('./routes/newAdmin')))
+
+
 
 app.use('/commuter', require('./routes/commuterLogin'))
 app.use('/commuter', require('./routes/commuterLogin'))
+app.use('/commuter', require('./routes/reportViolation'))
+app.use('/commuter', require('./routes/reportMissingItem'))
+app.use('/commuter', require('./routes/getFareCalc'))
+app.use('/commuter', require('./routes/getReportsHistory'))
+app.use('/commuter', require('./routes/getCommuterProfile'))
+
 
 app.use('/', require('./routes/logoutRoute'))
 

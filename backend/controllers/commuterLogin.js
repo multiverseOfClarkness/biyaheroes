@@ -47,7 +47,7 @@ const login = async (req, res) => {
 }
 
 const getDashboard = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'commuter-dashboard.html'))
+    res.sendFile(path.resolve('./', 'frontend', 'views', 'home.html'))
 }
 
 function generateAccessToken(user){
