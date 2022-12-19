@@ -46,9 +46,7 @@ const login = async (req, res) => {
     
 }
 
-function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '300s'})
-}
+
 
 const adminDashboard = (req, res) => {
     res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-add-member.html'))
@@ -58,5 +56,13 @@ module.exports = {
     getLoginForm,
     login,
     adminDashboard
+}
+
+
+function generateAccessToken(user){
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '300s'}, (err, token) =>{
+        if(err) {console.log(err)}
+        res.send(token)
+    })
 }
 
