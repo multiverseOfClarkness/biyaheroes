@@ -30,8 +30,8 @@ const login = async (req, res) => {
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
                 const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-                res.cookie('jwt', accessToken, {httpOnly: true})
-                res.redirect('/commuter/dashboard')
+                res.cookie('token', accessToken, {httpOnly: true})
+                return res.redirect('/commuter/dashboard')
                 
             }else{
                 res.send('invalid username/password')
@@ -51,8 +51,10 @@ const getDashboard = (req, res) => {
 }
 
 function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '300s'})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'})
 }
+
+
 
 module.exports = {
     getLoginForm,
