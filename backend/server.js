@@ -1,7 +1,7 @@
 require('dotenv').config()
 const connectDB = require('./config/db')
 const path = require('path')
-const {verifyJWT} = require('./middlewares/verifyJWT')
+const {verifyJWTforCommuters, verifyJWTforAdmin} = require('./middlewares/verifyJWTforCommuters')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const app = express()
@@ -18,19 +18,24 @@ app.use(cookieParser())
 
 app.use('/', require('./routes/indexRoute'))
 app.use('/',  require('./routes/commuterRegister'))
+app.get('/logout', (req, res) => {
+    res.cookie('token', '', {maxAge: 1})
+    res.redirect('/')
+})
+
 app.use('/admin', require('./routes/adminLogin'))
 
-app.use('/admin', verifyJWT, (require('./routes/newAdmin')))
+app.use('/admin', verifyJWTforAdmin, (require('./routes/newAdmin')))
 
 
 
-app.use('/commuter', require('./routes/commuterLogin'))
-app.use('/commuter', require('./routes/commuterLogin'))
-app.use('/commuter',   require('./routes/reportViolation'))
-app.use('/commuter',  verifyJWT,  require('./routes/reportMissingItem'))
-app.use('/commuter',  verifyJWT,  require('./routes/getFareCalc'))
-app.use('/commuter',  verifyJWT,  require('./routes/getReportsHistory'))
-app.use('/commuter',  verifyJWT,  require('./routes/getCommuterProfile'))
+app.use('/commuter',  require('./routes/commuterLogin'))
+app.use('/commuter',  verifyJWTforCommuters, require('./routes/commuterDashboard'))
+app.use('/commuter',  verifyJWTforCommuters, require('./routes/reportViolation'))
+app.use('/commuter',  verifyJWTforCommuters,  require('./routes/reportMissingItem'))
+app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getFareCalc'))
+app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getReportsHistory'))
+app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getCommuterProfile'))
 
 
 app.use('/', require('./routes/logoutRoute'))

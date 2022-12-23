@@ -46,9 +46,6 @@ const login = async (req, res) => {
     
 }
 
-const getDashboard = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'home.html'))
-}
 
 function generateAccessToken(user){
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'})
@@ -59,6 +56,6 @@ function generateAccessToken(user){
 module.exports = {
     getLoginForm,
     login,
-    getDashboard
+   
 }
 
