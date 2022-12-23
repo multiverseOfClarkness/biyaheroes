@@ -7,9 +7,8 @@ const cookieParser = require('cookie-parser')
 const app = express()
 connectDB()
 
-// to serve static files(html, css, images etc.)
+
 app.use(express.static(path.join(__dirname, '../frontend/views')))
-// parses incoming requests with urlencoded payloads and is based on body-parser.
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
 
@@ -18,14 +17,11 @@ app.use(cookieParser())
 
 app.use('/', require('./routes/indexRoute'))
 app.use('/',  require('./routes/commuterRegister'))
-app.get('/logout', (req, res) => {
-    res.cookie('token', '', {maxAge: 1})
-    res.redirect('/')
-})
+app.use('/', require('./routes/logout'))
 
 app.use('/admin', require('./routes/adminLogin'))
 
-app.use('/admin', verifyJWTforAdmin, (require('./routes/newAdmin')))
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/newAdmin')))
 
 
 
@@ -38,7 +34,7 @@ app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getReportsHistor
 app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getCommuterProfile'))
 
 
-app.use('/', require('./routes/logoutRoute'))
+
 
 app.get('*', (req, res)=> {
     res.send('Resource not found')

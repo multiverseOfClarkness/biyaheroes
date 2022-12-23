@@ -19,7 +19,7 @@ const verifyJWTforCommuters = (req, res, next) => {
             }
         })
     }else{
-        res.redirect('/commuter ')
+        res.redirect('/commuter')
     }
 }
 
@@ -39,7 +39,7 @@ const verifyJWTforAdmin = (req, res, next) => {
             }
         })
     }else{
-        res.redirect('/admin ')
+        res.redirect('/admin')
     }
 }
 

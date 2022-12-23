@@ -69,7 +69,7 @@
     </header>
 
     <section class="container">
-        <form action="" id="form">
+        <form action="/commuter/report/violation" method="post" id="form" on>
 
             <div class="row">
                 <div class="col-md-6">
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="form-item">
-                        <label for="" class="form-label">TODA</label>
+                        <label for="" class="form-label" id="toda">TODA</label>
                         <select class="form-select" aria-label="Default select example">
                             <option selected>Select the Driver's TODA</option>
                             <option value="delpatoda">Dela Paz Toda</option>
@@ -108,7 +108,7 @@
                 <div class="col-md-6">
                     <h3>Incident Information</h3>
                     <div class="form-item">
-                        <label for="" class="form-label">Violation</label>
+                        <label for="" class="form-label" id="violation-type">Violation</label>
                         <select class="form-select" aria-label="Default select example">
                             <option selected>Select Type of Violation</option>
                             <option value="overspeeding">Overspeeding</option>
@@ -145,7 +145,7 @@
                     </div>
 
                     <div class="form-item">
-                        <label for="attach-evidence" class="form-label">Attach Evidence/s</label>
+                        <label for="attach-evidence" class="form-label" id="evidence">Attach Evidence/s</label>
                         <input class="form-control" type="file" id="attach-evidence" multiple />
                         <small class="form-text">Error Message</small>
                     </div>
@@ -160,7 +160,7 @@
         </form>
 
         <div class="text-center">
-            <a href="history.html" class="history">View Report History Instead</a>
+            <a href="/commuter/reportsHistory" class="history">View Report History Instead</a>
         </div>
         
     </section>
