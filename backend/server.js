@@ -8,6 +8,8 @@ const app = express()
 connectDB()
 
 
+
+
 app.use(express.static(path.join(__dirname, '../frontend/views')))
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())

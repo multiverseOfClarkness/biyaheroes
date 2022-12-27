@@ -1,4 +1,3 @@
-
 const path = require('path')
 const User = require('../models/users')
 const bcryptjs = require('bcryptjs')
@@ -30,8 +29,11 @@ const createNewUser = async (req, res) => {
         await newUser.save()
         res.redirect('/')
     } catch (error) {
-        res.send('Email already used!')
-        
+        if (error.name == "ValidationError") {
+            return res.status(400).json({
+                message: "Username already registered! Try logging in",
+            });
+        }
     }
                     
         

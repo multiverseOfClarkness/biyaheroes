@@ -3,7 +3,6 @@ const path = require ('path')
 const bcryptjs =require('bcryptjs')
 const commonUsers = require('../models/users.js')
 const jwt = require('jsonwebtoken')
-const { rmSync } = require('fs')
 
 
 

@@ -1,3 +1,4 @@
+
 //LOGIN INPUTS
 const form = document.getElementById('form');
 const email = document.getElementById('email');
@@ -11,8 +12,7 @@ const address = document.getElementById('address');
 const phoneNum = document.getElementById('phone-num');
 const confirmPass = document.getElementById('confirm-pass');
 
-//POP-UP
-const popup = document.getElementById('popup')
+
 
 
 function Validation() {
@@ -82,11 +82,9 @@ function Validation() {
         errorMsg(email, 'Enter a valid email.');
         return valid = false;
     } 
-        successMsg(email);
+    successMsg(email);
         
         
-        
-    
     //password validation
     if (passValue === '') {
         errorMsg(password, 'This field cannot be blank.');
@@ -105,7 +103,7 @@ function Validation() {
     } 
         successMsg(confirmPass);
         
-    successAlert();
+    
     
 
     
