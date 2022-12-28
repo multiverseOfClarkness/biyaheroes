@@ -11,6 +11,7 @@ const complainantSomeoneElse = document.getElementById('someone-else')
 const evidence = document.getElementById('evidence');
 
 function formValidation() {
+    var valid = true
     const bodyNumVal = bodyNum.value.trim();
     const driverNameVal = driverName.value.trim();
     const todaVal = toda.value
@@ -21,8 +22,10 @@ function formValidation() {
     
     if(bodyNumVal === '') {
         errorMsg(bodyNum, 'Please provide body number.');
+        return valid = false
     } else if(bodyNumVal.length !== 4) {
         errorMsg(bodyNum, 'Invalid number of Body Number');
+        return valid = false
     }
     else {
         successMsg(bodyNum);
@@ -30,37 +33,42 @@ function formValidation() {
     
     if(driverNameVal === '') {
         errorMsg(driverName, `Please provide driver's name or alias.`);
+        return valid = false
     } else {
         successMsg(driverName);
     }
 
     if(todaVal === `Select the Driver's TODA`) {
         errorMsg(toda, `Please choose the toda.`)
-        
+        return valid = false
     } else {
         successMsg(toda);
     }
 
     if(driverDescVal === '') {
         errorMsg(driverDesc, 'Please provide further information.');
+        return valid = false
     } else {
         successMsg(driverDesc);
     }
 
     if(violationVal === 'Select Type of Violation') {
         errorMsg(violation, 'Please choose type of violation.');
+        return valid = false
     } else {
         successMsg(violation);
     }
     
     if(dateVal === '') {
         errorMsg(date, 'Please provide date of incident.');
+        return valid = false
     } else {
         successMsg(date);
     }
     
     if(incidentDescVal === '') {
         errorMsg(incidentDesc, 'Please provide further information.');
+        return valid = false
     } else {
         successMsg(incidentDesc);
     }
@@ -71,6 +79,7 @@ function formValidation() {
         successMsgRadioButton(complainantSomeoneElse)
     }else {
        errorMsgRadioButton(complainantSomeoneElse, 'Please indicate complainant.')
+       return valid = false
     }
 
 }

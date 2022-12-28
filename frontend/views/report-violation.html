@@ -98,11 +98,11 @@
 
                     <div class="form-item">
                         <label> TODA </label>
-                        <select class="form-select" id="toda" aria-label="Default select example">
+                        <select class="form-select" name="toda" id="toda" aria-label="Default select example">
                             <option value="Select the Driver's TODA">Select the Driver's TODA</option>
-                            <option value="delpatoda">Dela Paz Toda</option>
-                            <option value="zapote-toda">Zapote Toda</option>
-                            <option value="malaban-toda">Malaban Toda</option>
+                            <option name="delpatoda" value="delpatoda">Dela Paz Toda</option>
+                            <option name="zapote-toda" value="zapote-toda">Zapote Toda</option>
+                            <option name="malaban-toda" value="malaban-toda">Malaban Toda</option>
                         </select>
                         <small class="form-text">Error Message</small>
                     </div>
@@ -119,11 +119,11 @@
                     <h3>Incident Information</h3>
                     <div class="form-item">
                         <label>Violation</label>
-                        <select id="violation" class="form-select" aria-label="Default select example">
+                        <select id="violation" name="violation" class="form-select" aria-label="Default select example">
                             <option selected>Select Type of Violation</option>
-                            <option value="overspeeding">Overspeeding</option>
-                            <option value="overchargin">Overcharging</option>
-                            <option value="drunk-drive">Drunk Driving</option>
+                            <option name="overspeeding" value="overspeeding">Overspeeding</option>
+                            <option name="overcharging" value="overcharging">Overcharging</option>
+                            <option name="drunk-driving" value="drunk-driving">Drunk Driving</option>
                         </select>
                         <small class="form-text">Error Message</small>
                     </div>
@@ -154,7 +154,7 @@
 
                     <div class="form-item">
                         <label for="attach-evidence" class="form-label" name="evidence" id="evidence">Attach Evidence/s</label>
-                        <input class="filepond" type="file" id="attach-evidence" multiple />
+                        <input name="evidence" class="filepond" type="file" id="evidence" multiple />
                         <small class="form-text">Error Message</small>
                     </div>
 

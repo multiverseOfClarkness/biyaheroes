@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const violationReportsSchema = mongoose.Schema({
+const violationReportsSchema = new Schema({
     bodyNum : {
         type: String,
         required: true
@@ -13,7 +14,7 @@ const violationReportsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    driverDesciption : {
+    driverDescription : {
         type: String,
         required: true
     },
@@ -25,7 +26,7 @@ const violationReportsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    incidentDesciption : {
+    incidentDescription : {
         type: String,
         required: true
     },
@@ -34,13 +35,8 @@ const violationReportsSchema = mongoose.Schema({
         required: true
     },
     evidence : {
-        name: String,
-        desc: String,
-        img: {
-            data: Buffer,
-            contentType: String
-        }
+        type: Buffer
     }
-}) 
+}, {timestamps: true}) 
 
-module.exports = mongoose.model('Violation_Reports', violationReportsSchema, 'violation_reports')
+module.exports = mongoose.model('violationReports', violationReportsSchema, 'violationReports')

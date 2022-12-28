@@ -1,45 +1,58 @@
 const path = require('path')
-const { encode } = require('punycode')
 const ViolationReport = require('../models/violationReports')
-const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
+
+const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
+
+
+
 const getReportViolationPage = (req,res) => {
     res.sendFile(path.resolve('./', 'frontend', 'views', 'report-violation.html'))
 }
 
 const submitViolationReport = async (req, res) => {
-    try {
-        const body = await req.body
+    const body = req.body
+    const bodyNum = body.bodyNum
+    const driverName = body.driverName
+    const TODA = body.toda
+    const driverDescription = body.driverDesc
+    const violation = body.violation
+    const dateOfIncident = body.date
+    const incidentDescription = body.incidentDesc
+    const complainant = body.complainant
+    const evidence = body.evidence
 
-        let newReport = new ViolationReport({
-            body_number: body.bodyNum,
-            driver_name: body.driverName,
-            TODA: body.toda,
-            driver_description: body.driverDesc,
-            date: body.date,
-            incident_description: body.incidentDesc,
-            complainant: body.complainant,
-            evidence: body.evidence
-        })
-        await ViolationReport.save()
+
+    const violationReports = new ViolationReport({
+        bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, evidence
+    });
+    saveImageAsBinary(violationReports, evidence)
+
+    try {
+        const newReport = await violationReports.save();
         res.redirect('/commuter/reportsHistory')
     } catch (error) {
-        if (error.name == "ValidationError") {
-            return res.status(400).json({
-                message: "An error has occured. Please try again.",
-            });
-        }
+        console.log(error.message)
     }
     
-   
+    
 }
 
-// const saveEvidence (img, encodedImage ) =>{
-//     if (encodedImage == null) return
-//     const image =  JSON.parse(encodedImage)
-//     if (image != null && imageMimeTypes.includes(image.type)) {
-//         img.evidence = new Buffer.from(image.data, 'base64')
-//     }
-// }   
+const saveImageAsBinary = (violationReports, evidenceEncoded) => {
+    try {
+        if (evidenceEncoded === undefined) return;
+
+        const evidence = JSON.parse(evidenceEncoded)
+
+        if (evidence != null && imageMimeTypes.includes(evidence.type)) {
+            violationReports.evidence = new Buffer.from(evidence.data, 'base64')
+    }
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+}
+  
 
 module.exports = {
     getReportViolationPage,
