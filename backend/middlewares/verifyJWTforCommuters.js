@@ -10,11 +10,11 @@ const verifyJWTforCommuters = (req, res, next) => {
 
     if (token){
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
+           
             if(err){
                 console.log(err.message)
                 res.redirect('/commuter')
             }else{
-                console.log(decodedToken)
                 next()
             }
         })
@@ -45,5 +45,6 @@ const verifyJWTforAdmin = (req, res, next) => {
 
 module.exports = {
     verifyJWTforCommuters,
-    verifyJWTforAdmin
+    verifyJWTforAdmin,
+    
 }

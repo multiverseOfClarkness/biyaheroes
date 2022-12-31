@@ -10,9 +10,10 @@ connectDB()
 
 
 
-app.use(express.json())
+
 app.use(express.static(path.join(__dirname, '../frontend/views')))
-app.use(express.urlencoded({extended: true}, {limit: '50mb'}))
+app.use(express.urlencoded({extended: false, limit: '50mb'}))
+app.use(express.json())
 app.use(cookieParser())
 
 

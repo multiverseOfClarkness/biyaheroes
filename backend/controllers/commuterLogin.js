@@ -28,7 +28,6 @@ const login = async (req, res) => {
                 const user = { email:userEmail}
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
                 res.cookie('token', accessToken, {httpOnly: true})
                 return res.redirect('/commuter/dashboard')
                 
@@ -54,7 +53,6 @@ function generateAccessToken(user){
 
 module.exports = {
     getLoginForm,
-    login,
-   
+    login
 }
 

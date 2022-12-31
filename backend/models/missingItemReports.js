@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 
-const violationReportsSchema = new Schema({
+const missingItemReportsSchema = new Schema({
     bodyNum : {
         type: String,
         required: [true, 'Body number is required']
@@ -45,6 +45,6 @@ const violationReportsSchema = new Schema({
 }, {timestamps: true}) 
 
 
-const violationReports = mongoose.model('violationReports', violationReportsSchema, 'violationReports')
+const violationReports = mongoose.model('missingItemReports', missingItemReportsSchema, 'missingItemReports')
 module.exports = violationReports
  

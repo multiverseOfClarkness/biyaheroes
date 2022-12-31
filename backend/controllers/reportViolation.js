@@ -1,5 +1,10 @@
 const path = require('path')
 const ViolationReport = require('../models/violationReports')
+const users = require('../models/users')
+const jwtdecode = require('jwt-decode')
+
+
+
 
 const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
@@ -10,6 +15,7 @@ const getReportViolationPage = (req,res) => {
 }
 
 const submitViolationReport = async (req, res) => {
+    const findUser = await users.findOne({email: jwtdecode(req.cookies.token).email})
     const body = req.body
     const bodyNum = body.bodyNum
     const driverName = body.driverName
@@ -20,15 +26,18 @@ const submitViolationReport = async (req, res) => {
     const incidentDescription = body.incidentDesc
     const complainant = body.complainant
     const evidence = body.evidence
-
-
+    const author = findUser._id
+    
     const violationReports = new ViolationReport({
-        bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, evidence
+        bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, evidence, author
     });
     saveImageAsBinary(violationReports, evidence)
+     
 
     try {
-        const newReport = await violationReports.save();
+       
+        await violationReports.save();
+        
         res.redirect('/commuter/reportsHistory')
     } catch (error) {
         console.log(error.message)
@@ -37,11 +46,11 @@ const submitViolationReport = async (req, res) => {
     
 }
 
-const saveImageAsBinary = (violationReports, evidenceEncoded) => {
+const saveImageAsBinary = async (violationReports, evidenceEncoded) => {
     try {
-        if (evidenceEncoded === undefined) return;
+        if (evidenceEncoded === undefined || evidenceEncoded === null) return;
 
-        const evidence = JSON.parse(evidenceEncoded)
+        const evidence = await JSON.parse(evidenceEncoded)
 
         if (evidence != null && imageMimeTypes.includes(evidence.type)) {
             violationReports.evidence = new Buffer.from(evidence.data, 'base64')
@@ -49,9 +58,9 @@ const saveImageAsBinary = (violationReports, evidenceEncoded) => {
     } catch (error) {
         console.log(error)
     }
-    
-    
 }
+
+
   
 
 module.exports = {

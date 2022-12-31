@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const userSchema = mongoose.Schema({
+const userSchema = new Schema({
     fname : {
         type: String,
         required: [true, 'Firstname is required.']
@@ -29,9 +30,13 @@ const userSchema = mongoose.Schema({
     verifiedpass : {
         type: String,
         required: [true, 'Password is required.']
+    },
+    reports : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'violationReports'
     }
-
 })
+
 
 //validates unique email
 userSchema.path('email').validate(async (email) => {
@@ -39,4 +44,5 @@ userSchema.path('email').validate(async (email) => {
     return !recordCount
 }, 'Email already exists')
 
-module.exports = mongoose.model('User', userSchema, 'user')
+ const user = mongoose.model('user', userSchema, 'user')
+ module.exports = user
