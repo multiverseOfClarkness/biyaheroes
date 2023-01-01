@@ -2,10 +2,6 @@ const path = require('path')
 const ViolationReport = require('../models/violationReports')
 const users = require('../models/users')
 const jwtdecode = require('jwt-decode')
-
-
-
-
 const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
 
@@ -37,7 +33,6 @@ const submitViolationReport = async (req, res) => {
     try {
        
         await violationReports.save();
-        
         res.redirect('/commuter/reportsHistory')
     } catch (error) {
         console.log(error.message)

@@ -19,7 +19,7 @@ const missingItemReportsSchema = new Schema({
         type: String,
         required: [true, 'Driver description is required']
     },
-    violation : {
+    itemType : {
         type: String,
         required: [true, 'Violation type is required']
     },
@@ -27,7 +27,7 @@ const missingItemReportsSchema = new Schema({
         type: String,
         required: [true, 'Date of incident is required']
     },
-    incidentDescription : {
+    itemDescription : {
         type: String,
         required: [true, 'Additional description about the incident is required']
     },
@@ -45,6 +45,6 @@ const missingItemReportsSchema = new Schema({
 }, {timestamps: true}) 
 
 
-const violationReports = mongoose.model('missingItemReports', missingItemReportsSchema, 'missingItemReports')
-module.exports = violationReports
+const missingItemReports = mongoose.model('missingItemReports', missingItemReportsSchema, 'missingItemReports')
+module.exports = missingItemReports
  
