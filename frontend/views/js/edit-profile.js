@@ -1,3 +1,5 @@
+
+
 const edit = document.getElementById('edit')
 const save = document.getElementById('save');
 const cancel = document.getElementById('cancel');
@@ -10,12 +12,7 @@ const phoneNum = document.getElementById('phone-num');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 
-const defaultFullName = fullName.value = "Hannah Liwanag";
-const defaultAddress = address.value = "De La Paz, Binan Laguna";
-const defaultBirthday = birthday.value = "2001-03-30";
-const defaultPhoneNum = phoneNum.value = "0912345";
-const defaultEmail = email.value = "andy@yopmail.com";
-const defaultPassword = password.value = "root";
+
 
 edit.addEventListener('click', toEdit);
 cancel.addEventListener('click', cancelEdit);
@@ -33,19 +30,21 @@ function toEdit() {
 
 function cancelEdit() {
     //returns the default name
-      fullName.value = defaultFullName;
-      birthday.value = defaultBirthday;
-      address.value = defaultAddress;
-      phoneNum.value = defaultPhoneNum;
-      email.value = defaultEmail;
-      password.value = defaultPassword;
 
-        edit.style.visibility = "visible";
-        save.style.visibility = "hidden";
-        cancel.style.visibility = "hidden";
+      edit.style.visibility = "visible";
+      save.style.visibility = "hidden";
+      cancel.style.visibility = "hidden";
       
-        for(const input of inputs) {
-          input.readOnly = true;
+      fullName.value = ""
+      address.value = ""
+      birthday.value = ""
+      phoneNum.value = ""
+      email.value = ""
+      password.value = ""
+
+      for(const input of inputs) {
+        input.readOnly = true;
+          
       }
     }
 

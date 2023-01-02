@@ -27,6 +27,10 @@ const userSchema = new Schema({
         required: [true, 'Email is required.'],
         unique: [true, 'Email already used.']
     },
+    password : {
+        type: String,
+        required: [true, 'Password is required.']
+    },
     verifiedpass : {
         type: String,
         required: [true, 'Password is required.']
@@ -39,10 +43,7 @@ const userSchema = new Schema({
 
 
 //validates unique email
-userSchema.path('email').validate(async (email) => {
-    const recordCount = await mongoose.models.User.countDocuments({email})
-    return !recordCount
-}, 'Email already exists')
+
 
  const user = mongoose.model('user', userSchema, 'user')
  module.exports = user

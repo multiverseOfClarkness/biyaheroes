@@ -24,14 +24,17 @@ const createNewUser = async (req, res) => {
         address: req.body.address,
         phone: req.body.phone,
         email: req.body.email,
+        password: req.body.password,
         verifiedpass: hashedPassword
         });
+        
         await newUser.save()
         res.redirect('/')
     } catch (error) {
-        if (error.name == "ValidationError") {
+        if (error) {
+            console.log(error)
             return res.status(400).json({
-                message: "Username already registered! Try logging in",
+                message: error.message
             });
         }
     }
