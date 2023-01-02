@@ -12,7 +12,7 @@ const verifyJWTforCommuters = (req, res, next) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
            
             if(err){
-                console.log(err.message)
+                console.log(err)
                 res.redirect('/commuter')
             }else{
                 next()

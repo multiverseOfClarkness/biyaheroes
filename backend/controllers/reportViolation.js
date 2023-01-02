@@ -33,7 +33,7 @@ const submitViolationReport = async (req, res) => {
     try {
        
         await violationReports.save();
-        res.redirect('/commuter/reportsHistory')
+        res.redirect('/commuter/history/violation')
     } catch (error) {
         console.log(error.message)
     }
