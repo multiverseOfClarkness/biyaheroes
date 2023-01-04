@@ -25,7 +25,7 @@ const userSchema = new Schema({
     email : {
         type: String,
         required: [true, 'Email is required.'],
-        unique: [true, 'Email already used.']
+        unique: [true, 'Email already used. Try logging in.']
     },
     password : {
         type: String,
@@ -38,6 +38,9 @@ const userSchema = new Schema({
     reports : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'violationReports'
+    },
+    profileImage : {
+        type: Buffer
     }
 })
 

@@ -31,11 +31,8 @@ const createNewUser = async (req, res) => {
         await newUser.save()
         res.redirect('/')
     } catch (error) {
-        if (error) {
-            console.log(error)
-            return res.status(400).json({
-                message: error.message
-            });
+        if (error.code === 11000) {
+            res.render('resend-user-register-page.ejs')
         }
     }
                     

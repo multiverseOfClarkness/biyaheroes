@@ -12,11 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/errorAlert.css">
     <script defer src="/js/users.js" ></script>
     
 </head>
 
-<body>
+<body onload=errorAlert()>
 
     <div class="container">
         
@@ -92,6 +93,13 @@
         </form>
         
     </div>
+    <div id="popup" class="popup">
+        <img src="/images/error.png" alt="tick.png">
+        <h2>Error</h2>
+        <p>Email already used. Try logging in. </p>
+        <button onclick=closepopup() type="button">OK</button>
+    </div>
+    <script src="/js/login-verify.js"></script>
 
 </body>
 </html>

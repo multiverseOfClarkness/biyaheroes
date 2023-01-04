@@ -8,14 +8,6 @@ body {
 
 /*DIVS*/
 
-.box {
-    width: fit-content;
-    padding: 2em;
-    border-radius: 12px;
-    background-color: var(--bg-clr);
-    position: absolute;
-}
-
 .header {
     margin: 1em 0;
     text-align: center;
@@ -98,20 +90,7 @@ body {
     visibility: visible;
 }
 
-.btn button {
-    font-size: 1rem;
-    padding: .5em 2em;
-    font-family: 'Montserrat', sans-serif;
-    font-family: 500;
-    color: var(--bg-clr);
-    background-color: var(--tertiary-clr);
-    border-radius: 6px;
-    border:0;
-    cursor:pointer;
-    margin-top: 10px;
-    position: relative;
-    left: 5em;
-}
+
 
 
 .popup img {

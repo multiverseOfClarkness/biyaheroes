@@ -14,11 +14,11 @@
 
     
 </head>
-<body>
+<body onload=errorAlert()>
     <div class="box">
 
         <div class="header">
-            <a href="/commuter"><h1>BiyaHeroes</h1></a>
+            <a href="#"><h1>BiyaHeroes</h1></a>
             <p>Please enter your login credentials</p>
         </div>
 
@@ -42,9 +42,17 @@
             <div class="footer">
                 <p>Don't have an account? <a href="/commuter/register">Signup</a></p>
             </div>
+
+            
         </form>
         
     </div>
-    
+    <div id="popup" class="popup">
+        <img src="/images/error.png" alt="tick.png">
+        <h2>Error</h2>
+        <p>Password incorrect. Try again.</p>
+        <button onclick=closepopup() type="button">OK</button>
+    </div>
+    <script src="/js/login-verify.js"></script>
 </body>
 </html>

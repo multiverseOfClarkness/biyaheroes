@@ -20,9 +20,10 @@ const login = async (req, res) => {
         
         
         const user = await commonUsers.findOne({email:email})
-        const isMatchUser = await bcryptjs.compare(password, user.verifiedpass)
+        
        
         if(user){
+            const isMatchUser = await bcryptjs.compare(password, user.verifiedpass)
             if(isMatchUser){
                 const userEmail = body.email
                 const user = { email:userEmail}
@@ -32,14 +33,14 @@ const login = async (req, res) => {
                 return res.redirect('/commuter/dashboard')
                 
             }else{
-                res.send('invalid username/password')
+                res.sendFile(path.resolve('./', 'frontend', 'views', 'login-wrong-pass.html'))
             }
         }else{
-            res.send('invalid username/password')
+            res.sendFile(path.resolve('./', 'frontend', 'views', 'login-no-email.html'))
         }
-    
     }catch (error){
-        res.send('Invalid username/password')
+        console.log(error)
+        res.status(500).send('An error has occured with the server. Please try again in a few minutes.')
     }
     
 }

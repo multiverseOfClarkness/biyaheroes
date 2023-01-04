@@ -13,12 +13,9 @@ const phoneNum = document.getElementById('phone-num');
 const confirmPass = document.getElementById('confirm-pass');
 
 
-
-
 function Validation() {
-
-        var valid = true
-
+    
+    var valid = true
     //login validation
     const emailValue = email.value.trim();
     const passValue = password.value.trim();
@@ -103,11 +100,6 @@ function Validation() {
     } 
         successMsg(confirmPass);
         
-    
-    
-
-    
-    
 }
 
 function errorMsg(input, msg) {
@@ -135,10 +127,5 @@ function isPhoneNum(phoneNum) {
     return /((^(\+)(\d){12}$)|(^\d{11}$))/.test(phoneNum);
 }
 
-function successAlert() {
-    alert('Registration successful!')
-}
-function errorAlert() {
-    alert('Email already used!')
-}
+
 

@@ -4,5 +4,6 @@ const router = express.Router()
 
 
 router.get ('/profile',  getCommuterProfile.getCommuterProfile)
+router.post('/profile', getCommuterProfile.updateCommuterProfile)
 
 module.exports = router
