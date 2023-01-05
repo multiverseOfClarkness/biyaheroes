@@ -140,7 +140,9 @@ body {
 }
 
 .navbar-brand > h2 {
-    margin: 0;
+    margin-left: 10px;
+    font-family: var(--ff-header);
+    
 }
 
 .nav-link,

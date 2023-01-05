@@ -160,6 +160,12 @@ input[type=number] {
     
 }
 
+.container a {
+    position: absolute;
+    top: 61em;
+    right: 9%;
+}
+
 .banner > h2 {
     font-family: var(--ff-header);
     color: var(--bg-clr);
