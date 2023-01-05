@@ -39,6 +39,7 @@ app.use('/commuter',  verifyJWTforCommuters,  require('./routes/reportMissingIte
 app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getFareCalc'))
 app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getReportsHistory'))
 app.use('/commuter',  verifyJWTforCommuters,  require('./routes/getCommuterProfile'))
+app.use('/commuter',  verifyJWTforCommuters,  require('./routes/changepass'))
 
 
 

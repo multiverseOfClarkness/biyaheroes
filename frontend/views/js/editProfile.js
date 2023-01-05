@@ -11,7 +11,6 @@ const address = document.getElementById('address');
 const birthday = document.getElementById('birthday');
 const phoneNum = document.getElementById('phoneNum');
 const email = document.getElementById('email');
-const password = document.getElementById('password');
 const changePassDiv = document.querySelector('.profile-item-change-pass')
 
 
@@ -42,6 +41,7 @@ pond.setOptions({
 
 edit.addEventListener('click', toEdit);
 cancel.addEventListener('click', cancelEdit);
+save.addEventListener('click', saveEdit);
 
 
 function saveEdit() {
@@ -53,7 +53,7 @@ function saveEdit() {
   const birthdayVal = birthday.value.trim()
   const phoneNumVal = phoneNum.value.trim()
   const emailVal = email.value.trim()
-  const passwordVal = password.value.trim()
+  
 
   if(firstNameVal === '') {
     errorMsg(firstName, 'This field cannot be empty.')
@@ -89,10 +89,6 @@ function saveEdit() {
     return valid = false
   } successMsg(email)
   
-  if (passwordVal === ''){
-    errorMsg(phoneNum, 'This field cannot be empty.')
-    return valid = false
-  } successMsg(password)
 }
 
 function toEdit() {

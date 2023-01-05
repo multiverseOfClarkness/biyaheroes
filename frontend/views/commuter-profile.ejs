@@ -145,16 +145,6 @@
                             <small id="small" class="form-text">Error Message</small>
                         </div>
 
-                        <button type="button" onclick="return editPassword()" class="change-pass">Change password</button>  
-
-                        <div class="profile-item-change-pass">
-                            <input type="password" name="currentPassword" id="currentPassword" placeholder="password " readonly class="form-control">
-
-                            <input type="password" name="newPassword" id="newPassword" placeholder="password " readonly class="form-control">
-
-                            <input type="password" name="verifyNewPassword" id="verifyNewPassword" placeholder="password " readonly class="form-control">
-                            <small id="small" class="form-text">Error Message</small>
-                        </div>
                     
                         <button type="submit" class="btn btn-outline-success" id="save">Save</button>
                         <button type="reset"  onClick="window.location.reload(true)" class="btn btn-outline-danger" id="cancel">Cancel</button>
@@ -162,7 +152,9 @@
                 </div>
             <% }) %> 
             </form>
-            
+            <a href="/commuter/change-pass">
+                <button class="change-pass-btn">Change password?</button>
+            </a>
     </section>
 
     <footer>

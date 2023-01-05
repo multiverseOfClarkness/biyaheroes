@@ -55,6 +55,7 @@ section {
 footer {
     background-color: var(--secondary-clr);
     color: var(--bg-clr);
+    
 }
 
 /*TYPOGRAPHY*/
@@ -91,6 +92,7 @@ footer > p {
     margin: 0;
     padding: .5em 0;
     text-align: center;
+   
 }
 
 /*IMAGES*/

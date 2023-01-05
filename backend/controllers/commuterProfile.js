@@ -46,12 +46,15 @@ const updateCommuterProfile = async (req, res) => {
         birthday: reqBirthday,
         phone: reqPhone,
         email: reqEmail,
-        password: reqPassword
     })
 
     res.redirect('/logout')
     
 
+}
+
+const commuterChangePass = async (req, res) => {
+    res.render('commuter-change-pass')
 }
 
 const saveImageAsBinary = async (user, imageEncoded) => {
@@ -70,6 +73,7 @@ const saveImageAsBinary = async (user, imageEncoded) => {
 
 module.exports = {
     getCommuterProfile,
-    updateCommuterProfile
+    updateCommuterProfile,
+    commuterChangePass
 }
 

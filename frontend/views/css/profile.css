@@ -74,6 +74,16 @@ footer {
     border-radius: 10px;
 }
 
+.profile-item-change-pass input{
+    margin: 1px;
+    padding-bottom: 1em;
+    position: relative;
+    border: 1px solid #ced4da ;
+    border-radius: 10px;
+    visibility: visible;
+}
+
+
 .profile-item input:focus {
     outline: 0;
 }
@@ -120,7 +130,7 @@ input[type=number] {
     visibility: hidden;
 }
 
-.change-pass {
+.change-pass-btn {
     border: 1px solid #ced4da;
     font-size: .8rem;
     padding: .5em 2em;
@@ -132,7 +142,7 @@ input[type=number] {
     cursor:pointer;
 }
 
-.change-pass:hover {
+.change-pass-btn:hover {
     background-color: var(--tertiary-clr);
     background-image: linear-gradient(rgb(0 0 0/7%) 0 0);
     transition: 0.3s ease-in;
