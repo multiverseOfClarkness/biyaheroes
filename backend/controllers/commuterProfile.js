@@ -4,8 +4,6 @@ const moment = require('moment')
 const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
 
-
-
 const getCommuterProfile = async (req,res) => {
     try {
         const currentUser = await user.findOne({email: jwtdecode(req.cookies.token).email})
@@ -27,6 +25,7 @@ const getCommuterProfile = async (req,res) => {
 }
 
 const updateCommuterProfile = async (req, res) => {
+
     const currentUser = await user.findOne({email: jwtdecode(req.cookies.token).email})
     const body = req.body
     
@@ -36,19 +35,42 @@ const updateCommuterProfile = async (req, res) => {
     const reqAddress = body.address
     const reqPhone = body.phone
     const reqEmail = body.email
-    const reqPassword = body.password
     
     
-    await user.updateOne({email : currentUser.email}, {
-        fname: reqFname,
-        lname: reqLname,
-        address: reqAddress,
-        birthday: reqBirthday,
-        phone: reqPhone,
-        email: reqEmail,
-    })
+    
+    try {
+        const reqProfile = await JSON.parse(body.profile)
+        
+        await user.updateOne({email : currentUser.email}, {
+            fname: reqFname,
+            lname: reqLname,
+            address: reqAddress,
+            birthday: reqBirthday,
+            phone: reqPhone,
+            email: reqEmail,
+            profileImage: new Buffer.from(reqProfile.data, 'base64'),
+            profileImageType: reqProfile.type
 
-    res.redirect('/logout')
+        })
+        res.redirect('/logout')
+    } catch (error) {
+        if(error.message === 'Unexpected token , in JSON at position 0'){
+            await user.updateOne({email : currentUser.email}, {
+                fname: reqFname,
+                lname: reqLname,
+                address: reqAddress,
+                birthday: reqBirthday,
+                phone: reqPhone,
+                email: reqEmail
+    
+            })
+            res.redirect('/logout')
+        }
+        
+    }
+    
+    
+    
     
 
 }
@@ -64,7 +86,11 @@ const saveImageAsBinary = async (user, imageEncoded) => {
         const profileImage = await JSON.parse(imageEncoded)
 
         if (profileImage != null && imageMimeTypes.includes(profileImage.type)) {
-            user.profileImage = new Buffer.from(profileImage.data, 'base64')
+            await user.updateOne({email: currentUser.email}, {
+                profileImage: new Buffer.from(profileImage.data, 'base64'),
+                profileImageType: profileImage.type
+            })
+           
     }
     } catch (error) {
         console.log(error)

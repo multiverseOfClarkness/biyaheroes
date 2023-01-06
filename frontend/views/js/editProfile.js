@@ -5,6 +5,7 @@ const inputs = document.getElementsByClassName('form-control');
 
 const profile = document.getElementById('profile');
 
+
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 const address = document.getElementById('address');
@@ -12,6 +13,9 @@ const birthday = document.getElementById('birthday');
 const phoneNum = document.getElementById('phoneNum');
 const email = document.getElementById('email');
 const changePassDiv = document.querySelector('.profile-item-change-pass')
+const dataUrl = document.getElementById('dataUrl')
+dataUrl.style.visibility = 'hidden'
+const dataUrlVal = dataUrl.value.trim()
 
 
 
@@ -25,6 +29,7 @@ FilePond.registerPlugin(
 
 const pond = FilePond.create(profile);
 
+
 pond.setOptions({
   imageCropAspectRatio: '1:1',
   imageResizeTargetWidth: 180,
@@ -34,9 +39,17 @@ pond.setOptions({
   styleProgressIndicatorPosition: 'center',
   styleButtonRemoveItemPosition: 'center',
   styleButtonProcessItemPosition: 'center',
+  allowRemove: true,
   allowBrowse: false,
   allowDrop: false,
+  acceptedFileTypes: ['image/jpeg', 'image/jpg', 'image/png']
 });
+
+pond.addFile(dataUrlVal)
+
+
+
+
 
 
 edit.addEventListener('click', toEdit);
@@ -84,9 +97,9 @@ function saveEdit() {
   if (emailVal === ''){
     errorMsg(email, 'This field cannot be empty.')
     return valid = false
-  } else if(!isEmail(email)) {
-    errorMsg(email, 'Please enter a valid email.')
-    return valid = false
+  // } else if(!isEmail(email)) {
+  //   errorMsg(email, 'Please enter a valid email.')
+  //   return valid = false
   } successMsg(email)
   
 }
@@ -95,6 +108,7 @@ function toEdit() {
   save.style.visibility = "visible";
   cancel.style.visibility = "visible";
   edit.style.visibility = "hidden";
+  profile.style.visibility = "visible";
 
   //allows user to attach images
   if(pond.allowBrowse == false && pond.allowDrop == false) {

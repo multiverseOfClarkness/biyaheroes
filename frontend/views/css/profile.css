@@ -40,6 +40,9 @@ footer {
 }
 
 /*PROFILE*/
+.dataurl input{
+    visibility: hidden;
+}
 
 .filepond--root {
     width: 180px;

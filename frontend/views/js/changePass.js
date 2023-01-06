@@ -21,7 +21,10 @@ function Validate(){
     if (verifyNewPassVal === '') {
         errorMsg(verifyNewPass, 'This cannot be empty.')
         return valid = false
-    } successMsg(verifyNewPass)
+    }else if (newPassVal != verifyNewPassVal) {
+        errorMsg(verifyNewPass, 'Your passwords do not match.')
+        return valid = false
+    } else successMsg(verifyNewPass)
 
 }
 

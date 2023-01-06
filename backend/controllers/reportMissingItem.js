@@ -29,7 +29,6 @@ const reportMissingItem = async (req, res) => {
      
 
     try {
-        
         await missingItemReports.save();
         res.redirect('/commuter/history/missing-item')
     } catch (error) {

@@ -41,12 +41,17 @@ const userSchema = new Schema({
     },
     profileImage : {
         type: Buffer
+    },
+    profileImageType : {
+        type: String
     }
 })
 
-
-//validates unique email
-
+userSchema.virtual('profileImagePath').get(function(){
+    if(this.profileImage != null && this.profileImageType != null){
+        return `data:${this.profileImageType};charset=utf-8;base64,${this.profileImage.toString('base64')}`
+    }
+})
 
  const user = mongoose.model('user', userSchema, 'user')
  module.exports = user

@@ -27,7 +27,7 @@
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <script defer src="/js/editProfile.js"></script>
+    <script defer type="module" src="/js/editProfile.js"></script>
     
     
 </head>
@@ -91,21 +91,26 @@
         </div>
     </header>
 
+
     <section class="container">
         <% userDetails.forEach(user =>{ %>
             <form onsubmit="return saveEdit()" action="/commuter/profile" method="post" >
                 <div class="row my-5">
                     <div class="col-md-4 d-flex flex-column align-items-center">
                         <h5>Profile Photo</h5>
+                        
                         <input class="filepond" type="file" id="profile" name="profile">
+                        
+                        
                     </div>
         
                     <div class="col-md-8">
                         <div class="header">
                             <h5>Personal Information</h5>
                             <button type="button" class="btn btn-primary" id="edit">Edit</button>
+                        
                         </div>
-        
+                         
                         <div class="profile-item">
                             <label for="">First Name:</label>
                             <input type="text" name="firstName" id="firstName" placeholder="<%= user.fname %> " readonly class="form-control">
@@ -150,10 +155,11 @@
                         <button type="reset"  onClick="window.location.reload(true)" class="btn btn-outline-danger" id="cancel">Cancel</button>
                     </div>
                 </div>
+                <input class="dataUrl" id="dataUrl" value="<%=user.profileImagePath%>">
             <% }) %> 
             </form>
             <a href="/commuter/change-pass">
-                <button class="change-pass-btn">Change password?</button>
+                Change password?
             </a>
     </section>
 
