@@ -27,10 +27,27 @@ FilePond.registerPlugin(
   FilePondPluginFileEncode
 );
 
-const pond = FilePond.create(profile);
+// const pond = FilePond.create(profile,{
+//   files: [
+//       {
+//           // the server file reference
+//           source: dataUrlVal,
+
+//           // set type to local to indicate an already uploaded file
+//           options: {
+//               type: 'local',
+              
+//           },
+//       },
+//   ],
+// });
+
+const pond = FilePond.create(profile)
+
+pond.addFile(dataUrlVal);
 
 
-pond.setOptions({
+await pond.setOptions({
   imageCropAspectRatio: '1:1',
   imageResizeTargetWidth: 180,
   imageResizeTargetHeight: 180,
@@ -39,13 +56,13 @@ pond.setOptions({
   styleProgressIndicatorPosition: 'center',
   styleButtonRemoveItemPosition: 'center',
   styleButtonProcessItemPosition: 'center',
-  allowRemove: true,
   allowBrowse: false,
   allowDrop: false,
+  allowRemove: false ,
   acceptedFileTypes: ['image/jpeg', 'image/jpg', 'image/png']
 });
 
-pond.addFile(dataUrlVal)
+
 
 
 
@@ -105,16 +122,21 @@ function saveEdit() {
 }
 
 function toEdit() {
+  pond.removeFile()
   save.style.visibility = "visible";
   cancel.style.visibility = "visible";
   edit.style.visibility = "hidden";
   profile.style.visibility = "visible";
+  birthday.type = 'date';
+  
+  pond.allowRemove = true;
+  pond.allowDrop = true;
+  pond.allowBrowse = true;
+  pond.allowPaste = true;
+
 
   //allows user to attach images
-  if(pond.allowBrowse == false && pond.allowDrop == false) {
-    pond.allowBrowse = true;
-    pond.allowDrop = true;
-  }
+
 
   for(const input of inputs) {
         input.readOnly = false;
