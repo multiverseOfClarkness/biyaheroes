@@ -16,6 +16,8 @@ const changePassDiv = document.querySelector('.profile-item-change-pass')
 const dataUrl = document.getElementById('dataUrl')
 dataUrl.style.visibility = 'hidden'
 const dataUrlVal = dataUrl.value.trim()
+const profileDefault = document.getElementById('profileImage')
+const profileItem = document.querySelector('.profile-item')
 
 
 
@@ -47,7 +49,7 @@ const pond = FilePond.create(profile)
 pond.addFile(dataUrlVal);
 
 
-await pond.setOptions({
+pond.setOptions({
   imageCropAspectRatio: '1:1',
   imageResizeTargetWidth: 180,
   imageResizeTargetHeight: 180,
@@ -61,12 +63,6 @@ await pond.setOptions({
   allowRemove: false ,
   acceptedFileTypes: ['image/jpeg', 'image/jpg', 'image/png']
 });
-
-
-
-
-
-
 
 
 edit.addEventListener('click', toEdit);
@@ -129,6 +125,8 @@ function toEdit() {
   profile.style.visibility = "visible";
   birthday.type = 'date';
   
+  // profileDefault.classList.add("profileImageHide")
+  
   pond.allowRemove = true;
   pond.allowDrop = true;
   pond.allowBrowse = true;
@@ -140,6 +138,7 @@ function toEdit() {
 
   for(const input of inputs) {
         input.readOnly = false;
+        input.classList.add("form-item-show")
   }
 }
 
@@ -185,6 +184,10 @@ function errorMsg(input, msg) {
 function successMsg(input) {
   const formItem = input.parentElement;
   formItem.className = 'profile-item success';
+}
+function showBorder(input) {
+  const formItem = input.parentElement;
+  formItem.className = 'profile-item show';
 }
 
 //validates if the input is a valid email

@@ -30,7 +30,7 @@ const login = async (req, res) => {
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
                 const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-                res.cookie('jwt', accessToken, {httpOnly: true})
+                res.cookie('token', accessToken, {httpOnly: true})
                 res.redirect('/admin/dashboard')
                 
             }else {
@@ -48,21 +48,13 @@ const login = async (req, res) => {
 
 
 
-const adminDashboard = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-add-member.html'))
-}
-
 module.exports = {
     getLoginForm,
-    login,
-    adminDashboard
+    login
 }
 
 
 function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '300s'}, (err, token) =>{
-        if(err) {console.log(err)}
-        res.send(token)
-    })
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'})
 }
 

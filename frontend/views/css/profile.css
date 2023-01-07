@@ -40,6 +40,8 @@ footer {
 }
 
 /*PROFILE*/
+
+
 .dataurl input{
     visibility: hidden;
 }
@@ -72,16 +74,14 @@ footer {
     margin: .50em 0;
     padding-bottom: 10px;
     position: relative;
-    border: 1px solid ;
-    border-color: #ced4da;
-    border-radius: 10px;
+    
 }
 
 .profile-item-change-pass input{
     margin: 1px;
     padding-bottom: 1em;
     position: relative;
-    border: 1px solid #ced4da ;
+    border: none ;
     border-radius: 10px;
     visibility: visible;
 }
@@ -108,9 +108,8 @@ footer {
     margin: .50em 0;
     padding-bottom: 10px;
     position: relative;
-    border: 1px solid ;
-    border-color: #ced4da;
-    border-radius: 10px;
+    border: none;
+    
 }
 
 .form-control:focus {

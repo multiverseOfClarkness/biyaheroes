@@ -5,7 +5,7 @@ const bcryptjs = require('bcryptjs')
 
 
 const getAddNewAdmin = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-add-member.html'))
+    res.render('add-member')
 }
 
 const addNewAdmin = async (req, res) => {

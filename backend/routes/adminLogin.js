@@ -6,7 +6,5 @@ router.get('/', adminLoginController.getLoginForm)
 
 router.post('/',adminLoginController.login)
 
-router.get('/dashboard', adminLoginController.adminDashboard)
-    
 
 module.exports = router 

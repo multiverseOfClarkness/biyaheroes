@@ -28,6 +28,12 @@ app.use('/', require('./routes/logout'))
 
 app.use('/admin', require('./routes/adminLogin'))
 
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/admindashboard')))
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminMissingItemReports')))
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminComplaints')))
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminToda')))
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminDrivers')))
+app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminProfile')))
 app.use('/admin',  verifyJWTforAdmin, (require('./routes/newAdmin')))
 
 

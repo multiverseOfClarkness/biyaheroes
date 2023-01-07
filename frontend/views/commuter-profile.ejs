@@ -27,7 +27,7 @@
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <script defer type="module" src="/js/editProfile.js"></script>
+    <script defer src="/js/editProfile.js"></script>
     
     
 </head>
@@ -130,7 +130,7 @@
         
                         <div class="profile-item">
                             <label for="">Birthday:</label>
-                            <input type="datetime" name="birthday" id="birthday" placeholder="<%= formattedDate %> " readonly class="form-control">
+                            <input type="text" name="birthday" id="birthday" placeholder="<%= formattedDate %> " readonly class="form-control">
                             <small id="small" class="form-text">Error Message</small>
                         </div>
                         

@@ -34,7 +34,6 @@ const verifyJWTforAdmin = (req, res, next) => {
                 console.log(err.message)
                 res.redirect('/admin')
             }else{
-                console.log(decodedToken)
                 next()
             }
         })

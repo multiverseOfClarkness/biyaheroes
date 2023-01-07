@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,600;1,200&display=swap');
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.collapse-button {
+    background-color: #0d3f62;
+}
+
+hr {
+    color: rgb(255, 255, 255, 0.5);
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.container-fluid {
+    padding-left: 0;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+}
+
+.account-details {
+    margin-left: -10px;
+}
+
+.main-menu, .account-navigation{
+    font-size: large;
+    color: #f6f6e9;
+}
+
+li:hover {
+    border-radius: 30px;
+    background-color: #f6f6e933;
+    color: #979793;
+    transition: color 500ms ease-out;
+    width: auto;
+}
+
+/* .main-menu>.active>li {
+    background-color: #fd5f00;
+    color: #fd5f00;
+} */
+
+h4 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+.list-group {
+    margin-left: 14px;
+    border-radius: 15px;
+}
+
+.more-info {
+    border-radius: 35px;
+    border-color: transparent;
+    height: 43px;
+    background-color: #fd5f00;
+    color: white;
+    width: 80px;
+    font-size: smaller;
+}
+
+.number-solved {
+    margin-left: 20px;
+}
+
+/* .list-group-item:hover {
+    background-color: #0d3f62;
+    color: #6e6e27;
+    transition: color 600ms ease-out;
+    width: auto;
+} */
+
+#pending:hover {
+    background-color: #0d3f62;
+    transition: color 100ms ease-out;
+    width: auto;
+}
+
+#solved:hover {
+    background-color: #0d3f62;
+    transition: color 100ms ease-out;
+    width: auto;
+}
+
+#overdue:hover {
+    background-color: #0d3f62;
+    transition: color 100ms ease-out;
+    width: auto;
+}
+
+#notif-icon{
+    width: 40px;
+    height: 40px;
+}
+
+.toast-header{
+    background-image: linear-gradient(
+    rgba(0, 87, 146, 0.6),
+    rgba(0, 87, 146, 0.6)), url('/img/bn1.png');
+    color: white;
+}
+
+

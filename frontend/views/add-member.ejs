@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADD MEMBER</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/pres-toda.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+
+  </head>
+  <body>
+    <nav class="navbar-nav navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 sidebar">
+                    <a class="navbar-nav" href="#"></a>
+                    
+                        <button 
+                        class="navbar-toggler my-2 mx-2 collapse-button" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#toggleMobileMenu" 
+                        aria-controls="toggleMobileMenu" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                    <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                        <div class="sidebar-menu" >
+                            <div class="navbar-nav account-box">
+                                <div class="row">
+
+                                        <!-- account block start-->
+                                        <div class="header">
+                                            <a href="/admin/dashboard">
+                                                BIYAHEROES
+                                            </a>
+                                        </div>
+                                        
+
+                                    <!-- main menu block start -->
+                                    <div class="main-menu pb-3">
+                                        <hr>
+                                        <ul class="navbar-nav d-flex flex-column mx-3 mt-lg-0 main-menu-list" style="color: white">
+                                            <li>
+                                                <a href="/admin/complaints" class="nav-link text-white link">COMPLAINT</a>
+                                            </li>
+                        
+                                            <li>
+                                                <a href="/admin/missing" class="nav-link text-white link">MISSING</a>
+                                            </li>
+                        
+                                            <li>
+                                                <a href="/admin/TODA" class="nav-link text-white link" aria-current="true">TODA</a>
+                                            </li>
+                        
+                                            <li>
+                                                <a href="/admin/drivers" class="nav-link text-white link">DRIVER</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- main menu block end -->
+
+                                    <!-- account menu block start -->
+                                    <div class="account-navigation pb-5">
+                                        <hr>
+                                            <ul class="navbar-nav d-flex flex-column mx-3 pb-5">
+                                                <li>
+                                                    <a href="/admin/newAdmin" class="nav-link nav-pills link active">ADD MEMBER</a>
+                                                </li>
+                            
+                                                <li>
+                                                    <a href="/admin/profile" class="nav-link text-white">EDIT PROFILE</a>
+                                                </li>
+                            
+                                                <li>
+                                                    <a href="/logout" class="nav-link text-white log-out">LOG OUT</a>
+                                                </li>
+                                            </ul>
+                                    </div>
+                                    <!-- account menu block end -->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col pending-list">
+                    <div class="d-lg-flex">
+                        <h5 class="text-lg-start text-center my-2">ADD MEMBERS</h5>
+
+                        <div class="d-flex justify-content-lg-end justify-content-md-center search-bar">
+                            <form class="form-inline my-2 my-lg-2 search-form" style="width: 200px;">
+                                <input type="text" placeholder="Search" id="myInput" onkeyup='tableSearch()' class="form-control">
+                            </form>
+                            <img class="search-icon my-3" src="/images/search-icon.png">
+                        </div>
+                    </div>
+
+                    <!-- sample list start -->
+                    <div class="table-responsive-md toda-page">
+                        <table class="table table-hover overdue-report" id="myTable-th" data-filter-control="true" data-show-search-clear-button="true">
+                            <thead class="left-details">
+                                <tr>
+                                    <th>ROLE</th>
+                                    <th>MEMBER</th>
+                                    <th>EMAIL</th>
+                                    <th>PASSWORD</th>
+                                    <th class="delete">REMOVE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="input-data" id="role"></td>
+                                    <td class="input-data" id="member-name"></td>
+                                    <td class="input-data" id="member-email"></td>
+                                    <td class="input-data" id="member-pass"></td>
+                                    <td class="delete-icon">
+                                        <a href="">
+                                            <img class="delete-icon" id="delete-icn"  onclick="toRemove()" src="/images/delete-icon.png">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="input-data" id="new-role"></td>
+                                    <td class="input-data" id="new-member-name"></td>
+                                    <td class="input-data" id="new-member-email"></td>
+                                    <td class="input-data" id="new-member-pass"></td>
+                                    <td class="delete-icon">
+                                        <a href="">
+                                            <img class="delete-icon" id="delete-icn"  onclick="toRemove()" src="/images/delete-icon.png">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- sample report end -->
+
+                        <div class="input-group mb-3 pe-5 mx-2" id="new-input">
+                            <!-- <span class="input-group-text" id="basic-addon1">ENTER</span> -->
+                            <!-- <span class="input-group-text" id="basic-addon1">ENTER</span> -->
+                            <input type="text" class="form-control" placeholder="Member Role" aria-label="role" aria-describedby="basic-addon1" id="input-role">
+                            <input type="text" class="form-control" placeholder="Member Name" aria-label="member-name" aria-describedby="basic-addon1" id="input-member-name">
+                            <input type="text" class="form-control" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" id="input-member-email">
+                            <input type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon1" id="input-member-password">
+                            <button type="button" class="btn btn-outline-dark mx-1" id="save" style="height: 38px;">save</button>
+                        </div>
+
+                        <div class="d-flex flex-row-reverse">                     
+                            <button class="btn btn-light  me-md-2 border border-secondary text-center btn-options" type="button" onclick="showInputForm()" id="new-btn">ADD</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"
+    ></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"
+    ></script>
+    <script src="js/add-member.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/new.js"></script>
+    <script src="/javascript/search.js"></script>
+    <!-- <script src="Remove.js"></script> -->
+    <script src="/javascript/inline-edit.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </body>
+</html>

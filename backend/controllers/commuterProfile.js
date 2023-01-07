@@ -52,9 +52,11 @@ const updateCommuterProfile = async (req, res) => {
             profileImageType: reqProfile.type
 
         })
+        
         res.redirect('/logout')
     } catch (error) {
-        if(error.message === 'Unexpected token , in JSON at position 0'){
+        console.log(error.message)
+        if(error.message === 'Unexpected end of JSON input'){
             await user.updateOne({email : currentUser.email}, {
                 fname: reqFname,
                 lname: reqLname,
@@ -64,14 +66,11 @@ const updateCommuterProfile = async (req, res) => {
                 email: reqEmail
     
             })
+            
             res.redirect('/logout')
         }
         
     }
-    
-    
-    
-    
 
 }
 
@@ -79,23 +78,7 @@ const commuterChangePass = async (req, res) => {
     res.render('commuter-change-pass')
 }
 
-const saveImageAsBinary = async (user, imageEncoded) => {
-    try {
-        if (imageEncoded === undefined || imageEncoded === null) return;
 
-        const profileImage = await JSON.parse(imageEncoded)
-
-        if (profileImage != null && imageMimeTypes.includes(profileImage.type)) {
-            await user.updateOne({email: currentUser.email}, {
-                profileImage: new Buffer.from(profileImage.data, 'base64'),
-                profileImageType: profileImage.type
-            })
-           
-    }
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 module.exports = {
     getCommuterProfile,

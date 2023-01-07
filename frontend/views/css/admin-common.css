@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,600;1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&family=Roboto+Mono:wght@300&display=swap');
+
+.complaintID, .view {
+    font-weight: 50;
+    font-size: 14px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+a{
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 100px;
+    text-decoration: none;
+}
+
+.view-btn {
+    color: black;
+    font-family:'Bebas Neue', cursive;
+    font-size: 2px;
+    width: 65px;
+    font-size: medium;
+}
+
+.sidebar-menu{
+    background-image: linear-gradient(
+    rgba(0, 87, 146, 0.6),
+    rgba(0, 87, 146, 0.6)), url('/images/binan-admin.png');
+    height: 100vh;
+}
+
+.nav-pills {
+    background-color: #064b7a8e;
+    border-radius: 15px;
+    color: #f6f6e9;
+}
+
+.list-group-item {
+    height: 150px;
+    width: 350px;
+    background-color: #005892f1;
+    color: rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px #D6D6D1;
+}
+
+.logo {
+    font-family: 'Bebas Neue', cursive;
+    color: #ffffff;
+    font-size: 40px;
+    opacity: .65;
+}
+
+th {
+    font-weight: 500;
+    font-size: 14px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+td {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.nav-bar {
+    background-image: linear-gradient(
+    rgba(0, 87, 146, 0.6),
+    rgba(0, 87, 146, 0.6)), url('/images/bn2.jpg');
+}
+
+.navbar {
+    background-image: linear-gradient(
+    rgba(0, 87, 146, 0.6),
+    rgba(0, 87, 146, 0.6)), url('/images/bn2.jpg');
+    padding-top: 1.10rem;
+    padding-bottom: 1.10rem;
+}
+
+h6, small, h3, p {
+    font-family: 'Poppins', sans-serif;
+
+}
+
+p {
+    text-align: justify;
+}
+
+h3, small {
+    text-align: center;
+}
+
+h6 {
+    font-size: 15px;
+}
+
+.logo {
+    text-align: center;
+}
+
+#account-role {
+    text-align: start;
+}
+
+.navbar-brand {
+    font-size: larger, 1rem;
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.dl-icon{
+    width: 30px;
+    height:30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#dl-btn{
+    /* color: black; */
+    background-color: #064c7ada;
+    border-color: black;
+    border: 100px;
+    box-shadow: 0px 0px 1px 1px #00000333;
+    border-radius: 0.2rem;
+    font-weight: bold;
+
+}
+
+#dl-btn:hover{
+    background-color: #ffffff8e;
+    color: black;
+
+}
+
+.imageFeatures
+{
+ width: 320;
+ height: 250;
+}
+
+#proof-btn{
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+#proof {
+    max-height: 900px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-icon {
+    width: 23px;
+    padding-top: 2px;
+    padding-top: 0.5rem;
+}
