@@ -53,5 +53,5 @@ userSchema.virtual('profileImagePath').get(function(){
     }
 })
 
- const user = mongoose.model('user', userSchema, 'user')
- module.exports = user
+const user = mongoose.model('user', userSchema, 'user')
+module.exports = user

@@ -1,26 +1,30 @@
-const path = require ('path')
-const Admin = require('../models/adminUsers')
 const bcryptjs = require('bcryptjs')
+const admin = require('../models/adminUsers')
 
-
-
-const getAddNewAdmin = (req, res) => {
-    res.render('add-member')
+const getAddNewAdmin = async (req,res) => {
+    admin.find({}, (err, admin) => {
+        res.render('add-member', {
+            adminList : admin
+        })
+    })
+    
 }
 
 const addNewAdmin = async (req, res) => {
     const body = await req.body
     const salt = await bcryptjs.genSalt(10);
-    const hashedPassword = await bcryptjs.hash(body.password, salt)
+    const hashedPassword = await bcryptjs.hash(body.adminPassword, salt)
+    console.log(body)
 
-    let newUser = new Admin ({
-        role: req.body.role,
-        fullname: req.body.fullname,
-        email: req.body.email,
+    let newUser = new admin ({
+        role: body.adminRole,
+        fullname: body.adminName,
+        email: body.adminEmail,
         password: hashedPassword
     })
+    
     newUser.save()
-    res.redirect('/admin/dashboard')
+    res.redirect('/admin/newAdmin')
 
 
 }

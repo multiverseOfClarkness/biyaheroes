@@ -39,8 +39,7 @@ const missingItemReportsSchema = new Schema({
         type: Buffer
     },
     author: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+        type: Object
     }
 }, {timestamps: true}) 
 

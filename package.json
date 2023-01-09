@@ -18,7 +18,8 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
-    "mongoose": "^6.8.0"
+    "mongoose": "^6.8.0",
+    "mongoose-autopopulate": "^0.17.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

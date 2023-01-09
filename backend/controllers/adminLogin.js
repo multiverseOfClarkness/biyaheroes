@@ -3,7 +3,6 @@ const path = require ('path')
 const bcryptjs =require('bcryptjs')
 const adminUsers = require('../models/adminUsers.js')
 const jwt = require('jsonwebtoken')
-const { rmSync } = require('fs')
 
 
 
@@ -21,32 +20,31 @@ const login = async (req, res) => {
         
         
         const admin = await adminUsers.findOne({email:email})
-        const isMatchAdmin = await bcryptjs.compare(password, admin.password)
+       
        
         if(admin) {
+            const isMatchAdmin = await bcryptjs.compare(password, admin.password)
             if(isMatchAdmin){
                 const userEmail = body.email
                 const user = { email:userEmail}
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
                 res.cookie('token', accessToken, {httpOnly: true})
-                res.redirect('/admin/dashboard')
+                return res.redirect('/admin/dashboard')
                 
             }else {
-                res.send('Invalid password/username.')
+                res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-login-wrong-pass.html'))
             }
         }else{
-            res.send('Invalid username/password.')
+            res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-login-no-email.html'))
         }
 
     }catch (error){
-        res.send('Invalid username/password')
+        console.log(error)
+        res.status(500).send('An error has occured with the server. Please try again in a few minutes.')
     }
     
 }
-
-
 
 module.exports = {
     getLoginForm,

@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,600;1,200&display=swap');
+
+body{
+    font-family: 'Bebas Neue', cursive;
+}
+
+.sidebar-menu{
+    font-family: 'Montserrat', sans-serif;
+    /* background-image: linear-gradient(to top, #0d3f62 , #054d7e); */
+
+}
+
+.account-menu {
+    font-family: 'Bebas Neue', cursive;
+}
+
+.collapse-button {
+    /* background-image: linear-gradient(to bottom, #0d3f62 , #054d7e); */
+    background-color: #0d3f62;
+    
+}
+
+.profile-image, .account-details {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+hr {
+    color: rgb(255, 255, 255, 0.5);
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.flex-item {
+    padding: 0;
+}
+
+.container-fluid {
+    padding-left: 0;
+}
+
+.notification-icon{
+    width: 35px;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+}
+
+.account-details {
+    margin-left: -10px;
+}
+
+.navbar-brand {
+    font-size:x-large;
+    color: #f6f6e9;
+    font-weight: 600;
+}
+
+.main-menu, .account-navigation{
+    font-size: large;
+    color: #f6f6e9;
+}
+
+li:hover {
+    border-radius: 30px;
+    background-color: #f6f6e933;
+    color: #979793;
+    transition: color 500ms ease-out;
+    width: auto;
+}
+
+.main-menu>.active>li {
+    background-color: #fd5f00;
+    color: #fd5f00;
+}
+
+.nav-pills {
+    background-color: #2770a1;
+    border-radius: 15px;
+    color: #f6f6e9;
+}
+
+.pending-hr {
+    color: rgb(0, 0, 0, 1);
+    margin-bottom: 0;
+}
+
+.search-icon, .sort-icon{
+    height: 25px;
+    width: 30px;
+    margin-left: 50px;
+}
+
+#search-icon {
+    margin-left: 80px;
+}
+
+input {
+    margin-left: 80px;
+}
+
+.fcontrol {
+    margin-left: 120px;
+}
+
+h5 {
+    margin-bottom: 0;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+h6 {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+small {
+    font-size: 13px;
+}
+
+.pending-list {
+    padding-left: 20px;
+}
+
+.search-form {
+    margin-left: 250px;
+}
+
+.search-bar {
+    margin-left: 100px;
+}
+
+
+td {
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+th {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 50;
+    font-size: 14px;
+    text-align: center;
+}

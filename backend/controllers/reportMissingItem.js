@@ -20,7 +20,7 @@ const reportMissingItem = async (req, res) => {
     const itemDescription = body.itemDescription
     const complainant = body.complainant
     const evidence = body.evidence
-    const author = findUser._id
+    const author = findUser
     
     const missingItemReports = new MissingItemReport({
         bodyNum, driverName, TODA, driverDescription, itemType, dateOfIncident, itemDescription, complainant, evidence, author

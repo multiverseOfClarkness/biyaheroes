@@ -2,6 +2,8 @@ const path = require('path')
 const ViolationReport = require('../models/violationReports')
 const users = require('../models/users')
 const jwtdecode = require('jwt-decode')
+const { populate } = require('../models/violationReports')
+const { JsonWebTokenError } = require('jsonwebtoken')
 const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
 
@@ -13,6 +15,7 @@ const getReportViolationPage = (req,res) => {
 const submitViolationReport = async (req, res) => {
     const findUser = await users.findOne({email: jwtdecode(req.cookies.token).email})
     const body = req.body
+    
     const bodyNum = body.bodyNum
     const driverName = body.driverName
     const TODA = body.toda
@@ -22,18 +25,21 @@ const submitViolationReport = async (req, res) => {
     const incidentDescription = body.incidentDesc
     const complainant = body.complainant
     const evidence = body.evidence
-    const author = findUser._id
+    const author = findUser
+    
+    
     
     const violationReports = new ViolationReport({
-        bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, evidence, author
+        bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, evidence, author 
     });
     saveImageAsBinary(violationReports, evidence)
-     
+    
 
     try {
-       
-        await violationReports.save();
+    
+        await violationReports.save()
         res.redirect('/commuter/history/violation')
+            
     } catch (error) {
         console.log(error.message)
     }

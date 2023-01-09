@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const { default: mongooseAutoPopulate } = require('mongoose-autopopulate')
+const { castObject, schema } = require('./users')
 const Schema = mongoose.Schema
 
 
@@ -39,10 +41,12 @@ const violationReportsSchema = new Schema({
         type: Buffer
     },
     author: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+        type: Object
     }
+    
 }, {timestamps: true}) 
+
+
 
 
 const violationReports = mongoose.model('violationReports', violationReportsSchema, 'violationReports')
