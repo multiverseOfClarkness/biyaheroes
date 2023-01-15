@@ -14,10 +14,9 @@ const phoneNum = document.getElementById('phoneNum');
 const email = document.getElementById('email');
 const changePassDiv = document.querySelector('.profile-item-change-pass')
 const dataUrl = document.getElementById('dataUrl')
-dataUrl.style.visibility = 'hidden'
 const dataUrlVal = dataUrl.value.trim()
 const profileDefault = document.getElementById('profileImage')
-const profileItem = document.querySelector('.profile-item')
+// const profileItem = document.querySelector('.profile-item')
 
 
 
@@ -29,24 +28,9 @@ FilePond.registerPlugin(
   FilePondPluginFileEncode
 );
 
-// const pond = FilePond.create(profile,{
-//   files: [
-//       {
-//           // the server file reference
-//           source: dataUrlVal,
-
-//           // set type to local to indicate an already uploaded file
-//           options: {
-//               type: 'local',
-              
-//           },
-//       },
-//   ],
-// });
-
 const pond = FilePond.create(profile)
 
-pond.addFile(dataUrlVal);
+pond.addFile(dataUrlVal)
 
 
 pond.setOptions({
@@ -58,9 +42,11 @@ pond.setOptions({
   styleProgressIndicatorPosition: 'center',
   styleButtonRemoveItemPosition: 'center',
   styleButtonProcessItemPosition: 'center',
-  allowBrowse: false,
-  allowDrop: false,
-  allowRemove: false ,
+  styleButtonRemoveItemPosition: 'center',
+  styleItemPanelAspectRatioL: '1:2',
+  allowBrowse: true,
+  allowDrop: true,
+  allowRemove: true ,
   acceptedFileTypes: ['image/jpeg', 'image/jpg', 'image/png']
 });
 
@@ -118,19 +104,19 @@ function saveEdit() {
 }
 
 function toEdit() {
-  pond.removeFile()
+  
   save.style.visibility = "visible";
   cancel.style.visibility = "visible";
   edit.style.visibility = "hidden";
-  profile.style.visibility = "visible";
+  profileDefault.style.visibility = "hidden";
   birthday.type = 'date';
   
   // profileDefault.classList.add("profileImageHide")
   
-  pond.allowRemove = true;
-  pond.allowDrop = true;
-  pond.allowBrowse = true;
-  pond.allowPaste = true;
+  pond.allowRemove = 'true';
+  pond.allowDrop = 'true';
+  pond.allowBrowse = 'true';
+  pond.allowPaste = 'true';
 
 
   //allows user to attach images

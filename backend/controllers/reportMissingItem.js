@@ -2,7 +2,7 @@ const path = require('path')
 const MissingItemReport = require('../models/missingItemReports')
 const users = require('../models/users')
 const jwtdecode = require('jwt-decode')
-const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
+
 
 const getReportMissingPage = (req,res) => {
     res.sendFile(path.resolve('./', 'frontend', 'views', 'report-missing-item.html'))
@@ -19,38 +19,29 @@ const reportMissingItem = async (req, res) => {
     const dateOfIncident = body.date
     const itemDescription = body.itemDescription
     const complainant = body.complainant
-    const evidence = body.evidence
     const author = findUser
     
-    const missingItemReports = new MissingItemReport({
-        bodyNum, driverName, TODA, driverDescription, itemType, dateOfIncident, itemDescription, complainant, evidence, author
-    });
-    saveImageAsBinary(missingItemReports, evidence)
-     
-
     try {
+        const evidence = await JSON.parse(body.evidence)
+        const missingItemReports = new MissingItemReport({
+            bodyNum, driverName, TODA, driverDescription, itemType, dateOfIncident, itemDescription, complainant, evidence: new Buffer.from(evidence.data, 'base64'),evidenceType: evidence.type, author
+        });
         await missingItemReports.save();
         res.redirect('/commuter/history/missing-item')
     } catch (error) {
         console.log(error.message)
+        if(error.message === 'Unexpected end of JSON input'){
+            const missingItemReports = new MissingItemReport({
+                bodyNum, driverName, TODA, driverDescription, itemType, dateOfIncident, itemDescription, complainant, author 
+            })
+            await missingItemReports.save()
+            res.redirect('/commuter/history/missing-item')
     }
     
     
 }
-
-const saveImageAsBinary = async (missingItemReports, evidenceEncoded) => {
-    try {
-        if (evidenceEncoded === undefined || evidenceEncoded === null) return;
-
-        const evidence = await JSON.parse(evidenceEncoded)
-
-        if (evidence != null && imageMimeTypes.includes(evidence.type)) {
-            missingItemReports.evidence = new Buffer.from(evidence.data, 'base64')
-    }
-    } catch (error) {
-        console.log(error)
-    }
 }
+
 
 module.exports = {
     getReportMissingPage,

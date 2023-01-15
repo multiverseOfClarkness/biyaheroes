@@ -14,15 +14,14 @@ hr {
     padding-top: 0;
 }
 
+p{
+    text-transform: uppercase;
+}
+
 .container-fluid {
     padding-left: 0;
 }
-
-.profile-image {
-    width: 80px;
-    height: 80px;
-}
-
+    
 .account-details {
     margin-left: -10px;
 }
@@ -31,6 +30,21 @@ hr {
     font-size: large;
     color: #f6f6e9;
 }
+
+
+img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+
+
+
 
 li:hover {
     border-radius: 30px;

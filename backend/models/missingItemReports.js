@@ -38,11 +38,19 @@ const missingItemReportsSchema = new Schema({
     evidence : {
         type: Buffer
     },
+    evidenceType : {
+        type: String
+    },
     author: {
         type: Object
     }
 }, {timestamps: true}) 
 
+missingItemReportsSchema.virtual('evidenceImagePath').get(function(){
+    if(this.evidence != null && this.evidenceType != null){
+        return `data:${this.evidenceType};charset=utf-8;base64,${this.evidence.toString('base64')}`
+    }
+})
 
 const missingItemReports = mongoose.model('missingItemReports', missingItemReportsSchema, 'missingItemReports')
 module.exports = missingItemReports

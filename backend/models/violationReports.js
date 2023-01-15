@@ -40,12 +40,20 @@ const violationReportsSchema = new Schema({
     evidence : {
         type: Buffer
     },
+    evidenceType: {
+        type: String
+    },
     author: {
         type: Object
     }
     
 }, {timestamps: true}) 
 
+violationReportsSchema.virtual('evidenceImagePath').get(function(){
+    if(this.evidence != null && this.evidenceType != null){
+        return `data:${this.evidenceType};charset=utf-8;base64,${this.evidence.toString('base64')}`
+    }
+})
 
 
 

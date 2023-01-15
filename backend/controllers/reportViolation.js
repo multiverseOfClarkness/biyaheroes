@@ -24,45 +24,34 @@ const submitViolationReport = async (req, res) => {
     const dateOfIncident = body.date
     const incidentDescription = body.incidentDesc
     const complainant = body.complainant
-    const evidence = body.evidence
     const author = findUser
-    
-    
-    
-    const violationReports = new ViolationReport({
-        bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, evidence, author 
-    });
-    saveImageAsBinary(violationReports, evidence)
-    
 
     try {
-    
+        const evidence = await JSON.parse(body.evidence)
+        const violationReports = new ViolationReport({
+            bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, 
+            evidence: new Buffer.from(evidence.data, 'base64'),
+            evidenceType: evidence.type,
+            author 
+        })
         await violationReports.save()
         res.redirect('/commuter/history/violation')
-            
+
     } catch (error) {
         console.log(error.message)
+        if(error.message === 'Unexpected end of JSON input'){
+            const violationReports = new ViolationReport({
+                bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, author 
+            })
+            await violationReports.save()
+            res.redirect('/commuter/history/violation')
+        }
     }
+    
     
     
 }
 
-const saveImageAsBinary = async (violationReports, evidenceEncoded) => {
-    try {
-        if (evidenceEncoded === undefined || evidenceEncoded === null) return;
-
-        const evidence = await JSON.parse(evidenceEncoded)
-
-        if (evidence != null && imageMimeTypes.includes(evidence.type)) {
-            violationReports.evidence = new Buffer.from(evidence.data, 'base64')
-    }
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
-  
 
 module.exports = {
     getReportViolationPage,

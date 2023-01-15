@@ -117,14 +117,14 @@
                             </thead>    
                              
                                 <tbody id="myTable">
-                                <% missingList.forEach(missing => { %>  
+                                <% missingReportsList.forEach(missing => { %>  
                                     <tr>
                                         <td id="report-no"><%= missing._id %> </td>
                                         <td class="complainant-name-data" id="complainant"><%= missing.author.fname %> </td>
                                         <td class="toda-data" id="toda-name"><%= missing.TODA %> </td>
                                         <td class="body-no-data" id="body-no"><%= missing.bodyNum %> </td>
                                         <td class="view">
-                                            <a href="missing-pending-report.html">
+                                            <a href="/admin/missing/pending/<%= missing.id %> ">
                                                 <button class="btn btn-outline-dark btn-sm view-btn">View</button>
                                             </a>
                                         </td>

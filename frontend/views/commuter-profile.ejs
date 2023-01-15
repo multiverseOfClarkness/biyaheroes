@@ -96,11 +96,15 @@
         <% userDetails.forEach(user =>{ %>
             <form onsubmit="return saveEdit()" action="/commuter/profile" method="post" >
                 <div class="row my-5">
-                    <div class="col-md-4 d-flex flex-column align-items-center">
+                    <div class="img-container col-md-4 d-flex flex-column align-items-center">
                         <h5>Profile Photo</h5>
                         
                         <input class="filepond" type="file" id="profile" name="profile">
                         
+                        <img class="image-placehoder" id="profileImage" src="<%= user.profileImagePath %>" alt="">
+                        
+                        
+                       
                         
                     </div>
         
@@ -155,12 +159,13 @@
                         <button type="reset"  onClick="window.location.reload(true)" class="btn btn-outline-danger" id="cancel">Cancel</button>
                     </div>
                 </div>
-                <input class="dataUrl" id="dataUrl" value="<%=user.profileImagePath%>">
+                <input id="dataUrl" type="text" value="<%= user.profileImagePath %> ">
             <% }) %> 
             </form>
             <a href="/commuter/change-pass">
                 Change password?
             </a>
+            
     </section>
 
     <footer>

@@ -42,7 +42,7 @@ footer {
 /*PROFILE*/
 
 
-.dataurl input{
+.dataUrl {
     visibility: hidden;
 }
 
@@ -60,6 +60,19 @@ footer {
 /* REMINDER TO INCLUDE A CREDITS TO FILEPOND SOMEWHERE ON THE WEBSITE */
 .filepond--credits {
     visibility: hidden;
+}
+
+.img-container {
+    position: relative;
+}
+
+img{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    position: absolute;
+    top: 4%;
+    object-fit: cover;
 }
 
 /*PROFILE INFORMATION*/
@@ -129,6 +142,9 @@ input[type=number] {
 }
 
 #save, #cancel {
+    visibility: hidden;
+}
+#dataUrl {
     visibility: hidden;
 }
 
@@ -211,4 +227,11 @@ footer > p {
     .col-md-4 {
         margin-bottom: 1.5em;
     }
+}
+
+@media (max-width: 767px) {
+    img{
+        top: 14%;
+    }
+    
 }

@@ -31,14 +31,8 @@ app.use('/admin', require('./routes/adminLogin'))
 app.use('/admin',  verifyJWTforAdmin, (require('./routes/admindashboard')))
 
 app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminComplaints')))
-app.use('/admin',  verifyJWTforAdmin, (require('./routes/complaintsPending')))
-app.use('/admin',  verifyJWTforAdmin, (require('./routes/complaintsSolved')))
-app.use('/admin',  verifyJWTforAdmin, (require('./routes/complaintsOverdue')))
-
 app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminMissingItemReports')))
-app.use('/admin',  verifyJWTforAdmin, (require('./routes/missingPending')))
-app.use('/admin',  verifyJWTforAdmin, (require('./routes/missingOverdue')))
-app.use('/admin',  verifyJWTforAdmin, (require('./routes/missingSolved')))
+
 
 
 app.use('/admin',  verifyJWTforAdmin, (require('./routes/adminToda')))

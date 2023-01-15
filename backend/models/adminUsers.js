@@ -17,7 +17,19 @@ const userSchema = mongoose.Schema ({
     password : {
         type: String,
         required: true
+    },
+    profileImage : {
+        type: Buffer
+    },
+    profileImageType : {
+        type: String
     }
 
+})
+
+userSchema.virtual('profileImagePath').get(function(){
+    if(this.profileImage != null && this.profileImageType != null){
+        return `data:${this.profileImageType};charset=utf-8;base64,${this.profileImage.toString('base64')}`
+    }
 })
 module.exports = mongoose.model('Admin', userSchema, 'admin')
