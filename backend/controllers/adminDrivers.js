@@ -61,21 +61,25 @@ const uploadDriverFile = async (req, res) => {
 };
 
 const addNewDriver = async (req, res) => {
-  const body = req.body;
-  const TODA = body.TODA;
-  const bodyNum = body.bodyNum;
-  const driverName = body.driverName;
-  const phone = body.phone;
+  try {
+    const body = req.body;
+    const TODA = body.TODA;
+    const bodyNum = body.bodyNum;
+    const driverName = body.driverName;
+    const phone = body.phone;
 
-  const newDriver = new driverModel({
-    TODA,
-    bodyNum,
-    driverName,
-    phone,
-  });
-  //await driverModel.deleteMany();
-  await newDriver.save();
-  res.redirect("/admin/drivers");
+    const newDriver = new driverModel({
+      TODA,
+      bodyNum,
+      driverName,
+      phone,
+    });
+    //await driverModel.deleteMany();
+    await newDriver.save();
+    res.redirect("/admin/drivers");
+  } catch (error) {
+    if (error.code === 11000) getDriversPageAfterError(req, res);
+  }
 };
 
 module.exports = {

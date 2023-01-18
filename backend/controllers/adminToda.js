@@ -17,17 +17,21 @@ const getTodaPageAfterError = (req, res) => {
 };
 
 const addNewToda = async (req, res) => {
-  const body = req.body;
-  const TODA = body.TODA;
-  const presidentName = body.president;
+  try {
+    const body = req.body;
+    const TODA = body.TODA;
+    const presidentName = body.president;
 
-  const newToda = new todaModel({
-    TODA,
-    presidentName,
-  });
+    const newToda = new todaModel({
+      TODA: TODA,
+      presidentName: presidentName,
+    });
 
-  await newToda.save();
-  res.redirect("/admin/TODA");
+    await newToda.save();
+    res.redirect("/admin/TODA");
+  } catch (e) {
+    if (e.code === 11000) getTodaPageAfterError(req, res);
+  }
 };
 
 const uploadNewToda = async (req, res) => {
