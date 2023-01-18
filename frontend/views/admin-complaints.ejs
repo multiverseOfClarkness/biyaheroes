@@ -99,33 +99,36 @@
                     <div class="col dashboard">
                         <h4 class="d-flex justify-content-center my-5">SUMMARY OF COMPLAINT REPORTS</h4>
 
-                        <div class="complaint-option d-flex justify-content-center">
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between mb-3" id="pending">
-                                    <h4 class="">PENDING</h4>
-                                    <h1 class="pt-3 number-pending" id="pending-count">NO</h1>
-                                    <a href="/admin/complaints/pending" class="mt-5 pt-3 ">
-                                        <button class="btn mt-4 mx-1 more-info">View</button>
-                                    </a>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between mb-3" id="solved">
-                                    <h4 class="">SOLVED</h4>
-                                    <h1 class="pt-3 number-solved" id="solved-count">NO</h1>
-                                    <a href="/admin/complaints/solved" class="mt-5 pt-3">
-                                        <button class="btn mt-4 mx-1 more-info">View</button>
-                                    </a>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between mb-2" id="overdue">
-                                    <h4 class="">OVERDUE</h4>
-                                    <h1 class="pt-3 number-overdue" id="overdue-count">NO</h1>
-                                    <a href="/admin/complaints/overdue" class="mt-5 pt-3 ">
-                                        <button class="btn mt-4 mx-1 more-info">View</button>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        
+                            <div class="complaint-option d-flex justify-content-center">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between mb-3" id="pending">
+                                        <h4 class="">PENDING</h4>
+                                        <h1 class="pt-3 number-pending" id="pending-count"><%= count %> </h1>
+                                        <a href="/admin/complaints/pending" class="mt-5 pt-3 ">
+                                            <button class="btn mt-4 mx-1 more-info">View</button>
+                                        </a>
+                                    </li>
+    
+                                    <li class="list-group-item d-flex justify-content-between mb-3" id="solved">
+                                        <h4 class="">SOLVED</h4>
+                                        <h1 class="pt-3 number-solved" id="solved-count">NO</h1>
+                                        <a href="/admin/complaints/solved" class="mt-5 pt-3">
+                                            <button class="btn mt-4 mx-1 more-info">View</button>
+                                        </a>
+                                    </li>
+    
+                                    <li class="list-group-item d-flex justify-content-between mb-2" id="overdue">
+                                        <h4 class="">OVERDUE</h4>
+                                        <h1 class="pt-3 number-overdue" id="overdue-count">NO</h1>
+                                        <a href="/admin/complaints/overdue" class="mt-5 pt-3 ">
+                                            <button class="btn mt-4 mx-1 more-info">View</button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        
+                        
                     </div>              
                 </div>
             </div>

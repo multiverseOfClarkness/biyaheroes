@@ -1,7 +1,12 @@
 const violationReports = require('../models/violationReports')
 
 const getComplaintsPage = (req, res) =>{
-    res.render('admin-complaints')
+    violationReports.countDocuments({}, (err, count) =>{
+        res.render('admin-complaints', {
+            count
+        })
+    })
+    
 }
 
 const getViolationReportsHistory = (req,res) => {

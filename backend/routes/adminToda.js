@@ -1,7 +1,21 @@
-const express = require('express')
-const router = express.Router()
-const adminTODA = require('../controllers/adminToda')
+const express = require("express");
+const router = express.Router();
+const adminTODA = require("../controllers/adminToda");
+const multer = require("multer");
+//MULTER
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 
-router.get('/TODA', adminTODA.getTODApage)
+var upload = multer({ storage: storage });
 
-module.exports = router
+router.get("/TODA", adminTODA.getTODApage);
+router.post("/TODA", upload.single("excel"), adminTODA.uploadNewToda);
+router.post("/TODA/new", adminTODA.addNewToda);
+
+module.exports = router;

@@ -18,8 +18,8 @@ body{
     
 }
 
-.upload-excel {
-    visibility: hidden;
+.input-group-native {
+    display: none;
 }
 
 .profile-image, .account-details {
@@ -72,59 +72,6 @@ li:hover {
     transition: color 500ms ease-out;
     width: auto;
 }
-
-#submitUpload, #new-input {
-    display: none;
-}
-
-.popup {
-    width: fit-content;
-    padding: 1em;
-    border-radius: 12px;
-    background-color: var(--bg-clr);
-    visibility: hidden;
-    text-align: center;
-}
-
-.open-popup {
-    visibility: visible;
-    width: fit-content;
-    padding: 2em;
-    border-radius: 12px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, .5) 0 0 0 1000000px;
-    position: absolute;
-    left: 40%;
-    bottom: 30%;
-}  
-
-.popup img {
-    width: 100px;
-    margin-top: 20px;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.popup h2 {
-    font-size: 45px;
-    font-weight: 500;
-    margin: 20px 0 10px;
-    font-family: var(--ff-body)
-}
-
-
-.popup button {
-    background-color: white;
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px 0;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
 
 .main-menu>.active>li {
     background-color: #fd5f00;
@@ -222,13 +169,13 @@ small {
 }
 
 .form-control {
-    margin-left: 80px;
+    margin-left: 110px;
 }
 
 .search-icon {
     height: 25px;
     width: 30px;
-    margin-left: 50px;
+    margin-left: 70px;
 }
 
 button {
@@ -245,12 +192,6 @@ button {
     color: #fd5f00;
 }
 
-#name {
-    border: none;
-}
-
-th {
-    font-size: 20px;
-    font-family: 'Bebas Neue', cursive;
-    font-weight: 100;
-}
+/* th, td {
+    text-align: start;
+} */
