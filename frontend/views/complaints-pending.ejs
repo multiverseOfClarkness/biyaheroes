@@ -13,9 +13,10 @@
     />
     <link rel="stylesheet" href="/css/list.css">
     <link rel="stylesheet" href="/css/admin-common.css">
+    <link rel="stylesheet" href="/css/pagination.css">
   </head>
   
-  <body>
+  <body >
     <nav class="navbar-nav navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <div class="row">
@@ -107,7 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive-md overdue-page">
+                    <div class="list-page table-responsive-md overdue-page">
                         <!-- sample report start -->
                         <table class="table table-hover overdue-report" id="myTable-th" data-filter-control="true" data-show-search-clear-button="true">
                             <thead>
@@ -121,21 +122,21 @@
                             </thead>   
         
                                 <tbody id="myTable">
-                                <tr>
-                                    <% violationList.forEach(violation => { %>  
-                                        <tr>
-                                            <td id="report-no"><%= violation.id %></td>
-                                            <td class="complainant-name-data" id="complainant"><%= violation.author.fname %> </td>
-                                            <td class="toda-data" id="toda-name"><%= violation.TODA %> </td>
-                                            <td class="body-no-data" id="body-no"><%= violation.bodyNum %> </td>
-                                            <td class="view">
-                                                <a href="/admin/complaints/pending/<%= violation.id %> ">
-                                                    <button class="btn btn-outline-dark btn-sm view-btn">View</button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <% }) %>   
-                                </tr>
+                                
+                                <% violationList.forEach(violation => { %>  
+                                    <tr class="item">
+                                        <td id="report-no"><%= violation.id %></td>
+                                        <td class="complainant-name-data" id="complainant"><%= violation.author.fname %> </td>
+                                        <td class="toda-data" id="toda-name"><%= violation.TODA %> </td>
+                                        <td class="body-no-data" id="body-no"><%= violation.bodyNum %> </td>
+                                        <td class="view">
+                                            <a href="/admin/complaints/pending/<%= violation.id %> ">
+                                                <button class="btn btn-outline-dark btn-sm view-btn">View</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <% }) %>   
+                                
                                 </tbody>
                         </table>
                     </div>
@@ -156,7 +157,7 @@
     crossorigin="anonymous"
     ></script>
     <script src="/js/search.js"></script>
-    <script src="/javascript/pending-list-display.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/pagination.js"></script>
   </body>
 </html>

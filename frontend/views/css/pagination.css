@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.page-item {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    /* box-shadow: 3px 1px 1px #D6D6D1; */
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 5px;
+}
+
+.page-link {
+    border: none;
+    background-color: #fd5f00;
+    color: white;
+
+}
+
+.page-link:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border: none;
+    color: black;
+}
+
+.listPage .active {
+    /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+    /* outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+    outline-color: blue; */
+    /* box-shadow: 1px 3px 5px 2px #ef5806;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; */
+    background-color: #b04503;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: 1px;
+}
+
+/* thead, th, tbody, .item{
+    padding-left: 300px;
+}
+
+th {
+    margin-right: 100px;
+} */
+
+/* .table {
+    padding-left: 100px;
+    padding-right: 100px;
+} */
