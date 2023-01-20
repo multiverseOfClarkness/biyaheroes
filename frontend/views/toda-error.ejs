@@ -13,6 +13,7 @@
     />
     <link rel="stylesheet" href="/css/pres-toda.css">
     <link rel="stylesheet" href="/css/admin-common.css">
+    <link rel="stylesheet" href="/css/typography.css">
 
   </head>
   <body onload=errorAlert()>
@@ -121,9 +122,11 @@
                                     <td scope="row" class="input-data" id="toda-name"><%= toda.TODA %> </td>
                                     <td class="input-data" id="president-name"><%= toda.presidentName %> </td>
                                     <td class="delete-icon">
-                                        <a href="">
-                                            <img class="delete-icon" id="delete-icn"  onclick="toRemove()" src="/images/delete-icon.png">
-                                        </a>
+                                        <form method="post" action="/admin/TODA/<%= toda._id %>?_method=DELETE">
+                                            <button type="submit">
+                                                <img class="delete-icon" id="delete-icn" src="/images/delete-icon.png">
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             <% }) %> 

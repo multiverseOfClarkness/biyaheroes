@@ -12,7 +12,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/pres-toda.css">
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin-common.css">
+    <link rel="stylesheet" href="/css/typography.css">
     
 
   </head>
@@ -39,14 +40,14 @@
                             <div class="navbar-nav account-box">
                                 <div class="row">
 
-                                        <!-- account block start-->
-                                        <div class="header">
-                                            <a href="/admin/dashboard">
-                                                BIYAHEROES
-                                            </a>
-                                        </div>
-                                        
-
+                                    <!-- account block start-->
+                                    
+                                    <div class="">
+                                        <a href="/admin/dashboard">
+                                            <h3 class="logo mx-2 my-1">BIYAHEROES</h3>
+                                        </a>
+                                    </div>
+                                    
                                     <!-- main menu block start -->
                                     <div class="main-menu pb-3">
                                         <hr>
@@ -126,9 +127,11 @@
                                     <td class="input-data" id="member-name"><%= admin.fullname %> </td>
                                     <td class="input-data" id="member-email"><%= admin.email %> </td>
                                     <td class="delete-icon">
-                                    <a href="">
-                                        <img class="delete-icon" id="delete-icn"  onclick="toRemove()" src="/images/delete-icon.png">
-                                    </a>
+                                    <form method="post" action="/admin/newAdmin/<%= admin.id %>?_method=DELETE ">
+                                        <button type="submit">
+                                            <img class="delete-icon" id="delete-icn" src="/images/delete-icon.png">
+                                        </button>
+                                    </form>
                                 </td>
                                 
                                 

@@ -79,8 +79,16 @@ const uploadNewToda = async (req, res) => {
   res.redirect("/admin/TODA");
 };
 
+const deleteToda = async (req, res) => {
+  const thisToda = await todaModel.findById(req.params.id);
+
+  await thisToda.remove();
+  res.redirect("/admin/TODA");
+};
+
 module.exports = {
   getTODApage,
   addNewToda,
   uploadNewToda,
+  deleteToda,
 };

@@ -1,36 +1,40 @@
-const bcryptjs = require('bcryptjs')
-const admin = require('../models/adminUsers')
+const bcryptjs = require("bcryptjs");
+const admin = require("../models/adminUsers");
 
-const getAddNewAdmin = async (req,res) => {
-    admin.find({}, (err, admin) => {
-        res.render('add-member', {
-            adminList : admin
-        })
-    })
-    
-}
+const getAddNewAdmin = async (req, res) => {
+  admin.find({}, (err, admin) => {
+    res.render("add-member", {
+      adminList: admin,
+    });
+  });
+};
 
 const addNewAdmin = async (req, res) => {
-    const body = await req.body
-    const salt = await bcryptjs.genSalt(10);
-    const hashedPassword = await bcryptjs.hash(body.adminPassword, salt)
-    console.log(body)
+  const body = await req.body;
+  const salt = await bcryptjs.genSalt(10);
+  const hashedPassword = await bcryptjs.hash(body.adminPassword, salt);
+  console.log(body);
 
-    let newUser = new admin ({
-        role: body.adminRole,
-        fullname: body.adminName,
-        email: body.adminEmail,
-        password: hashedPassword
-    })
-    
-    newUser.save()
-    res.redirect('/admin/newAdmin')
+  let newUser = new admin({
+    role: body.adminRole,
+    fullname: body.adminName,
+    email: body.adminEmail,
+    password: hashedPassword,
+  });
 
+  newUser.save();
+  res.redirect("/admin/newAdmin");
+};
 
-}
+const deleteAdmin = async (req, res) => {
+  const thisAdmin = await admin.findById(req.params.id);
 
+  await thisAdmin.remove();
+  res.redirect("/admin/newAdmin");
+};
 
 module.exports = {
-    getAddNewAdmin,
-    addNewAdmin
-}
+  getAddNewAdmin,
+  addNewAdmin,
+  deleteAdmin,
+};

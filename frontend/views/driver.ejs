@@ -12,9 +12,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/pres-toda.css">
-    <!-- <link rel="stylesheet" href="css/driver.css"> -->
+    <link rel="stylesheet" href="/css/typography.css">
+    
     <link rel="stylesheet" href="/css/admin-common.css">
-    <!-- <link rel="stylesheet" href="css/typography.css"> -->
+    
 
   </head>
   <body>
@@ -40,10 +41,12 @@
                             <div class="navbar-nav account-box">
                                 <div class="row">
 
-                                        <!-- account block start-->
-                                        <div class="">
+                                    <!-- account block start-->
+                                    <div class="">
+                                        <a href="/admin/dashboard">
                                             <h3 class="logo mx-2 my-1">BIYAHEROES</h3>
-                                        </div>
+                                        </a>
+                                    </div>
                                        
 
                                     <!-- main menu block start -->
@@ -124,9 +127,12 @@
                                         <td class="input-data" id="driver-name"><%= driver.driverName %></td>
                                         <td class="input-data" id="body-no"><%= driver.bodyNum %></td>
                                         <td class="delete-icon">
-                                            <a href="">
-                                                <img class="delete-icon" id="delete-icn"  onclick="toRemove()" src="/images/delete-icon.png">
-                                            </a>
+                                            <form method="post" action="/admin/drivers/<%= driver._id %>?_method=DELETE">
+                                                <button type="submit">
+                                                    <img class="delete-icon" id="delete-icn" src="/images/delete-icon.png">
+                                                </button>
+                                                
+                                            </form>
                                         </td>
                                     </tr>
                                 <% }) %> 

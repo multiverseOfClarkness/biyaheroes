@@ -34,6 +34,7 @@ const submitViolationReport = async (req, res) => {
             evidenceType: evidence.type,
             author 
         })
+        
         await violationReports.save()
         res.redirect('/commuter/history/violation')
 
@@ -43,6 +44,7 @@ const submitViolationReport = async (req, res) => {
             const violationReports = new ViolationReport({
                 bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, author 
             })
+            
             await violationReports.save()
             res.redirect('/commuter/history/violation')
         }

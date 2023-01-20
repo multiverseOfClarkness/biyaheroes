@@ -78,12 +78,24 @@ const addNewDriver = async (req, res) => {
     await newDriver.save();
     res.redirect("/admin/drivers");
   } catch (error) {
-    if (error.code === 11000) getDriversPageAfterError(req, res);
+    if (error.code === 11000) {
+      getDriversPageAfterError(req, res);
+    } else {
+      console.log(error);
+    }
   }
+};
+
+const deleteDriver = async (req, res) => {
+  const thisDriver = await driver.findById(req.params.id);
+
+  await thisDriver.remove();
+  res.redirect("/admin/drivers");
 };
 
 module.exports = {
   getDriversPage,
   uploadDriverFile,
   addNewDriver,
+  deleteDriver,
 };

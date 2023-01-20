@@ -45,6 +45,10 @@ const violationReportsSchema = new Schema({
     },
     author: {
         type: Object
+    },
+    status: {
+        type: String,
+        default: 'Pending'
     }
     
 }, {timestamps: true}) 

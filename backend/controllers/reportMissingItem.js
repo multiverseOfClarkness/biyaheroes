@@ -26,6 +26,7 @@ const reportMissingItem = async (req, res) => {
         const missingItemReports = new MissingItemReport({
             bodyNum, driverName, TODA, driverDescription, itemType, dateOfIncident, itemDescription, complainant, evidence: new Buffer.from(evidence.data, 'base64'),evidenceType: evidence.type, author
         });
+        
         await missingItemReports.save();
         res.redirect('/commuter/history/missing-item')
     } catch (error) {
@@ -34,6 +35,7 @@ const reportMissingItem = async (req, res) => {
             const missingItemReports = new MissingItemReport({
                 bodyNum, driverName, TODA, driverDescription, itemType, dateOfIncident, itemDescription, complainant, author 
             })
+            
             await missingItemReports.save()
             res.redirect('/commuter/history/missing-item')
     }

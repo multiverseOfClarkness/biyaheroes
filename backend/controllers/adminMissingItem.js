@@ -1,7 +1,12 @@
 const missingItemReports = require('../models/missingItemReports')
 
 const getMissingItemPage = (req, res) => { 
-    res.render('admin-missing')
+    missingItemReports.countDocuments({}, (err, count) =>{
+        res.render('admin-missing', {
+            count
+        })
+    })
+    
 }
 
 const getMissingReportsHistory = (req,res) => {

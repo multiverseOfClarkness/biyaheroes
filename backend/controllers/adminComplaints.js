@@ -11,7 +11,7 @@ const getComplaintsPage = (req, res) =>{
 
 const getViolationReportsHistory = (req,res) => {
     
-    violationReports.find({}, (err, violationReports) => {
+    violationReports.find({status: 'Pending'}, (err, violationReports) => {
         res.render('complaints-pending', {
             violationList : violationReports
         })
