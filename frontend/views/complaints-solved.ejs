@@ -113,23 +113,23 @@
                                     <th scope="col" >COMPLAINANT</th>
                                     <th scope="col" >TODA</th>
                                     <th scope="col" >BODY NO</th>
-                                    <th scope="col" >STATUS</th>
                                     <th scope="col" >VIEW</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
+                                <% violationList.forEach(violation => { %> 
                                 <tr>
-                                    <td scope="row" class="report-no" id="report-no"></th>
-                                    <td class="complainant" id="complainant"></td>
-                                    <td class="toda-name" id="toda-name"></td>
-                                    <td class="body-no" id="body-no"></td>
-                                    <td class="status" id="status"></td>
+                                    <td scope="row" class="report-no" id="report-no"><%= violation.id %> </th>
+                                    <td class="complainant" id="complainant"><%= violation.author.fname %> <%= violation.author.lname %></td>
+                                    <td class="toda-name" id="toda-name"><%= violation.TODA %></td>
+                                    <td class="body-no" id="body-no"><%= violation.bodyNum %></td>
                                     <td class="view">
-                                        <a href="complaint-solved-report.html">
+                                        <a href="/admin/complaints/solved/<%= violation.id %> ">
                                             <button class="btn btn-outline-dark btn-sm view-btn">View</button>
                                         </a>
                                     </td>
                                 </tr>
+                                <% }) %>  
                             </tbody>
                         </table>
                     </div>
@@ -147,8 +147,8 @@
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"
     ></script>
-    <script src="/javascript/search.js"></script>
-    <script src="/javascript/solved-list-display.js"></script>
+    <script src="/js/search.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </body>
 </html>

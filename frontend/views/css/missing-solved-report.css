@@ -1,0 +1,99 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+.back-icon {
+    width: 23px;
+}
+
+
+.container {
+    max-width: 1325px;
+}
+
+.report-hr {
+    max-width: 1325px;
+}
+
+.col6 {
+    max-width: 615px;
+    margin-left: 10px;
+}
+
+.wrapper {
+    margin-top: 75px;
+
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 550;
+    margin-bottom: 5px;
+}
+
+h5 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+#contact {
+    font-size: 13px;
+}
+
+.prooftxt {
+    visibility: hidden;
+}
+.btn-primary {
+    background-color: #054d7e;
+}
+
+.btn-secondary {
+    background-color: #fd5f00;
+}
+
+.btn {
+    width: auto;
+}
+
+h6 {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.vr {
+    height: auto;
+    padding: 0;
+}
+
+.desc {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 1;
+}
+
+p {
+    text-align: justify;
+}
+
+.incident-info {
+    text-align: justify;
+}
+
+h7 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+#closed-date {
+    font-size: 15px;
+    padding-top: 5px;
+}
+#driver-name, #toda-name, #body-no {
+    color: black;
+}
+
+.badge {
+    border-radius: 10px;
+    border-color: #34312f;
+    height: 60px;
+}

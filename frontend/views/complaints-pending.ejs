@@ -126,7 +126,7 @@
                                 <% violationList.forEach(violation => { %>  
                                     <tr class="item">
                                         <td id="report-no"><%= violation.id %></td>
-                                        <td class="complainant-name-data" id="complainant"><%= violation.author.fname %> </td>
+                                        <td class="complainant-name-data" id="complainant"><%= violation.author.fname %> <%= violation.author.lname %></td>
                                         <td class="toda-data" id="toda-name"><%= violation.TODA %> </td>
                                         <td class="body-no-data" id="body-no"><%= violation.bodyNum %> </td>
                                         <td class="view">

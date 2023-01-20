@@ -1,18 +1,32 @@
 const violationReports = require('../models/violationReports')
 
 const getComplaintsPage = (req, res) =>{
-    violationReports.countDocuments({}, (err, count) =>{
-        res.render('admin-complaints', {
-            count
+    violationReports.countDocuments({status: "Pending"}, (err, count) => {
+        violationReports.countDocuments({status: "Solved"}, (err, count1) =>{
+            res.render('admin-complaints', {
+                count,
+                count1
+            })
+        })
+        
+    })
+    
+    
+}
+
+const getPendingViolationReportsHistory = (req,res) => {
+    
+    violationReports.find({status: 'Pending'}, (err, violationReports) => {
+        res.render('complaints-pending', {
+            violationList : violationReports
         })
     })
     
 }
-
-const getViolationReportsHistory = (req,res) => {
+const getSolvedViolationReportsHistory = (req,res) => {
     
-    violationReports.find({status: 'Pending'}, (err, violationReports) => {
-        res.render('complaints-pending', {
+    violationReports.find({status: 'Solved'}, (err, violationReports) => {
+        res.render('complaints-solved', {
             violationList : violationReports
         })
     })
@@ -24,17 +38,31 @@ const getIndividualPendingComplaintReport = async(req, res) => {
         res.render('complaint-pending-report', {
             violationList : violationReports
         })
-    })
-
-
-      
+    }) 
+}
+const getIndividualSolvedComplaintReport = async(req, res) => {
+    violationReports.find({_id: req.params.id}, (err, violationReports) => {
+        res.render('complaint-solved-report', {
+            violationList : violationReports
+        })
+    }) 
 }
 
+const updateIndividualPendingComplaintReport = async (req, res) =>{
+    await violationReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {
+    new: true
+    });
+    res.redirect('/admin/complaints')
+
+}
 
 module.exports = {
     getComplaintsPage,
-    getViolationReportsHistory,
-    getIndividualPendingComplaintReport
-
+    getPendingViolationReportsHistory,
+    getSolvedViolationReportsHistory,
+    getIndividualPendingComplaintReport,
+    getIndividualPendingComplaintReport,
+    getIndividualSolvedComplaintReport,
+    updateIndividualPendingComplaintReport
 
 }

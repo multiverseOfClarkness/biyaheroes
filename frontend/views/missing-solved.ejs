@@ -113,24 +113,24 @@
                                     <th data-column="complainant" data-order="desc">REPORTER</th>
                                     <th data-column="todaName" data-order="desc">TODA </th>
                                     <th data-column="bodyNo" data-order="desc">BODY NO</th>
-                                    <th data-column="status" data-order="desc">STATUS</th>
                                     <th data-column="view" data-order="desc">VIEW</th>
                                 </tr>
                             </thead>    
                              
                                 <tbody id="myTable">
-                                <tr>
-                                    <td id="report-no"></td>
-                                    <td class="complainant-name-data" id="complainant"></td>
-                                    <td class="toda-data" id="toda-name"></td>
-                                    <td class="body-no-data" id="body-no"></td>
-                                    <td class="status-data" id="status"></td>
-                                    <td class="view">
-                                        <a href="missing-solved-report.html">
-                                            <button class="btn btn-outline-dark btn-sm view-btn">View</button>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <% missingReportsList.forEach(missing => { %>  
+                                        <tr>
+                                            <td id="report-no"><%= missing._id %> </td>
+                                            <td class="complainant-name-data" id="complainant"><%= missing.author.fname %> </td>
+                                            <td class="toda-data" id="toda-name"><%= missing.TODA %> </td>
+                                            <td class="body-no-data" id="body-no"><%= missing.bodyNum %> </td>
+                                            <td class="view">
+                                                <a href="/admin/missing/solved/<%= missing.id %> ">
+                                                    <button class="btn btn-outline-dark btn-sm view-btn">View</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>  
                                 </tbody>
                         </table>
                         <!-- sample report end -->

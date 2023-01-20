@@ -35,9 +35,9 @@
         
         <nav class="navbar-nav navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <div class="row">
+                <div class="bod">
                     
-                    <div class="col-lg-3 col-xxl-6 sidebar">
+                    <div class="col-lg-3 col-xxl-3 sidebar">
                         <a class="navbar-nav" href="#"></a>
                     
                         <button 
@@ -132,34 +132,60 @@
 
                     <div class="col dashboard">
 
-                        <h4 class="d-flex justify-content-center my-5">SUMMARY OF REPORTS</h4>
+                        <h4 class="my-5">SUMMARY OF REPORTS</h4>
 
-                        <div class="complaint-option d-flex justify-content-center">
+                        <div class="complaint-option">
                             
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between mb-3" id="pending">
+                            <ul class="list-group dash">
+                                <li class="box" id="pending">
                                     <h4 class="">PENDING</h4>
-                                    <h1 class="pt-3" id="pending-count"><%= totalReps %> </h1>
-                                   
+                                    <h1 class="" id="pending-count"><%= totalReps %> </h1>
+
+                                    <div class="links">
+                                        <a href="complaint-overdue.html" class="">
+                                            Complaints
+                                        </a>
+
+                                        <a href="missing-overdue.html" class="">
+                                            Missing Items
+                                        </a>
+                                    </div>
                                 </li>
 
-                                <li class="list-group-item d-flex justify-content-between mb-3" id="solved">
+                                <li class="box" id="solved">
                                     <h4 class="">SOLVED</h4>
-                                    <h1 class="pt-3" id="solved-count">NO</h1>
-                                    <a href="complaint-solved.html" class="mt-5 pt-3">
-                                        <button class="btn mt-4 mx-1 more-info">View</button>
-                                    </a>
+                                    <h1 class="" id="solved-count">NO</h1>
+
+                                    <div class="links">
+                                        <a href="complaint-overdue.html" class="">
+                                            Complaints
+                                        </a>
+
+                                        <a href="missing-overdue.html" class="">
+                                            Missing Items
+                                        </a>
+                                    </div>
                                 </li>
 
-                                <li class="list-group-item d-flex justify-content-between mb-2" id="overdue">
+                                <li class="box" id="overdue">
                                     <h4 class="">OVERDUE</h4>
-                                    <h1 class="pt-3" id="overdue-count">NO</h1>
-                                    <a href="complaint-overdue.html" class="mt-5 pt-3 ">
-                                        <button class="btn mt-4 mx-1 more-info">View</button>
-                                    </a>
+                                    <h1 class="" id="overdue-count">NO</h1>
+
+
+                                    <div class="links">
+                                        <a href="complaint-overdue.html" class="">
+                                            Complaints
+                                        </a>
+
+                                        <a href="missing-overdue.html" class="">
+                                            Missing Items
+                                        </a>
+                                    </div>
                                 </li>  
                             </ul>
+
                         </div>   
+
                     </div>                               
                 </div>
             </div>

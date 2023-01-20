@@ -42,18 +42,6 @@ img {
     
 }
 
-
-
-
-
-li:hover {
-    border-radius: 30px;
-    background-color: #f6f6e933;
-    color: #979793;
-    transition: color 500ms ease-out;
-    width: auto;
-}
-
 /* .main-menu>.active>li {
     background-color: #fd5f00;
     color: #fd5f00;
@@ -123,4 +111,42 @@ h1 {
     color: white;
 }
 
+ul {
+    list-style: none;
+}
 
+
+.dash {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.bod {
+    display: flex;
+}
+
+.box {
+    background-color: #0d3f62;
+    padding: 1rem 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    color: #FFFFFF;
+}
+
+.links a {
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 0 .5rem;
+}
+
+.links > a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width:1000px) {
+    .links {
+        display: flex;
+        flex-direction: column;
+    }
+}
