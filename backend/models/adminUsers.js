@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema ({
     },
     profileImageType : {
         type: String
+    },
+    status: {
+        type: String,
+        default: "Continuing"
     }
 
 })

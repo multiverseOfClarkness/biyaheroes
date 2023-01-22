@@ -44,7 +44,10 @@ const userSchema = new Schema({
     },
     profileImageType : {
         type: String
-    }
+    },
+    role : {
+        type: String, default: "commuter"
+    },
 })
 
 userSchema.virtual('profileImagePath').get(function(){

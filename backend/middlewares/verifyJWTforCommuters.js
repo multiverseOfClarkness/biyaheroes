@@ -1,4 +1,6 @@
 require('dotenv').config()
+const user = require('../models/users')
+const admin = require('../models/adminUsers')
 
 
 const jwt = require('jsonwebtoken')
@@ -9,17 +11,21 @@ const verifyJWTforCommuters = (req, res, next) => {
 
 
     if (token){
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,  (err, decodedToken) => {
            
             if(err){
-                console.log(err)
-                res.redirect('/commuter')
+                
+                res.render('login')
             }else{
+                
+                user.findOne({email: decodedToken.email}, (err, data) =>{
+                    res.locals.A = data
                 next()
+                })
             }
         })
     }else{
-        res.redirect('/commuter')
+        res.redirect('/')
     }
 }
 
@@ -32,13 +38,17 @@ const verifyJWTforAdmin = (req, res, next) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
             if(err){
                 console.log(err.message)
-                res.redirect('/admin')
+                res.redirect('/')
             }else{
-                next()
+                admin.findOne({email: decodedToken.email}, (err, data) =>{
+                    res.locals.B = data
+                    next()
+                })
+                
             }
         })
     }else{
-        res.redirect('/admin')
+        res.redirect('/')
     }
 }
 

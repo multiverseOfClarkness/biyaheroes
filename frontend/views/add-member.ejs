@@ -127,7 +127,7 @@
                                     <td class="input-data" id="member-name"><%= admin.fullname %> </td>
                                     <td class="input-data" id="member-email"><%= admin.email %> </td>
                                     <td class="delete-icon">
-                                    <form method="post" action="/admin/newAdmin/<%= admin.id %>?_method=DELETE ">
+                                    <form method="post" action="/admin/newAdmin/<%= admin.id %>?_method=PATCH ">
                                         <button type="submit">
                                             <img class="delete-icon" id="delete-icn" src="/images/delete-icon.png">
                                         </button>

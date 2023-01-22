@@ -139,14 +139,14 @@
                             <ul class="list-group dash">
                                 <li class="box" id="pending">
                                     <h4 class="">PENDING</h4>
-                                    <h1 class="" id="pending-count"><%= totalReps %> </h1>
+                                    <h1 class="" id="pending-count"><%= totalRepsPending %> </h1>
 
                                     <div class="links">
-                                        <a href="complaint-overdue.html" class="">
+                                        <a href="/admin/complaints/pending" class="">
                                             Complaints
                                         </a>
 
-                                        <a href="missing-overdue.html" class="">
+                                        <a href="/admin/missing/pending" class="">
                                             Missing Items
                                         </a>
                                     </div>
@@ -154,14 +154,14 @@
 
                                 <li class="box" id="solved">
                                     <h4 class="">SOLVED</h4>
-                                    <h1 class="" id="solved-count">NO</h1>
+                                    <h1 class="" id="solved-count"><%= totalRepsSolved %> </h1>
 
                                     <div class="links">
-                                        <a href="complaint-overdue.html" class="">
+                                        <a href="/admin/complaints/solved" class="">
                                             Complaints
                                         </a>
 
-                                        <a href="missing-overdue.html" class="">
+                                        <a href="/admin/missing/solved" class="">
                                             Missing Items
                                         </a>
                                     </div>
@@ -169,7 +169,7 @@
 
                                 <li class="box" id="overdue">
                                     <h4 class="">OVERDUE</h4>
-                                    <h1 class="" id="overdue-count">NO</h1>
+                                    <h1 class="" id="overdue-count">0</h1>
 
 
                                     <div class="links">

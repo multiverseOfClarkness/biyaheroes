@@ -1,13 +1,12 @@
-require('dotenv').config()
-const path = require ('path')
-const bcryptjs =require('bcryptjs')
-const commonUsers = require('../models/users.js')
+const path = require('path')
+const commonUsers = require('../models/users')
+const admin = require('../models/adminUsers')
+const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 
-
 const getLoginForm = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'commuter-login.html'))
+    res.render('login')
 }
 
 const login = async (req, res) => {
@@ -19,12 +18,14 @@ const login = async (req, res) => {
         let password = body.password
         
         
-        const user = await commonUsers.findOne({email:email})
+        const user1 = await commonUsers.findOne({email:email})
+        const user2 = await admin.findOne({email:email})
         
        
-        if(user){
-            const isMatchUser = await bcryptjs.compare(password, user.verifiedpass)
-            if(isMatchUser){
+        if(user1){
+            const isMatchUser1 = await bcryptjs.compare(password, user1.verifiedpass)
+            
+            if(isMatchUser1){
                 const userEmail = body.email
                 const user = { email:userEmail}
                 //GENERATE TOKEN
@@ -35,7 +36,22 @@ const login = async (req, res) => {
             }else{
                 res.sendFile(path.resolve('./', 'frontend', 'views', 'login-wrong-pass.html'))
             }
-        }else{
+        }else if (user2) {
+            
+            const isMatchUser2 = await bcryptjs.compare(password, user2.password)
+            if(isMatchUser2){
+                const userEmail = body.email
+                const user = { email:userEmail}
+                //GENERATE TOKEN
+                const accessToken = generateAccessToken(user)
+                res.cookie('token', accessToken, {httpOnly: true})
+                return res.redirect('/admin/dashboard')
+                
+            }else{
+                res.sendFile(path.resolve('./', 'frontend', 'views', 'login-wrong-pass.html'))
+            }
+        }
+        else{
             res.sendFile(path.resolve('./', 'frontend', 'views', 'login-no-email.html'))
         }
     }catch (error){
@@ -56,4 +72,3 @@ module.exports = {
     getLoginForm,
     login
 }
-

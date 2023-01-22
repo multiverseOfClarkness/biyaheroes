@@ -19,7 +19,7 @@
     <nav class="navbar fixed-top navbar-light header" style="background-color: #0d3f62;">
         <div class="container-fluid">
             <div class="d-flex flex-row">
-                <a href="/admin/complaint/pending">
+                <a href="/admin/complaints/pending">
                     <img class="back-icon" src="/images/back-icon.png" id="back-icon">
                 </a>
                 <a class="navbar-brand" href="/admin/dashboard" style="color: white ;">
@@ -129,7 +129,13 @@
                     <img src="<%= violation.evidenceImagePath %>" alt="" id="proof" > 
 
     <% }); %>
-    
+                    <!-- NEW -->
+                    <div class="text-center">
+                    <span class="badge" id="status-badge" style="text-align: center;">STATUS: <small id="report-status"> PENDING</small></span>
+                    </div>
+
+                    <footer class="d-flex flex-column justify-content-center" style="text-align: center;">© Commuter's Report Management System</footer>
+                    <!-- NEW -->
 
                 
             </div>

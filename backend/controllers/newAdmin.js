@@ -2,7 +2,7 @@ const bcryptjs = require("bcryptjs");
 const admin = require("../models/adminUsers");
 
 const getAddNewAdmin = async (req, res) => {
-  admin.find({}, (err, admin) => {
+  admin.find({status: "Continuing"}, (err, admin) => {
     res.render("add-member", {
       adminList: admin,
     });
@@ -27,9 +27,9 @@ const addNewAdmin = async (req, res) => {
 };
 
 const deleteAdmin = async (req, res) => {
-  const thisAdmin = await admin.findById(req.params.id);
+  await admin.findByIdAndUpdate(req.params.id, {status: "Terminated"});
 
-  await thisAdmin.remove();
+  
   res.redirect("/admin/newAdmin");
 };
 

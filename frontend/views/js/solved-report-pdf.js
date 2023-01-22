@@ -1,7 +1,5 @@
 //event once na napindot yung download button
-document.getElementById('dl-btn').addEventListener('click', function() {
-    downloadPDF();
-});
+
 
 //nag lagay ako ng submitted proof na hinide ko muna kapag hindi naman siya idodownload
 //since may button na "click to view submitted proof"
@@ -9,6 +7,7 @@ document.getElementById('proof-text').style.display='none';
 // let hehe = document.getElementById('invisible').style.display='none';
 
 function downloadPDF() {
+  console.log('f')
   let downloadButton = document.getElementById('dl-btn');
   let backIcon = document.getElementById('back-icon');
   let text = document.getElementById('proof-text');

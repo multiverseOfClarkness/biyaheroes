@@ -10,7 +10,7 @@ const displayImage = () => {
    
     if (clickCount % 2 != 0) {
         showEvidenceButton.innerHTML = 'Hide proof'
-        proof.style.display = 'block'
+        proof.style.display = 'inline'
         proof.style.visibility = 'visible'
         proofText.style.visibility = 'visible'
         

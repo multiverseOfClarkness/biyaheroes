@@ -5,9 +5,15 @@ const jwtdecode = require("jwt-decode");
 
 const getAdminDashboard = async (req, res) => {
   try {
-    const vReps = await violationReports.countDocuments();
-    const mReps = await missingItemReports.countDocuments();
-    const totalReps = vReps + mReps;
+    const vRepsPending = await violationReports.countDocuments({status: "Pending"});
+    const mRepsPending = await missingItemReports.countDocuments({status: "Pending"});
+    const totalRepsPending = vRepsPending + mRepsPending;
+
+    const vRepsSolved = await violationReports.countDocuments({status: "Solved"});
+    const mRepsSolved = await missingItemReports.countDocuments({status: "Solved"});
+    const totalRepsSolved = vRepsSolved + mRepsSolved;
+
+
     const currentUser = await admin.findOne({
       email: jwtdecode(req.cookies.token).email,
     });
@@ -15,7 +21,8 @@ const getAdminDashboard = async (req, res) => {
     admin.find({ _id: currentUser._id }, (err, admin) => {
       res.render("admin-dashboard", {
         adminDetails: admin,
-        totalReps,
+        totalRepsPending,
+        totalRepsSolved
       });
     });
   } catch (error) {
