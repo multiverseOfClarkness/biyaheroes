@@ -1,5 +1,6 @@
 const admin = require("../models/adminUsers");
 const jwtdecode = require("jwt-decode");
+const bcryptjs = require('bcryptjs')
 
 const getAdminProfilePage = async (req, res) => {
   try {
@@ -23,39 +24,65 @@ const updateAdminProfile = async (req, res) => {
   });
   const body = req.body;
 
-  const reqFullname = body.fullname;
-  const reqRole = body.role;
+  const reqFname = body.fname;
+  const reqLname = body.lname;
+  const reqPhone = body.phone;
   const reqEmail = body.email;
+  const reqCurrentPass = body.currentPass;
+  const reqNewPass = body.newPass;
+  const reqVerifiedPass = body.verifiedNewPass;
+  
 
   try {
-    const reqProfile = await JSON.parse(body.profile);
+    if(reqFname || reqLname){
+      await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {fname: reqFname, lname: reqLname});
+      res.redirect("/logout");
+    } else if (reqPhone || reqEmail) {
+      await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {phone: reqPhone, email: reqEmail});
+      res.redirect("/logout");
+    } else if (reqCurrentPass || reqNewPass || reqVerifiedPass) {
+      const currentUser = await admin.findOne({email: jwtdecode(req.cookies.token).email})
 
-    await admin.updateOne(
-      { email: currentUser.email },
-      {
-        role: reqRole,
-        fullname: reqFullname,
-        email: reqEmail,
-        profileImage: new Buffer.from(reqProfile.data, "base64"),
-        profileImageType: reqProfile.type,
+      if(currentUser) {
+          const isMatchUser = await bcryptjs.compare(reqCurrentPass, currentUser.password)
+          if(isMatchUser){
+              const salt = await bcryptjs.genSalt(10);
+              let verifiedNewPass = reqVerifiedPass
+              const newHashedPassword = await bcryptjs.hash(verifiedNewPass, salt)
+
+              await admin.updateOne({email : currentUser.email}, {
+                  password: newHashedPassword
+              })
+              res.redirect('/logout')
+          } else {
+              res.redirect('/admin/profile')
+          }
       }
-    );
-
-    res.redirect("/logout");
-  } catch (error) {
-    console.log(error.message);
-    if (error.message === "Unexpected end of JSON input") {
+    } else {
+      const reqProfile = await JSON.parse(body.profile);
       await admin.updateOne(
         { email: currentUser.email },
         {
-          role: reqRole,
-          fullname: reqFullname,
-          email: reqEmail,
+          profileImage: new Buffer.from(reqProfile.data, "base64"),
+          profileImageType: reqProfile.type
         }
       );
-
       res.redirect("/logout");
     }
+  } catch (error) {
+    console.log(error.message);
+    // if (error.message === "Unexpected end of JSON input") {
+    //   await admin.updateOne(
+    //     { email: currentUser.email },
+    //     {
+    //       role: reqRole,
+    //       fullname: reqFullname,
+    //       email: reqEmail,
+    //     }
+    //   );
+
+    //   res.redirect("/logout");
+    // }
   }
 };
 

@@ -1,23 +1,17 @@
 const violationReports = require('../models/violationReports')
 
 const getComplaintsPage = (req, res) =>{
-    violationReports.countDocuments({status: "Pending"}, (err, count) => {
-        violationReports.countDocuments({status: "Solved"}, (err, count1) =>{
+    violationReports.find({}, (err, violationReports) => {      
             res.render('admin-complaints', {
-                count,
-                count1
+                violationList: violationReports
             })
-        })
-        
-    })
-    
-    
+    })  
 }
 
 const getPendingViolationReportsHistory = (req,res) => {
     
-    violationReports.find({status: 'Pending'}, (err, violationReports) => {
-        res.render('complaints-pending', {
+    violationReports.find({}, (err, violationReports) => {
+        res.render('admin-complaints', {
             violationList : violationReports
         })
     })
@@ -33,9 +27,9 @@ const getSolvedViolationReportsHistory = (req,res) => {
     
 }
 
-const getIndividualPendingComplaintReport = async(req, res) => {
+const getIndividualComplaintReport = async(req, res) => {
     violationReports.find({_id: req.params.id}, (err, violationReports) => {
-        res.render('complaint-pending-report', {
+        res.render('complaint-individual-report', {
             violationList : violationReports
         })
     }) 
@@ -60,9 +54,7 @@ module.exports = {
     getComplaintsPage,
     getPendingViolationReportsHistory,
     getSolvedViolationReportsHistory,
-    getIndividualPendingComplaintReport,
-    getIndividualPendingComplaintReport,
+    getIndividualComplaintReport,
     getIndividualSolvedComplaintReport,
     updateIndividualPendingComplaintReport
-
 }

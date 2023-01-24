@@ -1,5 +1,69 @@
+body {
+    background-color: var(--bg-clr);
+}
+
+.banner {
+    background-image:linear-gradient(
+        rgba(0, 87, 146, 0.6),
+        rgba(0, 87, 146, 0.6)), url("../images/binan-landscape.jpg");
+    width: 100%;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-top: .25em solid var(--tertiary-clr);
+    border-bottom: .25em solid var(--tertiary-clr);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    margin: 0 1em;
+}
+
+.container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2em;
+}
+
+footer {
+    background-color: var(--secondary-clr);
+    color: var(--bg-clr);
+}
+
+.btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.password-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 /*PROFILE*/
+.img-container {
+    position: relative;
+}
+
+.profileImage {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10%;
+    object-fit: cover;
+}
 
 .filepond--root {
     width: 180px;
@@ -17,10 +81,26 @@
     visibility: hidden;
 }
 
+/* PROFILE PICTURE EDIT BTNS */
+
+#save, #cancel {
+    padding: 0 .5em;
+    visibility: hidden;
+    border: none;
+}
+
+.filepond-controllers {
+    text-align: center;
+}
+
 /*PROFILE INFORMATION*/
-    .form-control {
+.deets {
+    text-transform: capitalize;
+}
+    .personal-info,
+    .acc-info {
         border: none;
-        padding-left: 5;
+        padding-left: 0;
         font-family: var(--ff-body);
     }
 
@@ -37,24 +117,13 @@
         visibility: hidden;
     }
 
-    #save, #cancel {
-        visibility: hidden;
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1.2em;
-    }
-
-/* TYPOGRAPHY */
+/*TYPOGRAPHY*/
 
 .navbar-brand {
     font-family: var(--ff-header);
     color: var(--secondary-clr);
     
-} */
+}
 
 .banner > h2 {
     font-family: var(--ff-header);
@@ -80,11 +149,11 @@ h5 {
     margin: 0;
 }
 
-.header > small {
+small {
     cursor: pointer;
 }
 
-.header > small:hover {
+small:hover {
     color: var(--tertiary-clr);
     transition: 0.2s;
 }
@@ -95,12 +164,37 @@ footer > p {
     text-align: center;
 }
 
+input {
+    border: none;
+}
+
+.user-info {
+    margin: 1.5em 0;
+}
+
+/* HIDDEN FORM */
+
+/* .account {
+    position: relative;
+}
+form {
+    visibility: collapse;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.form-control-sm {
+    width: 100%;
+} */
+
 @media (min-width:320px) and (max-width:992px) {
     .col-md-4 {
         margin-bottom: 1.5em;
     }
 }
-
-.dataUrl {
-    visibility: hidden;
+@media (max-width: 767px) {
+    img{
+        top: 14%;
+    }
+    
 }

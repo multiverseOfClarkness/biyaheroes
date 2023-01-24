@@ -11,6 +11,11 @@ const todaSchema = mongoose.Schema({
     required: [true, "TODA name is required"],
     unique: [true, "Already exists"],
   },
+  contact: {
+    type: String,
+    required: [true, "Contact number is required"],
+    unique: [true, "Already exists"],
+  }
 });
 
 module.exports = mongoose.model("toda", todaSchema, "toda");

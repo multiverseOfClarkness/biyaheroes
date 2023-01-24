@@ -19,12 +19,14 @@ const getTodaPageAfterError = (req, res) => {
 const addNewToda = async (req, res) => {
   try {
     const body = req.body;
-    const TODA = body.TODA;
-    const presidentName = body.president;
+    const TODA = body.toda;
+    const presidentName = body.fullname;
+    const contact = body.contact;
 
     const newToda = new todaModel({
       TODA: TODA,
       presidentName: presidentName,
+      contact : contact
     });
 
     await newToda.save();

@@ -44,7 +44,6 @@ select > option {
     font-family: var(--ff-body);
 
 }
-
 .sort-search {
     margin-bottom: 1.5em;
 }
@@ -53,12 +52,12 @@ select > option {
     margin-right: .5em;
 }
 
-/* #show {
+#show {
     margin-right:1em;
     border: none;
     background-color: inherit;
     padding: .5em;
-} */
+}
 
 #search {
     border: none;
@@ -138,8 +137,7 @@ thead {
 @media (min-width:320px) and (max-width:992px) {
 
     .table-controllers {
-        /* flex-direction: column; */
-        display: block;
+        flex-direction: column;
     }
 
     .table-controllers > .btns {
@@ -153,17 +151,13 @@ thead {
     #add {
         width: 48%;
     }
-
     .sort-search {
-        margin-bottom: 1.25em;
+        display: flex;
+        justify-content: space-evenly;
     }
 
     .sort-search > label {
         display: none;
-    }
-
-    #search {
-        width: 100%;
     }
 
     .table thead {

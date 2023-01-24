@@ -2,7 +2,7 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 const path = require("path");
 const {verifyJWTforCommuters, verifyJWTforAdmin} = require("./middlewares/verifyJWTforCommuters");
-const {isAdmin, isCommuter} = require ('./middlewares/authorization')
+const {isAdmin, isCommuter, isSuper} = require ('./middlewares/authorization')
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
@@ -24,7 +24,7 @@ app.use("/", require("./routes/commuterRegister"));
 app.use("/", require("./routes/logout"));
 
 
-
+app.use("/super-admin", verifyJWTforAdmin, isSuper, require('./routes/superadmindashboard'))
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/admindashboard"));
 
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminComplaints"));
@@ -33,7 +33,7 @@ app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminMissingItem
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminToda"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminDrivers"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminProfile"));
-app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/newAdmin"));
+app.use("/admin", verifyJWTforAdmin, isSuper, require("./routes/newAdmin"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/admin-changepass"));
 
 

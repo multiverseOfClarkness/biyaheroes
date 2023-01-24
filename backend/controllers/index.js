@@ -45,7 +45,12 @@ const login = async (req, res) => {
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
                 res.cookie('token', accessToken, {httpOnly: true})
-                return res.redirect('/admin/dashboard')
+                if (user2.role === 'admin') {
+                    return res.redirect('/admin/dashboard')
+                } else {
+                    return res.redirect('/super-admin/dashboard')
+                }
+                
                 
             }else{
                 res.sendFile(path.resolve('./', 'frontend', 'views', 'login-wrong-pass.html'))

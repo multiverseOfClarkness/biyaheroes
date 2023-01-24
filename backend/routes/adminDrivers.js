@@ -18,6 +18,6 @@ var upload = multer({ storage: storage });
 router.get("/drivers", adminDrivers.getDriversPage);
 router.post("/drivers", upload.single("excel"), adminDrivers.uploadDriverFile);
 router.post("/drivers/new", adminDrivers.addNewDriver);
-router.delete("/drivers/:id", adminDrivers.deleteDriver);
+router.patch("/drivers/:id", adminDrivers.deleteDriver);
 
 module.exports = router;

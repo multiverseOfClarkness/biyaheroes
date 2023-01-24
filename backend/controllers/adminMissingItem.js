@@ -1,14 +1,10 @@
 const missingItemReports = require('../models/missingItemReports')
 
 const getMissingItemPage = (req, res) =>{
-    missingItemReports.countDocuments({status: "Pending"}, (err, count) => {
-        missingItemReports.countDocuments({status: "Solved"}, (err, count1) =>{
+    missingItemReports.find({}, (err, data) => {
             res.render('admin-missing', {
-                count,
-                count1
+                missingList: data,
             })
-        })
-        
     }) 
 }
 
@@ -31,9 +27,9 @@ const getSolvedMissingReportsHistory = (req,res) => {
     
 }
 
-const getIndividualPendingMissingReport = async(req, res) => {
+const getIndividualMissingReport = async(req, res) => {
     missingItemReports.find({_id: req.params.id}, (err, missingItemReports) => {
-        res.render('missing-pending-report', {
+        res.render('missing-individual-report', {
             missingReportData : missingItemReports
         })
     })  
@@ -58,7 +54,7 @@ module.exports = {
     getMissingItemPage,
     getPendingMissingReportsHistory,
     getSolvedMissingReportsHistory,
-    getIndividualPendingMissingReport,
+    getIndividualMissingReport,
     getIndividualSolvedMissingReport,
     updateIndividualPendingMissingReport
 }

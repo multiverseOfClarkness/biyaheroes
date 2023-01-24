@@ -1,21 +1,28 @@
 const driverModel = require("../models/driver");
 const XLSX = require("xlsx");
-const driverr = require("../models/driver");
+const todaModel = require("../models/toda");
 const driver = require("../models/driver");
 
 const getDriversPage = (req, res) => {
-  driverModel.find({}, (err, driverModel) => {
-    res.render("driver", {
-      driverList: driverModel,
-    });
+  driverModel.find({status: 'Continuing'}, (err, driverModel) => {
+    todaModel.find({}, (err, toda) =>{
+      res.render("driver", {
+        driverList: driverModel,
+        todaList: toda
+      });
+    })
   });
 };
 
 const getDriversPageAfterError = (req, res) => {
   driverModel.find({}, (err, driverModel) => {
-    res.render("driver-error", {
-      driverList: driverModel,
-    });
+    todaModel.find({}, (err, toda) =>{
+      res.render("driver-error", {
+        driverList: driverModel,
+        todaList: toda
+      });
+    })
+    
   });
 };
 
@@ -63,22 +70,25 @@ const uploadDriverFile = async (req, res) => {
 const addNewDriver = async (req, res) => {
   try {
     const body = req.body;
-    const TODA = body.TODA;
-    const bodyNum = body.bodyNum;
-    const driverName = body.driverName;
+    const TODA = body.toda;
+    const reqbodyNum = body.bodyNum;
+    const fname = body.fname;
+    const lname = body.lname;
     const phone = body.phone;
 
     const newDriver = new driverModel({
-      TODA,
-      bodyNum,
-      driverName,
-      phone,
+      TODA: TODA,
+      bodyNum: reqbodyNum,
+      fname: fname,
+      lname: lname,
+      phone: phone,
     });
-    //await driverModel.deleteMany();
+    await driverModel.deleteMany();
     await newDriver.save();
     res.redirect("/admin/drivers");
   } catch (error) {
     if (error.code === 11000) {
+      console.log(error)
       getDriversPageAfterError(req, res);
     } else {
       console.log(error);
@@ -87,9 +97,8 @@ const addNewDriver = async (req, res) => {
 };
 
 const deleteDriver = async (req, res) => {
-  const thisDriver = await driver.findById(req.params.id);
+  await driver.findByIdAndUpdate(req.params.id, {status: 'Terminated'});
 
-  await thisDriver.remove();
   res.redirect("/admin/drivers");
 };
 
