@@ -2,9 +2,9 @@ function tableSearch() {
     let input, filter, table, tr, td, txtValue;
 
     //Intialising Variables
-    input = document.getElementById("myInput");
+    input = document.getElementById("search");
     filter = input.value.toUpperCase();
-    table = document.getElementById("myTable-th");
+    table = document.getElementById("table");
     tr = table.getElementsByTagName("tr");
 
     for (let i = 0; i < tr.length; i++) {
