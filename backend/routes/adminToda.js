@@ -17,6 +17,6 @@ var upload = multer({ storage: storage });
 router.get("/TODA", adminTODA.getTODApage);
 router.post("/TODA", upload.single("excel"), adminTODA.uploadNewToda);
 router.post("/TODA/new", adminTODA.addNewToda);
-router.delete("/TODA/:id", adminTODA.deleteToda);
+router.patch("/TODA/:id", adminTODA.deleteToda);
 
 module.exports = router;

@@ -5,7 +5,18 @@ const popups = document.getElementsByClassName('popup-box');
 const add_popup = document.getElementById('add-popup');
 const upload_popup = document.getElementById('upload-popup');
 const edit_popup = document.getElementById('edit-popup');
+const error_popup = document.getElementById('error-popup');
 const mask = document.getElementById('page-mask');
+
+function errorPopout() {
+  error_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+  const x_btns = document.getElementsByClassName('close');
+
+    for(var x of x_btns) {
+      x.addEventListener('click', ClosePopup);
+    }
+}
 
 function ClosePopup() {
     mask.style.visibility = 'hidden';

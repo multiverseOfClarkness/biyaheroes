@@ -103,19 +103,22 @@
                     <tr>
                         <th scope="row" data-label="TODA"><%= toda.TODA %></th>
                         <td data-label="President"><%= toda.presidentName %></td>
-                        <td data-label="Contact">+639123459786</td>
+                        <td data-label="Contact">+63<%= toda.contact %></td>
                         <td data-label="Edit">
                             <a href="">
                                 <img src="/images/edit.svg" alt="" class="table-btn edit-btn">
                             </a>
                             
                         </td>
-                        <td data-label="Delete">
-                            <a href="">
-                                <img src="/images/trash.svg" role="button" alt="" class="table-btn delete-btn">
-                            </a>
-                            
-                        </td>
+                        <form method="post" action="/admin/TODA/<%= toda.id %>?_method=PATCH">
+                            <td data-label="Delete">
+                                <button type="submit">
+                                    <img src="/images/trash.svg" role="button" alt="" class="table-btn delete-btn">
+
+                                </button>
+                            </td>
+                        </form>
+                        
                     </tr>
                 <% }) %> 
             </tbody>

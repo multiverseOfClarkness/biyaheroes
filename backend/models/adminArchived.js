@@ -43,4 +43,4 @@ userSchema.virtual('profileImagePath').get(function(){
         return `data:${this.profileImageType};charset=utf-8;base64,${this.profileImage.toString('base64')}`
     }
 })
-module.exports = mongoose.model('admin', userSchema, 'admin')
+module.exports = mongoose.model('adminArchived', userSchema, 'adminArchived')

@@ -1,7 +1,7 @@
 const driverModel = require("../models/driver");
 const XLSX = require("xlsx");
 const todaModel = require("../models/toda");
-const driver = require("../models/driver");
+const archivedDrivers = require('../models/driverArchived') 
 
 const getDriversPage = (req, res) => {
   driverModel.find({status: 'Continuing'}, (err, driverModel) => {
@@ -15,7 +15,7 @@ const getDriversPage = (req, res) => {
 };
 
 const getDriversPageAfterError = (req, res) => {
-  driverModel.find({}, (err, driverModel) => {
+  driverModel.find({status: 'Continuing'}, (err, driverModel) => {
     todaModel.find({}, (err, toda) =>{
       res.render("driver-error", {
         driverList: driverModel,
@@ -70,20 +70,20 @@ const uploadDriverFile = async (req, res) => {
 const addNewDriver = async (req, res) => {
   try {
     const body = req.body;
-    const TODA = body.toda;
+    const reqTODA = body.toda;
     const reqbodyNum = body.bodyNum;
-    const fname = body.fname;
-    const lname = body.lname;
-    const phone = body.phone;
+    const reqfname = body.fname;
+    const reqlname = body.lname;
+    const reqphone = body.phone;
 
     const newDriver = new driverModel({
-      TODA: TODA,
+      TODA: reqTODA,
       bodyNum: reqbodyNum,
-      fname: fname,
-      lname: lname,
-      phone: phone,
+      fname: reqfname,
+      lname: reqlname,
+      phone: reqphone,
     });
-    await driverModel.deleteMany();
+    
     await newDriver.save();
     res.redirect("/admin/drivers");
   } catch (error) {
@@ -97,9 +97,28 @@ const addNewDriver = async (req, res) => {
 };
 
 const deleteDriver = async (req, res) => {
-  await driver.findByIdAndUpdate(req.params.id, {status: 'Terminated'});
+  try {
+    const currentDriver = await driverModel.findByIdAndUpdate(req.params.id, {status: "Terminated"}, {new: true})
 
-  res.redirect("/admin/drivers");
+    const newArchived = new archivedDrivers({
+      id: currentDriver.id,
+      bodyNum: currentDriver.bodyNum,
+      fname: currentDriver.fname,
+      lname: currentDriver.lname,
+      TODA: currentDriver.TODA,
+      phone:  currentDriver.phone,
+      status: currentDriver.status
+    })
+    await newArchived.save()
+    await driverModel.remove(currentDriver)
+  
+  
+
+    res.redirect("/admin/drivers");
+  } catch (error) {
+    res.redirect('*')
+  }
+  
 };
 
 module.exports = {

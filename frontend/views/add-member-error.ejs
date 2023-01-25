@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload=errorPopup()>
     <header>
 
         <nav class="navbar navbar-expand-md">
@@ -97,6 +97,14 @@
         </div>
         
     </section>
+    <div class="popup-box" id="error-popup">
+
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+
+        <h5>Error!</h5>
+        <p id="error-message">The data you tried to enter already exists!</p>   
+        
+    </div>
 
     <div class="popup-box" id="add-admin-popup">
 

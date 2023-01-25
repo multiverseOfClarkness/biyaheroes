@@ -22,4 +22,4 @@ const todaSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("toda", todaSchema, "toda");
+module.exports = mongoose.model("todaArchived", todaSchema, "todaArchived");

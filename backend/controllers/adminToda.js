@@ -1,4 +1,5 @@
 const todaModel = require("../models/toda");
+const todaArchived = require("../models/todaArchived");
 const XLSX = require("xlsx");
 
 const getTODApage = (req, res) => {
@@ -28,7 +29,7 @@ const addNewToda = async (req, res) => {
       presidentName: presidentName,
       contact : contact
     });
-
+    
     await newToda.save();
     res.redirect("/admin/TODA");
   } catch (e) {
@@ -82,9 +83,19 @@ const uploadNewToda = async (req, res) => {
 };
 
 const deleteToda = async (req, res) => {
-  const thisToda = await todaModel.findById(req.params.id);
+  const thisToda = await todaModel.findByIdAndUpdate(req.params.id, {status: "Archived"}, {new: true});
+  const archived = new todaArchived ({
+    id: thisToda.id,
+    presidentName: thisToda.presidentName,
+    TODA: thisToda.TODA,
+    contact: thisToda.contact,
+    status: thisToda.status
 
-  await thisToda.remove();
+  })
+
+  await todaModel.deleteOne(thisToda)
+  await archived.save()
+  
   res.redirect("/admin/TODA");
 };
 
@@ -92,5 +103,5 @@ module.exports = {
   getTODApage,
   addNewToda,
   uploadNewToda,
-  deleteToda,
+  deleteToda
 };
