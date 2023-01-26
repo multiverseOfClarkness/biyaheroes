@@ -110,9 +110,17 @@
             </thead>
 
             <tbody>
+                
+                   
+
                 <% driverList.forEach(driver => { %> 
                     <tr>
-                        <th scope="row" data-label="TODA"><%= driver.TODA %></th>
+                        <% if(TODA.includes(driver.TODA)){ %> 
+                            <th scope="row" data-label="TODA"><%= driver.TODA %> (Terminated)</th>
+                        <% }else { %> 
+                            <th scope="row" data-label="TODA"><%= driver.TODA %></th>
+                        <% } %> 
+                        
                         <td data-label="President"><%= driver.fname %> <%= driver.lname %></td>
                         <td data-label="President"><%= driver.bodyNum %></td>
                         <td data-label="Contact">+63<%= driver.phone %></td>

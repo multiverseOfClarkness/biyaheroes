@@ -1,18 +1,23 @@
 const driverModel = require("../models/driver");
 const XLSX = require("xlsx");
 const todaModel = require("../models/toda");
-const archivedDrivers = require('../models/driverArchived') 
+const archivedToda = require('../models/todaArchived') 
 
 
 const getDriversPage = (req, res) => {
+  let TODA = []
+  archivedToda.find((err, data)=>{
+    data.forEach(x =>{
+      TODA.push(x.TODA)
+    })
+  })
+  
   driverModel.find({status: 'Continuing'}, (err, driverModel) => {
     todaModel.find({}, (err, toda) =>{
-      archivedDrivers.find({}, (err, data) =>{
         res.render("driver", {
           driverList: driverModel,
           todaList: toda,
-          data
-      })
+          TODA
       });
     })
   });

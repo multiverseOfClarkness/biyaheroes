@@ -21,12 +21,14 @@ const addNewToda = async (req, res) => {
   try {
     const body = req.body;
     const TODA = body.toda;
-    const presidentName = body.fullname;
+    const presidentfname = body.fname;
+    const presidentlname = body.lname;
     const contact = body.contact;
 
     const newToda = new todaModel({
       TODA: TODA,
-      presidentName: presidentName,
+      presidentfname: presidentfname,
+      presidentlname: presidentlname,
       contact : contact
     });
     
@@ -88,7 +90,8 @@ const deleteToda = async (req, res) => {
   const thisToda = await todaModel.findByIdAndUpdate(req.params.id, {status: "Archived"}, {new: true});
   const archived = new todaArchived ({
     id: thisToda.id,
-    presidentName: thisToda.presidentName,
+    presidentlname: thisToda.presidentlname,
+    presidentfname: thisToda.presidentfname,
     TODA: thisToda.TODA,
     contact: thisToda.contact,
     status: thisToda.status
