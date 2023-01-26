@@ -2,6 +2,7 @@ const driverModel = require("../models/driver");
 const XLSX = require("xlsx");
 const todaModel = require("../models/toda");
 const archivedToda = require('../models/todaArchived') 
+const archivedDrivers = require('../models/driverArchived') 
 
 
 const getDriversPage = (req, res) => {
@@ -55,7 +56,7 @@ const uploadDriverFile = async (req, res) => {
     //CONVERTS EXCEL FILE TO JSON
     //RETURNS JSON
     var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_namelist[x]]);
-    console.log(xlData )
+    
     try {
       xlData.every((data) => {
         if (allData.includes(data.fname) || allData.includes(data.lname) || allData.includes(data.phone) || allData.includes(data.bodyNum)) {
@@ -117,14 +118,14 @@ const deleteDriver = async (req, res) => {
       phone:  currentDriver.phone,
       status: currentDriver.status
     })
+    
+    await driverModel.deleteOne(currentDriver)
     await newArchived.save()
-    await driverModel.remove(currentDriver)
-  
   
 
     res.redirect("/admin/drivers");
   } catch (error) {
-    res.redirect('*')
+    console.log(error)
   }
   
 };

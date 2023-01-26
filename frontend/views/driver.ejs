@@ -111,8 +111,6 @@
 
             <tbody>
                 
-                   
-
                 <% driverList.forEach(driver => { %> 
                     <tr>
                         <% if(TODA.includes(driver.TODA)){ %> 
@@ -125,19 +123,18 @@
                         <td data-label="President"><%= driver.bodyNum %></td>
                         <td data-label="Contact">+63<%= driver.phone %></td>
                         <td data-label="Edit">
-                            <a href="">
-                                <img src="/images/edit.svg" alt="" class="table-btn edit-btn">
-                            </a>
+                            
+                        <img src="/images/edit.svg" alt="" class="table-btn edit-btn">
                             
                         </td>
                         <td data-label="Delete">
-                            <% driverList.forEach(driver => { %> 
-                                <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH">
-                                
-                            <% }) %> 
-                                <button>
-                                    <img src="/images/trash.svg" alt="" class="table-btn delete-btn">
-                                </button>
+                            
+                            <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH">
+                            
+                        
+                            <button>
+                                <img src="/images/trash.svg" alt="" class="table-btn delete-btn">
+                            </button>
                             </form>
                         </td>
                     </tr>
