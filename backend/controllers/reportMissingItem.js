@@ -5,7 +5,7 @@ const jwtdecode = require('jwt-decode')
 
 
 const getReportMissingPage = (req,res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'report-missing-item.html'))
+    res.render('report-missing')
 }
 
 const reportMissingItem = async (req, res) => {
@@ -28,7 +28,7 @@ const reportMissingItem = async (req, res) => {
         });
         
         await missingItemReports.save();
-        res.redirect('/commuter/history/missing-item')
+        res.render('report-missing-success')
     } catch (error) {
         console.log(error.message)
         if(error.message === 'Unexpected end of JSON input'){
@@ -37,7 +37,7 @@ const reportMissingItem = async (req, res) => {
             })
             
             await missingItemReports.save()
-            res.redirect('/commuter/history/missing-item')
+            res.render('report-missing-success')
     }
     
     

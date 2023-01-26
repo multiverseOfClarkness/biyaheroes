@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const todaSchema = mongoose.Schema({
-  presidentName: {
+  presidentlname: {
+    type: String,
+    required: [true, "President name is required"],
+    unique: [true, "Already exists"],
+  },
+  presidentfname: {
     type: String,
     required: [true, "President name is required"],
     unique: [true, "Already exists"],

@@ -102,7 +102,7 @@
                 <% todaList.forEach(toda =>{ %> 
                     <tr>
                         <th scope="row" data-label="TODA"><%= toda.TODA %></th>
-                        <td data-label="President"><%= toda.presidentName %></td>
+                        <td data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
                         <td data-label="Contact">+63<%= toda.contact %></td>
                         <td data-label="Edit">
                             <a href="">
@@ -144,7 +144,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Upload</h5>
-        <form action="/admin/TODA" method="post">
+        <form action="/admin/TODA" method="post" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>

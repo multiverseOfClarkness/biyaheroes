@@ -96,6 +96,10 @@ footer {
 }
 
 /*TYPOGRAPHY*/
+#error-message{
+    text-align: center;
+}
+
 
 .navbar-brand {
     font-family: var(--ff-header);

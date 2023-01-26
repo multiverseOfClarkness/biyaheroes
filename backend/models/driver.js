@@ -28,7 +28,7 @@ const driverSchema = mongoose.Schema({
   status: {
     type: String,
     default: 'Continuing',
-    required: [true, "Phone is required"],
+    required: [true, "Status is required"],
   }
 });
 

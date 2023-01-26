@@ -3,12 +3,16 @@ const XLSX = require("xlsx");
 const todaModel = require("../models/toda");
 const archivedDrivers = require('../models/driverArchived') 
 
+
 const getDriversPage = (req, res) => {
   driverModel.find({status: 'Continuing'}, (err, driverModel) => {
     todaModel.find({}, (err, toda) =>{
-      res.render("driver", {
-        driverList: driverModel,
-        todaList: toda
+      archivedDrivers.find({}, (err, data) =>{
+        res.render("driver", {
+          driverList: driverModel,
+          todaList: toda,
+          data
+      })
       });
     })
   });
@@ -27,6 +31,7 @@ const getDriversPageAfterError = (req, res) => {
 };
 
 const uploadDriverFile = async (req, res) => {
+  
   const existingDrivers = await driverModel.find();
 
   const allData = [];
@@ -41,29 +46,27 @@ const uploadDriverFile = async (req, res) => {
   var x = 0;
 
   //TO LOOP AROUND EACH SHEETS OF THE UPLOADED EXCEL FILE
-  sheet_namelist.forEach((element) => {
+  sheet_namelist.forEach(element => {
     //CONVERTS EXCEL FILE TO JSON
     //RETURNS JSON
     var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_namelist[x]]);
-
+    console.log(xlData )
     try {
       xlData.every((data) => {
-        if (
-          allData.includes(data.driverName) ||
-          allData.includes(data.phone) ||
-          allData.includes(data.bodyNum)
-        ) {
+        if (allData.includes(data.fname) || allData.includes(data.lname) || allData.includes(data.phone) || allData.includes(data.bodyNum)) {
           getDriversPageAfterError(req, res);
           return false;
+        } 
+        for (let x in xlData) {
+          
+          driverModel.insertMany([xlData[x]]);
+          
         }
-
-        for (let driver in xlData) {
-          driverModel.create([xlData[driver]]);
-          res.redirect("/admin/drivers");
-        }
+        x++;
+        res.redirect("/admin/drivers");
       });
     } catch (error) {}
-    x++;
+    
   });
 };
 

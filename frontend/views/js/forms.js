@@ -9,7 +9,27 @@ const incidentDesc = document.getElementById('incident-desc');
 const complainantMe = document.getElementById('me')
 const complainantSomeoneElse = document.getElementById('someone-else')
 const evidence = document.getElementById('evidence');
+const error_popup = document.getElementById('error-popup');
+const mask = document.getElementById('page-mask');
+const popups = document.getElementsByClassName('popup-box');
 
+function errorPopout() {
+    error_popup.style.display = 'block';
+    mask.style.visibility = 'visible';
+    const x_btns = document.getElementsByClassName('close');
+  
+      for(var x of x_btns) {
+        x.addEventListener('click', ClosePopup);
+      }
+  }
+
+  function ClosePopup() {
+    mask.style.visibility = 'hidden';
+
+    for(var popup of popups) {
+      popup.style.display = 'none';
+    }
+}
 function formValidation() {
     var valid = true
     const bodyNumVal = bodyNum.value.trim();

@@ -164,7 +164,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Upload</h5>
-        <form action="/admin/drivers">
+        <form method="post" action="/admin/drivers" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>

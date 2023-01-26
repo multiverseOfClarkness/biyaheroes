@@ -9,7 +9,7 @@ const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
 
 const getReportViolationPage = (req,res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'report-violation.html'))
+    res.render('report-violation')
 }
 
 const submitViolationReport = async (req, res) => {
@@ -36,7 +36,7 @@ const submitViolationReport = async (req, res) => {
         })
         
         await violationReports.save()
-        res.redirect('/commuter/history/violation')
+        res.render('report-violation-success')
 
     } catch (error) {
         console.log(error.message)
@@ -46,7 +46,7 @@ const submitViolationReport = async (req, res) => {
             })
             
             await violationReports.save()
-            res.redirect('/commuter/history/violation')
+            res.render('report-violation-success')
         }
     }
     

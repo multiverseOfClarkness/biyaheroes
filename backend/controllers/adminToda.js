@@ -68,15 +68,17 @@ const uploadNewToda = async (req, res) => {
 
         for (let driver in xlData) {
           driverModel.create([xlData[driver]]);
-          res.redirect("/admin/drivers");
+          
         }
+        x++;
+        res.redirect("/admin/drivers");
       });
     } catch (error) {}
     //LOOPS AROUND THE JSON TO INSERT EACH OBJECT TO THE DATABASE
     for (let driver in xlData) {
       todaModel.insertMany(xlData[driver]);
     }
-    x++;
+    
   });
 
   res.redirect("/admin/TODA");
