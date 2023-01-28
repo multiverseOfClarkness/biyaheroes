@@ -2,7 +2,7 @@ const todaModel = require("../models/toda");
 const todaArchived = require("../models/todaArchived");
 const XLSX = require("xlsx");
 
-const getTODApage = (req, res) => {
+const getTODApage = async (req, res) => {
 todaModel.find({}, (err, todaModel) => {
   res.render("toda", {
     todaList: todaModel,

@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 
 
-const getDriversPage = (req, res) => {
+const getDriversPage =  (req, res) => {
   let TODA = []
   archivedToda.find((err, data)=>{
     data.forEach(x =>{
@@ -27,11 +27,18 @@ const getDriversPage = (req, res) => {
 };
 
 const getDriversPageAfterError = (req, res) => {
+  let TODA = []
+  archivedToda.find((err, data)=>{
+    data.forEach(x =>{
+      TODA.push(x.TODA)
+    })
+  })
   driverModel.find({status: 'Continuing'}, (err, driverModel) => {
     todaModel.find({}, (err, toda) =>{
       res.render("driver-error", {
         driverList: driverModel,
-        todaList: toda
+        todaList: toda,
+        TODA
       });
     })
     

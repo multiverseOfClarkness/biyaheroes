@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drivers</title>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/admin-drivers.css">
-    <link rel="stylesheet" href="/css/popup-modal.css">
+    <link rel="stylesheet" href="/css/popup-modal.css"> 
 </head>
 
-<body onload=errorPopout()> 
+<body onload="errorPopout()">
 
     <header>
 
@@ -79,15 +79,16 @@
         <div class="sort-search">
 
             <!-- SORT BY TODA -->
-            <label for="show">Show</label>
-            <select name="show" id="show">
+            <!-- <label for="show">Show</label>
+            <select name="show" id="show" onselect="tableFilter()">
                 <option value="all">All</option>
-                <option value="dela-paz">Dela Paz Toda</option>
-                <option value="jubilation">Jubilation</option>
-            </select>
+                
+                    <option value="</option>
+               
+            </select> -->
 
             <label for="search">Search</label>
-            <input type="text" name="search" id="search" placeholder="Search">
+            <input type="text" name="search" id="search" placeholder="Search" onkeyup="tableSearch()">
         </div>
 
         <div class="btns">
@@ -96,7 +97,7 @@
         </div>
     </div>
 
-        <table class="table table-hover text-center">
+        <table class="table table-hover text-center" id="table">
             <thead>
                 <tr>
                     <th>TODA</th>
@@ -109,32 +110,73 @@
             </thead>
 
             <tbody>
+                <% const todaArray = [] %> 
+                <% todaList.forEach(toda =>{ %> 
+                    <% todaArray.push(toda.TODA) %> 
+                <% }) %> 
+                <% const driverArray = [] %> 
+                <% driverList.forEach(driver =>{ %> 
+                    <% driverArray.push(driver) %> 
+                <% }) %> 
+                
+                <input type="hidden" id="close-button" value="/images/x-lg.svg">
                 <% driverList.forEach(driver => { %> 
-                    <tr>
-                        <th scope="row" data-label="TODA"><%= driver.TODA %></th>
-                        <td data-label="President"><%= driver.fname %> <%= driver.lname %></td>
-                        <td data-label="President"><%= driver.bodyNum %></td>
-                        <td data-label="Contact">+63<%= driver.phone %></td>
-                        <td data-label="Edit">
-                            <a href="">
-                                <img src="/images/edit.svg" alt="" class="table-btn edit-btn">
-                            </a>
+                    <tr onclick="editInfo(this)">
+                        <div>
+                            <input type="hidden" class="driversArray" value="<%= JSON.stringify(driver) %>">            
+                            
+                            <input id="driver-toda" type="hidden" value="<%= todaArray %>">
+                        </div>
+                        
+                        
+                        <% if(TODA.includes(driver.TODA)){ %> 
+                            <th scope="row" data-label="TODA"><%= driver.TODA %> (Terminated)</th>
+                        <% }else { %> 
+                            <th scope="row" data-label="TODA"><%= driver.TODA %></th>
+                        <% } %> 
+                        
+                        <td class="driver-data" data-label="President" data-value="<%= driver.fname %> <%= driver.lname %>">
+                            <%= driver.fname %> <%= driver.lname %>
+                        </td>
+
+                        <td class="driver-data" data-label="President">
+                            <%= driver.bodyNum %>
+                        </td>
+
+                        <td class="driver-data" data-label="Contact">
+                            +63<%= driver.phone %>
+                            
+                        </td>
+                        <td class="driver-data" data-label="Contact" style="display: none;" >
+                            <%= driver.id %>
+                        </td>
+
+                        <td  data-label="Edit">
+                            <img src="/images/edit.svg" alt="" id="edit-btn" class="table-btn edit-btn" >
                             
                         </td>
                         <td data-label="Delete">
-                            <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH">
-                                <button>
-                                    <img src="/images/trash.svg" alt="" class="table-btn delete-btn">
-                                </button>
+                            
+                            <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH" >
+                            
+                            <input type="image" src="/images/trash.svg" class="table-btn delete-btn">
+                            
+                            
                             </form>
                         </td>
+                         
+                    <% }) %> 
+                    
                     </tr>
-                <% }) %> 
-                
+                    
             </tbody>
+            
         </table>
+        
+        
+        
     </section>
-
+    
     <div class="popup-box" id="add-popup">
 
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
@@ -147,14 +189,16 @@
                 <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
                 <% }) %> 
             </select>
-            <input type="text" name="fname" id="fullname" placeholder="First Name" class="form-control" required>
-            <input type="text" name="lname" id="fullname" placeholder="Last Name" class="form-control" required>
+            <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" required>
+            <input type="text" name="lname" id="lname" placeholder="Last Name" class="form-control" required>
             <input type="number" name="bodyNum" id="bodynum" placeholder="Body number" class="form-control" required>
             <input type="number" name="phone" id="contact" placeholder="Contact Number" class="form-control" required>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
+
+    
 
     <div class="popup-box" id="upload-popup">
 
@@ -167,38 +211,36 @@
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
-    <div class="popup-box" id="error-popup">
 
-        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
-
-        <h5>Error!</h5>
-        <p id="error-message">The data you tried to enter already exists!</p>   
-        
-    </div>
 
     <div class="popup-box" id="edit-popup">
 
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Edit</h5>
-        <form action="">
-            <input type="text" name="toda" id="toda" placeholder="TODA Name" class="form-control" required>
-            <input type="text" name="fullname" id="fullname" placeholder="Driver Name" class="form-control" required>
-            <input type="number" name="bodynum" id="bodynum" placeholder="Body #" class="form-control" required>
-            <input type="number" name="contact" id="contact" placeholder="Contact Number" class="form-control" required>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+        <form method="post" action="/admin/drivers/edit?_method=PATCH">
+            <input type="hidden" id="driver-id" name="driverid">
+            <input type="text" name="firstname" id="edit-driver-firstname" placeholder="First Name" class="form-control" required>
+            <input type="text" name="lastname" id="edit-driver-lastname" placeholder="Last Name" class="form-control" required>
+            <select class="form-control" name="toda" id="toda">
+                <% todaList.forEach(toda =>{ %> 
+                <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
+                <% }) %> 
+            </select>
+            <input type="text" name="bodynum" id="edit-driver-bodynum" class="form-control" required>
+            <input type="text" name="contact" id="edit-driver-contact" placeholder="Contact Number" class="form-control" required>
+
+            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
         </form>
     </div>
 
     <div id="page-mask"></div>
-
     <div id="error-popup" class="popup-box">
         <img src="/images/error.png" class="close-popup-btn close alt="">
         <h5>Error</h5>
         <p>Duplicate entry detected.</p>
         
     </div>
-    
     <footer>
         <p>Commuters' Reports Management System</p>
     </footer>
@@ -206,5 +248,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
     <script src="/js/admin-toda.js"></script>
+    <script src="/js/search.js"></script>
+
 </body>
 </html>
