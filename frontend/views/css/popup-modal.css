@@ -15,10 +15,38 @@
     text-align: right;
     font-family: var(--ff-body);
 }
+.edit-box {
+    display: block;
+    z-index: 1;
+    width: 300px;
+    position: absolute;
+    top: 40%;
+    right: 0;
+    left: 0;
+    margin-left: auto; 
+    margin-right: auto;
+    background-color: var(--bg-clr);
+    padding: 1rem 1.75rem;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.2);
+    text-align: right;
+    font-family: var(--ff-body);
+}
+
+.invi{
+    display: none;
+}
+
 
 .popup-box h5 {
     text-align: center;
     margin-top: .5em;
+}
+
+.popup-box img {
+    text-align: center;
+    margin-top: .5em;
+    visibility: visible;
 }
 
 .popup-box button,
@@ -52,6 +80,36 @@
     border-color: var(--tertiary-clr);
     color: #FFFFFF;
 }
+
+/* edit popup */
+
+.edit-box h5 {
+    text-align: center;
+    margin-top: .5em;
+}
+
+.edit-box button,
+.edit-box input{
+    width: 100%;
+}
+
+.edit-box input{
+    margin: 1em 0;
+    border-color: rgba(0, 47, 146, 0.3);
+}
+
+.edit-box .close-popup-btn{
+    width: 12px;
+    filter: invert(37%) sepia(9%) saturate(10%) hue-rotate(51deg) brightness(95%) contrast(87%);
+    opacity: 0.6;
+}
+
+.edit-box .close-popup-btn:hover {
+    filter: invert(39%) sepia(99%) saturate(2327%) hue-rotate(2deg) brightness(101%) contrast(106%);
+    opacity: 1;
+}
+
+
 
 #page-mask {
     background: rgba(0, 0, 0, 0.1);

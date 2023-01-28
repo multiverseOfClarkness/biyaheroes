@@ -3,6 +3,7 @@ const XLSX = require("xlsx");
 const todaModel = require("../models/toda");
 const archivedToda = require('../models/todaArchived') 
 const archivedDrivers = require('../models/driverArchived') 
+const mongoose = require('mongoose')
 
 
 const getDriversPage = (req, res) => {
@@ -125,14 +126,41 @@ const deleteDriver = async (req, res) => {
 
     res.redirect("/admin/drivers");
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
   }
   
 };
+
+const updateDriver = async (req, res) => {
+  const body = req.body
+  const driverid = body.driverid
+  var id = mongoose.Types.ObjectId(driverid);
+  const driverFname = body.firstname
+  const driverLname = body.lastname
+  const driverTODA = body.toda
+  const driverBodyNum = body.bodynum
+  const driverContact = body.contact
+  
+  try {
+    
+    await driverModel.findByIdAndUpdate(id, {
+      bodyNum: driverBodyNum,
+      fname: driverFname,
+      lname: driverLname,
+      TODA: driverTODA,
+      phone: driverContact
+    }, {new: true})
+    
+    res.redirect('/admin/drivers')
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 module.exports = {
   getDriversPage,
   uploadDriverFile,
   addNewDriver,
   deleteDriver,
+  updateDriver
 };

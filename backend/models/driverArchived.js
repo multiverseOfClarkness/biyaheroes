@@ -4,17 +4,15 @@ const driverSchema = mongoose.Schema({
   bodyNum: {
     type: String,
     required: [true, "Body number is required"],
-    unique: [true, "A driver with this body number already exists."],
+    
   },
   fname: {
     type: String,
     required: [true, "First name is required"],
-    unique: [true, "A driver with this name already exists."],
   },
   lname: {
     type: String,
     required: [true, "Last name is required"],
-    unique: [true, "A driver with this name already exists."],
   },
   TODA: {
     type: String,
@@ -23,7 +21,6 @@ const driverSchema = mongoose.Schema({
   phone: {
     type: String,
     required: [true, "Phone is required"],
-    unique: [true, "A driver with this phone number already exists."],
   },
   status: {
     type: String,

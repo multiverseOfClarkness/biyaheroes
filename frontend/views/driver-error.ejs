@@ -122,10 +122,7 @@
                             
                         </td>
                         <td data-label="Delete">
-                            <% driverList.forEach(driver => { %> 
-                                <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH">
-                                
-                            <% }) %> 
+                            <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH">
                                 <button>
                                     <img src="/images/trash.svg" alt="" class="table-btn delete-btn">
                                 </button>
