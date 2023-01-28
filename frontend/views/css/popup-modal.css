@@ -38,7 +38,7 @@
 }
 
 
-.popup-box h5 {
+.popup-box h5, p {
     text-align: center;
     margin-top: .5em;
 }

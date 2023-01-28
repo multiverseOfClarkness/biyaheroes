@@ -81,7 +81,8 @@ function UploadExcel() {
 
 function ClosePopup() {
   mask.style.visibility = 'hidden';
-  edit_popup.style.display = 'none'
+  // edit_popup.style.display = 'none'
+  // error_popup.style.display = 'none'
 
   for(var popup of popups) {
     popup.style.display = 'none';

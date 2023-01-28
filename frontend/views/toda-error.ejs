@@ -1,194 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODA PRESIDENTS</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/css/pres-toda.css">
-    <link rel="stylesheet" href="/css/admin-common.css">
-    <link rel="stylesheet" href="/css/typography.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODA</title>
 
-  </head>
-  <body onload=errorAlert()>
-    <nav class="navbar-nav navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 sidebar">
-                    <a class="navbar-nav" href="#"></a>
-                    
-                        <button 
-                        class="navbar-toggler my-2 mx-2 collapse-button" 
-                        type="button" 
-                        data-bs-toggle="collapse" 
-                        data-bs-target="#toggleMobileMenu" 
-                        aria-controls="toggleMobileMenu" 
-                        aria-expanded="false" 
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/toda.css">
+    <link rel="stylesheet" href="/css/popup-modal.css">
+</head>
 
-                    <div class="collapse navbar-collapse" id="toggleMobileMenu">
-                        <div class="sidebar-menu">
-                            <div class="navbar-nav account-box">
-                                <div class="row">
+<body onload="errorPopout()">
 
-                                    <!-- account block start-->
-                                    <div class="">
-                                        <h3 class="logo mx-2 my-1">BIYAHEROES</h3>
-                                    </div>
-                                        
+    <header>
 
-                                    <!-- main menu block start -->
-                                    <div class="main-menu pb-3">
-                                        <hr>
-                                        <ul class="navbar-nav d-flex flex-column mx-3 mt-lg-0 main-menu-list" style="color: white">
-                                            <li>
-                                                <a href="/admin/complaints" class="nav-link text-white link">COMPLAINT</a>
-                                            </li>
-                        
-                                            <li>
-                                                <a href="/admin/missing" class="nav-link text-white link">MISSING</a>
-                                            </li>
-                        
-                                            <li>
-                                                <a href="/admin/TODA" class="nav-link nav-pills link active" aria-current="true">TODA</a>
-                                            </li>
-                        
-                                            <li>
-                                                <a href="/admin/drivers" class="nav-link text-white link">DRIVER</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- main menu block end -->
+        <nav class="navbar navbar-expand-md">
+            <a href="/admin/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
 
-                                    <!-- account menu block start -->
-                                    <div class="account-navigation pb-5">
-                                        <hr>
-                                            <ul class="navbar-nav d-flex flex-column mx-3 pb-5">
-                                                <li>
-                                                    <a href="/admin/newAdmin" class="nav-link active text-white">ADD MEMBER</a>
-                                                </li>
-                            
-                                                <li>
-                                                    <a href="/admin/profile" class="nav-link text-white">EDIT PROFILE</a>
-                                                </li>
-                            
-                                                <li>
-                                                    <a href="/logout" class="nav-link text-white log-out">LOG OUT</a>
-                                                </li>
-                                            </ul>
-                                    </div>
-                                    <!-- account menu block end -->
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <button 
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#toggleMobileMenu"
+            aria-controls="toggleMobileMenu"
+            aria-expanded="false"
+            aria-label="Toggle Navigation">
 
-                <div class="col pending-list">
-                    <div class="d-lg-flex">
-                        <h5 class="text-lg-start text-center my-2">TODA PRESIDENTS</h5>
+            <span class="navbar-toggler-icon"></span>
+            </button>
 
-                        <div class="d-flex justify-content-lg-end justify-content-md-center search-bar">
-                            <form class="form-inline my-2 my-lg-2 search-form" style="width: 200px;">
-                                <input type="text" placeholder="Search" id="myInput" onkeyup='tableSearch()' class="form-control">
-                            </form>
-                            <img class="search-icon my-3" src="/images/search-icon.png">
-                        </div>
-                    </div>
+            <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                <ul class="navbar-nav ms-auto">
 
-                    <!-- sample list start -->
-                    <div class="table-responsive-md toda-page">
-                        <table class="table table-hover overdue-report" id="myTable-th" data-filter-control="true" data-show-search-clear-button="true">
-                            <thead class="left-details">
-                                <tr>
-                                    <th scope="col" id="toda">TODA NAME</th>
-                                    <th scope="col" class="president-name" contenteditable="false">PRESIDENT'S NAME</th>
-                                    <th scope="col" class="delete" id="delete">REMOVE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <% todaList.forEach(toda =>{ %> 
-                                <tr>
-                                    <td scope="row" class="input-data" id="toda-name"><%= toda.TODA %> </td>
-                                    <td class="input-data" id="president-name"><%= toda.presidentName %> </td>
-                                    <td class="delete-icon">
-                                        <form method="post" action="/admin/TODA/<%= toda._id %>?_method=DELETE">
-                                            <button type="submit">
-                                                <img class="delete-icon" id="delete-icn" src="/images/delete-icon.png">
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <% }) %> 
-                                
-                            </tbody>
-                        </table>
-                        <!-- sample report end -->
-                        <form action="/admin/TODA/new" method="post">
-                            <div class="input-group mb-3 pe-5 mx-2" id="new-input">
-                                
-                                <label class="input-group-text" for="inputGroupSelect01">TODA NAME</label>
-                                    <select class="form-select" name="TODA" id="inputGroupSelect01">
-                                        <option value="San Francisco" id="1">San Francisco</option>
-                                        <option value="Dela Paz" id="2">Dela Paz</option>
-                                        <option value="Malaban" id="3">Malaban</option>
-                                    </select>
-                                <input type="text" class="form-control" placeholder="President Name" name="president" id="input-pres-name">
-                                <button type="submit" class="btn btn-outline-dark mx-1" id="save" style="height: 38px;">save</button>
-                            </div>
-                        </form>
-                        
-                        <form action="/admin/TODA" method="post" enctype="multipart/form-data">
-                        <div class="d-flex flex-row-reverse">    
+                    <li>
+                        <a class="nav-link" href="/admin/complaints">Complaints</a>
+                    </li>
 
-                            <button class="btn btn-light  me-md-2 border border-secondary text-center btn-options" type="button" onclick="showInputForm()" id="new-btn">ADD</button>
-                            <button type="submit" class="btn btn-light  me-md-2 border border-secondary btn-options upload" value="Submit" id="submitUpload">Uploadd</button>
-                            <button class="btn btn-light  me-md-2 border border-secondary btn-options upload" type="button" id="showUpload">Upload</button>
-                            <input type="file" class="upload-excel border border-secondary form-control mb-3" name="excel" id="excel">    
+                    <li>
+                        <a class="nav-link" href="/admin/missing">Missing Items</a>
+                    </li>
 
-                            
-                        </div>
-                        </form>
-                       
-                        
-                    </div>
+                    <li>
+                        <a class="nav-link active" href="/admin/TODA">TODA</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/admin/drivers">Drivers</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/admin/newAdmin">Admins</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/admin/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link logout" href="/logout">Logout</a>
+                    </li>
+                </ul>
             </div>
+        </nav>
+
+        <div class="banner">
+            <h2>TODA</h2>
         </div>
-    </nav>
-    <div id="popup" class="popup">
-        <img src="/images/error.png">
-        <h2>Error</h2>
-        <p>Duplicate entries detected.</p>
-        <button onclick=closepopup() type="button">OK</button>
+    </header>
+
+    <section class="container">
+
+    <div class="table-controllers">
+        <div class="sort-search">
+            <label for="search">Search</label>
+            <input type="text" name="search" id="search" placeholder="Search" onkeyup="tableSearch()">
+        </div>
+
+        <div class="btns">
+            <button class="btn btn-primary btn-sm" id="upload">Upload</button>
+            <button class="btn btn-outline-primary btn-sm add-btn" id="add">Add</button>
+        </div>
     </div>
-    <script src="/js/login-verify.js"></script>
 
-    <script
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-    crossorigin="anonymous"
-    ></script>
-    <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-    crossorigin="anonymous"
-    ></script>
-    
-    
-    <script src="/js/new.js"></script>
+        <table class="table table-hover text-center" id="table">
+            <thead>
+                <tr>
+                    <th>TODA</th>
+                    <th>President</th>
+                    <th>Contact #</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% todaList.forEach(toda =>{ %> 
+                    <tr>
+                        <th scope="row" data-label="TODA"><%= toda.TODA %></th>
+                        <td data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
+                        <td data-label="Contact">+63<%= toda.contact %></td>
+                        <td data-label="Edit">
+                            <a href="">
+                                <img src="/images/edit.svg" alt="" class="table-btn edit-btn">
+                            </a>
+                            
+                        </td>
+                        <form method="post" action="/admin/TODA/<%= toda.id %>?_method=PATCH">
+                            <td data-label="Delete">
+                                <button type="submit">
+                                    <img src="/images/trash.svg" role="button" alt="" class="table-btn delete-btn">
+
+                                </button>
+                            </td>
+                        </form>
+                        
+                    </tr>
+                <% }) %> 
+            </tbody>
+        </table>
+    </section>
+
+    <div class="popup-box" id="add-popup">
+
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+
+        <h5>TODA</h5>
+        <form method="post" action="/admin/TODA/new">
+            <input type="text" name="toda" id="toda" placeholder="TODA Name" class="form-control" required>
+            <input type="text" name="fname" id="fname" placeholder="TODA President First name" class="form-control" required>
+            <input type="text" name="lname" id="lname" placeholder="TODA President Last name" class="form-control" required>
+            <input type="number" name="contact" id="contact" placeholder="Contact Number" class="form-control" required>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+
+    <div class="popup-box" id="upload-popup">
+
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+
+        <h5>Upload</h5>
+        <form action="/admin/TODA" method="post" enctype="multipart/form-data">
+            <input type="file" name="excel" id="excel" class="form-control" required>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+
+
+    <div id="page-mask"></div>
+    <div id="error-popup" class="popup-box">
+        <img src="/images/error.png" class="close-popup-btn close alt="">
+        <h5>Error</h5>
+        <p>Duplicate entry detected.</p>
+        
+    </div>
+    <footer>
+        <p>Commuters' Reports Management System</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="/js/admin-toda.js"></script>
     <script src="/js/search.js"></script>
-   
     
     
-
-  </body>
+</body>
 </html>
