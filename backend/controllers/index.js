@@ -23,7 +23,7 @@ const login = async (req, res) => {
         
        
         if(user1){
-            const isMatchUser1 = await bcryptjs.compare(password, user1.verifiedpass)
+            const isMatchUser1 = await bcryptjs.compare(password, user1.password)
             
             if(isMatchUser1){
                 const userEmail = body.email

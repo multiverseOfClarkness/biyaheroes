@@ -31,10 +31,6 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required.']
     },
-    verifiedpass : {
-        type: String,
-        required: [true, 'Password is required.']
-    },
     reports : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'violationReports'

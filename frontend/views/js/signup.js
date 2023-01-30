@@ -7,6 +7,7 @@ const phonenum = document.getElementById('phone-num');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirm_pass = document.getElementById('confirm-pass');
+const errorText = document.getElementById('error-msg')
 
 
 function InputValidation() {
@@ -21,7 +22,7 @@ function InputValidation() {
     let valid = true
 
     if(firstNameVal === '') {
-        errorMsg(first_name);
+        errorMsg(first_name, 'Please provide first name.');
         return valid = false;
     } successMsg(first_name);
 
@@ -51,7 +52,7 @@ function InputValidation() {
     if(emailVal === '') {
         errorMsg(email);
         return valid = false;
-    }else if (~isEmail(emailVal)) {
+    }else if (!isEmail(emailVal)) {
         errorMsg(email);
         return valid = false;
     } successMsg(email);
@@ -73,11 +74,16 @@ function InputValidation() {
     
 }
 
-function errorMsg(input) {
+function errorMsg(input, msg) {
+    const formItem = input.parentElement;
+    const small = formItem.querySelector('small');
+    errorText.style.display = 'block'
+    small.innerHTML = msg;
     input.className = 'form-control error';
 }
 
 function successMsg(input) {
+    errorText.style.display = 'none'
     input.className = 'form-control success';
 }
 

@@ -1,5 +1,6 @@
 let thisPage = 1; //current page
 let limit = 11; //item limit
+let head = document.getElementById('table-head')
 let list = document.querySelectorAll('.list-page .item'); //selects the div of table and table rows of the items
 
 //function wherein siya yung nag didisplay ng items based sa listPage
@@ -12,6 +13,7 @@ function loadItem(){
     list.forEach((item, key)=>{
         if(key >= beginGet && key <= endGet){
             item.style.display = 'table-row'; //condition wherein if may element it will dispalyed as table row
+            head.style.display = ''
         }else{
             item.style.display = 'none';
         }

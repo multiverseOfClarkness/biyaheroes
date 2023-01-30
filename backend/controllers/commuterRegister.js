@@ -15,7 +15,7 @@ const createNewUser = async (req, res) => {
         const salt = await bcryptjs.genSalt(10);
         
         //password hashing
-        const hashedPassword = await bcryptjs.hash(body.verifiedpass, salt)
+        const hashedPassword = await bcryptjs.hash(body.confirmpass, salt)
         
         let newUser = new User ({
         fname: req.body.fname,
@@ -24,16 +24,16 @@ const createNewUser = async (req, res) => {
         address: req.body.address,
         phone: req.body.phone,
         email: req.body.email,
-        password: req.body.password,
-        verifiedpass: hashedPassword
+        password: hashedPassword
         });
         
         await newUser.save()
         res.redirect('/')
     } catch (error) {
-        if (error.code === 11000) {
-            res.render('resend-user-register-page.ejs')
-        }
+        // if (error.code === 11000) {
+        //     res.render('resend-user-register-page.ejs')
+        // }
+        console.log(error)
     }
                     
         
