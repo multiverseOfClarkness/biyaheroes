@@ -22,6 +22,7 @@ app.use(cookieParser());
 app.use("/", require("./routes/indexRoute"));
 app.use("/", require("./routes/commuterRegister"));
 app.use("/", require("./routes/logout"));
+app.use("/", require("./routes/forgotPass"));
 
 
 app.use("/super-admin", verifyJWTforAdmin, isSuper, require('./routes/superadmindashboard'))

@@ -8,7 +8,7 @@
     left: 0;
     margin-left: auto; 
     margin-right: auto;
-    background-color: var(--bg-clr);
+    background-color: white;
     padding: 1rem 1.75rem;
     border-radius: 1rem;
     box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.2);
