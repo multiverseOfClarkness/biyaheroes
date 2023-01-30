@@ -1,10 +1,10 @@
-const path = require('path')
 const ViolationReport = require('../models/violationReports')
 const users = require('../models/users')
 const jwtdecode = require('jwt-decode')
-const { populate } = require('../models/violationReports')
-const { JsonWebTokenError } = require('jsonwebtoken')
 const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 
 
@@ -35,8 +35,20 @@ const submitViolationReport = async (req, res) => {
             author 
         })
         
-        await violationReports.save()
+        violationReports.save((err, report) =>{
+            const justReported = report.id
+            client.messages
+            .create({
+                body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
+                from: '+15732847492',
+                to: '+639925776610'
+            })
+            .then(message => console.log(message));
+        })
+         
+        
         res.render('report-violation-success')
+        
 
     } catch (error) {
         console.log(error.message)
@@ -45,7 +57,18 @@ const submitViolationReport = async (req, res) => {
                 bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, author 
             })
             
-            await violationReports.save()
+            violationReports.save((err, report) => {
+                const justReported = report.id
+                client.messages
+                .create({
+                    body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
+                    from: '+15732847492',
+                    to: '+639925776610'
+                })
+                .then(message => console.log(message));
+                })
+
+            
             res.render('report-violation-success')
         }
     }
