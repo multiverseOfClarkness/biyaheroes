@@ -7,6 +7,7 @@ const getChangePass = async (req, res) => {
     res.render('commuter-change-pass')
 }
 
+
 const changePass = async (req, res) => {
     try {
         const body = await req.body
@@ -30,7 +31,8 @@ const changePass = async (req, res) => {
                 })
                 res.redirect('/logout')
             } else {
-                res.render('commuter-change-pass-error')
+                console.log('ey')
+                getProfileAfterError(req, res)
             }
         }
 
@@ -40,6 +42,8 @@ const changePass = async (req, res) => {
         console.log(error)
     }
 }
+
+
 
 module.exports = {
     getChangePass, changePass

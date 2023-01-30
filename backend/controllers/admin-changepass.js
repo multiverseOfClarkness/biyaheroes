@@ -29,7 +29,8 @@ const changePass = async (req, res) => {
                 })
                 res.redirect('/logout')
             } else {
-                res.render('admin-change-pass-error')
+                //res.render('admin-change-pass-error')
+                res.send('hi')
             }
         }
 

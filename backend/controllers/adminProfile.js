@@ -18,6 +18,40 @@ const getAdminProfilePage = async (req, res) => {
     //res.redirect('/logout')
   }
 };
+
+const getProfileAfterError = async (req, res) =>{
+  try {
+      const currentUser = await admin.findOne({
+        email: jwtdecode(req.cookies.token).email,
+      });
+  
+      admin.find({ _id: currentUser._id }, (err, admin) => {
+        res.render("admin-change-pass-error", {
+          adminDetails: admin,
+        });
+      });
+    } catch (error) {
+      console.log(error);
+      //res.redirect('/logout')
+    }
+}
+const getProfileAfterSuccess = async (req, res) =>{
+  try {
+      const currentUser = await admin.findOne({
+        email: jwtdecode(req.cookies.token).email,
+      });
+  
+      admin.find({ _id: currentUser._id }, (err, admin) => {
+        res.render("admin-change-pass-success", {
+          adminDetails: admin,
+        });
+      });
+    } catch (error) {
+      console.log(error);
+      //res.redirect('/logout')
+    }
+}
+
 const updateAdminProfile = async (req, res) => {
   const currentUser = await admin.findOne({
     email: jwtdecode(req.cookies.token).email,
@@ -53,9 +87,9 @@ const updateAdminProfile = async (req, res) => {
               await admin.updateOne({email : currentUser.email}, {
                   password: newHashedPassword
               })
-              res.redirect('/logout')
+              getProfileAfterSuccess(req, res)
           } else {
-              res.redirect('/admin/profile')
+              getProfileAfterError(req, res)
           }
       }
     } else {

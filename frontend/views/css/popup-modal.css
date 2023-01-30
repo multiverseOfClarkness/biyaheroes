@@ -12,7 +12,7 @@
     padding: 1rem 1.75rem;
     border-radius: 1rem;
     box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.2);
-    text-align: right;
+    text-align: center;
     font-family: var(--ff-body);
 }
 .edit-box {
@@ -47,6 +47,15 @@
     text-align: center;
     margin-top: .5em;
     visibility: visible;
+    
+}
+.popup-box .success-indicator {
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+    
 }
 
 .popup-box button,

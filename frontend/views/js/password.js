@@ -25,3 +25,17 @@ function validateEmptyField() {
     document.getElementById("error").style.display = "none";
   }
 }
+
+const success_popup = document.getElementById('success-popup')
+const error_popup = document.getElementById('error-popup');
+function errorPopup() {
+  
+  error_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+
+  const x_btns = document.getElementsByClassName('close');
+  
+    for(var x of x_btns) {
+      x.addEventListener('click', ClosePopup);
+    }
+  }

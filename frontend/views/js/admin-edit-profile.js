@@ -9,6 +9,7 @@ const save_profile = document.getElementById('save');
 const cancel_profile = document.getElementById('cancel');
 
 const popups = document.getElementsByClassName('popup-box');
+const error_popup = document.getElementById('error-popup');
 const personal_popup = document.getElementById('personal-popup');
 const account_popup = document.getElementById('account-popup');
 const password_popup = document.getElementById('password-popup');
@@ -138,6 +139,16 @@ function ChangePassword() {
     x.addEventListener('click', ClosePopup);
   }
 }
+
+function errorPopout() {
+  error_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+  const x_btns = document.getElementsByClassName('close');
+  
+    for(var x of x_btns) {
+      x.addEventListener('click', ClosePopup);
+    }
+  }
 
 function FormValidation() {
 
