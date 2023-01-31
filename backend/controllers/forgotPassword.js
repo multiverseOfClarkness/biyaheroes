@@ -14,7 +14,7 @@ const forgotPass = (req, res) => {
     try {
         user.find({email: email}, (err, result) =>{
             if(result == ''){
-                res.send('Email not registered')
+                res.render('email-not-sent')
                 return
             } else {
                 const secret = process.env.ACCESS_TOKEN_SECRET + result[0].password
@@ -51,6 +51,7 @@ const forgotPass = (req, res) => {
                       console.log('Email sent: ' + info.response);
                     }
                   });
+                  res.render('email-sent')
             }
         })
     } catch (error) {

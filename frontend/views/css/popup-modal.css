@@ -90,6 +90,41 @@
     color: #FFFFFF;
 }
 
+#success-icon {
+    filter: invert(62%) sepia(65%) saturate(494%) hue-rotate(93deg) brightness(93%) contrast(87%);
+}
+
+.icon {
+    width: 60px;
+    margin-top: -60px;
+}
+
+.popup-box-w-icon {
+    /* COMMENT OUT */
+    display: none;
+    z-index: 1;
+    width: 300px;
+    position: absolute;
+    top: 40%;
+    right: 0;
+    left: 0;
+    margin-left: auto; 
+    margin-right: auto;
+    background-color: white;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: var(--ff-body);
+}
+
+#success-popup h5{
+    color: #2ecc71;
+}
+
+#error-icon {
+    filter:invert(31%) sepia(62%) saturate(2586%) hue-rotate(344deg) brightness(101%) contrast(81%);
+}
 /* edit popup */
 
 .edit-box h5 {
