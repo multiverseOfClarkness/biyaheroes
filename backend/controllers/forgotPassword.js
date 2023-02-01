@@ -1,6 +1,7 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const user = require('../models/users')
+const admin = require('../models/adminUsers')
 const bcryptjs = require('bcryptjs')
 var nodemailer = require('nodemailer');
 
@@ -14,48 +15,21 @@ const forgotPass = (req, res) => {
     try {
         user.find({email: email}, (err, result) =>{
             if(result == ''){
-                res.render('email-not-sent')
-                return
-            } else {
-                const secret = process.env.ACCESS_TOKEN_SECRET + result[0].password
-                const payload = {
-                    email: result[0].email,
-                    id: result[0].id
-                }
-                console.log(result[0].email)
-                const token =jwt.sign(payload, secret, {expiresIn: '15m'})
-                const link = `http://localhost:3000/reset-password/${result[0].id}/${token}`
-
-                //For email sending
-                const bhemail = 'biyaheroesconnect@gmail.com'
-                const receivers = [result[0].email, bhemail]
-                var transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      user: 'biyaheroesconnect@gmail.com',
-                      pass: 'eehntnjcdbowbdko'
-                    }
-                  });
-                  
-                  var mailOptions = {
-                    from: 'ladoboy92@gmail.com',
-                    to: receivers[0].toString() ,
-                    subject: 'BiyaHeroes: Reset password.',
-                    text: `Please click this link to reset your password ${link}.`
-                  };
-                  
-                  transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                      console.log(error.message);
+                admin.find({email: email}, (err, result) =>{
+                    if(result == '') {
+                        res.render('email-not-sent')
+                        return
                     } else {
-                      console.log('Email sent: ' + info.response);
+                        getEmail(req, res, result)
                     }
-                  });
-                  res.render('email-sent')
+                })
+                
+            } else {
+                getEmail(req, res, result)
             }
         })
     } catch (error) {
-        res.send(error)
+        res.render('404')
     }
     
 }
@@ -116,6 +90,46 @@ const resetPass = async (req, res) => {
     } catch (error) {
         res.send(error)
     }
+}
+
+const getEmail = (req, res, result) =>{
+    
+    const secret = process.env.ACCESS_TOKEN_SECRET + result[0].password
+                const payload = {
+                    email: result[0].email,
+                    id: result[0].id
+                }
+                
+                const token =jwt.sign(payload, secret, {expiresIn: '15m'})
+                const link = `http://localhost:3000/reset-password/${result[0].id}/${token}`
+
+                //For email sending
+                const bhemail = 'biyaheroesconnect@gmail.com'
+                const receivers = [result[0].email, bhemail]
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: 'biyaheroesconnect@gmail.com',
+                      pass: 'eehntnjcdbowbdko'
+                    }
+                  });
+                  
+                  var mailOptions = {
+                    from: 'ladoboy92@gmail.com',
+                    to: receivers[0].toString() ,
+                    subject: 'BiyaHeroes: Reset password.',
+                    text: `Please click this link to reset your password ${link}.`
+                  };
+                  
+                  transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error.message);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                  });
+                  res.render('email-sent')
+                  
 }
 
 module.exports = {

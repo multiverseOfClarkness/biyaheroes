@@ -30,16 +30,16 @@
                 <div class="form-item">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                    <small id="error-msg">Error</small>
+                    <small class="error-msg">Error</small>
                 </div>
 
                 <div class="form-item">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                    <small id="error-msg">Error</small>
-                    <small class="forgot-pass" role="button" id="forgot-pass-btn">Forgot Password?</small>
+                    <small class="error-msg">Error</small>
+                    
                 </div>
-
+                <small class="forgot-pass" role="button" id="forgot-pass-btn">Forgot Password?</small>
                 <div class="form-item btns">
                     <button type="submit" class="btn btn-primary" id="login">Login</button>
                     <p class="sign-up">Don't have an account? <a href="/commuter/register" class="sign-up-link">Create one.</a></p>
@@ -60,18 +60,17 @@
             <button type="submit" class="btn btn-primary" id="btn">Reset Password</button>
         </form>
     </div>
-    
     <div id="error-popup" class="popup-box-w-icon">
         <img src="/images/x-circle-fill.svg" alt="" id="error-icon" class="icon">
         <h5>Error</h5>
-        <p>Email not found. Please try again.</p>
+        <p>Wrong password. Please try again.</p>
         <button class="btn btn-primary" id="okay">Okay</button>
     </div>
     <div id="page-mask"></div>
-    
 
+    <script src="/js/popup.js"></script>
+    <!-- <script src="/js/login-verify.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script defer src="/js/form.js"></script>
-    <script defer src="/js/popup.js"></script>
 </body>
 </html>

@@ -39,20 +39,23 @@ body {
 }
 
 /* FORM */
-
+.form-item small {
+    visibility: hidden;
+}
 form {
     text-align: start;
 }
 
 form .form-item {
-    padding-bottom: 1em;
-    margin-top: 10px;
+    padding-bottom: .2em;
+   
 }
 
 .forgot-pass {
     display: flex;
     justify-content: end;
     margin-top: 1.2em;
+    padding-bottom: 1em;
 }
 
 .sign-up {
@@ -68,6 +71,11 @@ form .form-item {
 .form-control.error{
     border-color: #e74c3c;
 }
+.form-item.error small{
+    color: #e74c3c;
+    visibility: visible;
+}
+
 .form-control.error small{
     display: block;
     color: #e74c3c;

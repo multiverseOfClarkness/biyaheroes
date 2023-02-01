@@ -36,11 +36,17 @@ function errorMsg(input, msg) {
     const small = formItem.querySelector('small');
     
     small.innerHTML = msg;
+    formItem.className = 'form-item error'
     input.className = 'form-control error';
 }
 
 function successMsg(input) {
-    input.className = 'form-control success';
+  const formItem = input.parentElement;
+  const small = formItem.querySelector('small');
+  
+  small.style.visibility = 'hidden';
+  input.className = 'form-control success';
+
 }
 
 function ForgotPass() {

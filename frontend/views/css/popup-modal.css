@@ -165,10 +165,3 @@
     visibility: hidden;
   }
 
-.form-control.success{
-    border-color: #2ecc71;
-}   
-
-.form-control.error{
-    border-color: #e74c3c;
-}

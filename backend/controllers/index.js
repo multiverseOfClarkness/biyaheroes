@@ -34,7 +34,7 @@ const login = async (req, res) => {
                 return res.redirect('/commuter/dashboard')
                 
             }else{
-                res.sendFile(path.resolve('./', 'frontend', 'views', 'login-wrong-pass.html'))
+                res.render('login-wrong-pass')
             }
         }else if (user2) {
             
@@ -53,11 +53,11 @@ const login = async (req, res) => {
                 
                 
             }else{
-                res.sendFile(path.resolve('./', 'frontend', 'views', 'login-wrong-pass.html'))
+                res.render('login-wrong-pass')
             }
         }
         else{
-            res.sendFile(path.resolve('./', 'frontend', 'views', 'login-no-email.html'))
+            res.render('login-no-email')
         }
     }catch (error){
         console.log(error)

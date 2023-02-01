@@ -7,17 +7,23 @@ const maskk = document.getElementById('page-mask');
 const successPopup = () => {
     success_popup.style.display = 'block'
     mask.style.visibility = 'visible'
+
+    closebtn.addEventListener('click', () => {
+        success_popup.style.display = 'none'
+        mask.style.visibility = 'hidden'
+    })
 }
 const errorPopup = () => {
     error_popup.style.display = 'block'
     mask.style.visibility = 'visible'
+
+    closebtn.addEventListener('click', () => {
+        error_popup.style.display = 'none'
+        mask.style.visibility = 'hidden'
+    })
 }
 
-closebtn.addEventListener('click', () => {
-    success_popup.style.display = 'none'
-    error_popup.style.display = 'none'
-    mask.style.visibility = 'hidden'
-})
+
 
 function ErrorAutoClosePopup() {
     error_popup.style.display = 'none';

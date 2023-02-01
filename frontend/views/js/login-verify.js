@@ -1,9 +1,10 @@
-const popup = document.getElementById("popup");
+const popup = document.getElementById("error-popup");
 const body = document.getElementById("body");
 
 const errorAlert = () => {
-  popup.classList.add("open-popup");
+  popup.style.display = 'block'
 };
+
 const closepopup = () => {
   popup.style.display = "none";
 };

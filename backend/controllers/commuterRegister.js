@@ -5,8 +5,14 @@ const bcryptjs = require('bcryptjs')
 
 
 
-const getRegisterForm = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'signup.html'))
+const getRegisterForm = async (req, res) => {
+    const b = []
+    const existingUser = await User.find()
+    existingUser.forEach(data =>{
+        b.push(data.email)
+    })
+    
+    res.render('signup', {b})
 }
 
 const createNewUser = async (req, res) => {
