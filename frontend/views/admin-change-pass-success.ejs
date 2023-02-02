@@ -11,9 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/common.css">
-    
-    <link rel="stylesheet" href="/css/popup-modal.css">
     <link rel="stylesheet" href="/css/admin-profile.css">
+    <link rel="stylesheet" href="/css/popup-modal.css">
     <!-- FILEPOND -->
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link
@@ -187,14 +186,16 @@
         </form>
     </div>
     <% }) %>
-    <div id="page-mask"></div>
     <div id="error-popup" class="popup-box">
-        <img src="/images/tick.png" class="close-popup-btn close">
-        <img src="/images/tick.png" class="">
+        
+        <img src="/images/check-circle-fill.svg" id="success-icon" class="success-indicator">
         <h5>Success</h5>
         <p>New password saved.</p>
+        <button class="btn btn-primary close">Okay</button>
         
     </div>
+    <div id="page-mask"></div>
+    
     <footer>
         <p>Commuters' Reports Management System</p>
     </footer>
