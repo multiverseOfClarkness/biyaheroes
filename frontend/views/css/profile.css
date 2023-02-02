@@ -18,6 +18,8 @@ body {
     align-items: center;
 }
 
+
+
 .navbar {
     margin: 0 1em;
 }
@@ -39,11 +41,22 @@ footer {
     color: var(--bg-clr);
 }
 
+.btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.password-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /*PROFILE*/
 
-
-.dataUrl {
-    visibility: hidden;
+.img-container {
+    position: relative;
 }
 
 .filepond--root {
@@ -62,113 +75,46 @@ footer {
     visibility: hidden;
 }
 
-.img-container {
-    position: relative;
-}
-
-img{
+#profileImage {
     width: 180px;
     height: 180px;
     border-radius: 50%;
     position: absolute;
-    top: 4%;
+    top: 10%;
     object-fit: cover;
+}
+/* PROFILE PICTURE EDIT BTNS */
+
+#save, #cancel {
+    padding: 0 .5em;
+    visibility: hidden;
+    border: none;
+}
+
+.filepond-controllers {
+    text-align: center;
 }
 
 /*PROFILE INFORMATION*/
-.profile-item.success input{
-    border-color: #2ecc71;
-}
-.profile-item.error input{
-    border-color: #e74c3c;
-}
+    .personal-info,
+    .acc-info {
+        border: none;
+        padding-left: 0;
+        font-family: var(--ff-body);
+    }
 
-.profile-item input {
-    margin: .50em 0;
-    padding-bottom: 10px;
-    position: relative;
-    
-}
+    .form-control:focus {
+        outline: none;
+        box-shadow: none;
+    }
 
-.profile-item-change-pass input{
-    margin: 1px;
-    padding-bottom: 1em;
-    position: relative;
-    border: none ;
-    border-radius: 10px;
-    visibility: visible;
-}
+    input[type=number] {
+        appearance: textfield;
+    }
 
-
-.profile-item input:focus {
-    outline: 0;
-}
-
-.profile-item small {
-    font-family: var(--ff-body);
-    font-style: italic;
-    position: relative;
-    padding-top: 5px;
-    visibility: hidden;
-}
-
-.profile-item.error small {
-    color: #e74c3c;
-    visibility: visible;
-}
-
-.form-control {
-    margin: .50em 0;
-    padding-bottom: 10px;
-    position: relative;
-    border: none;
-    
-}
-
-.form-control:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-input[type=number] {
-    appearance: textfield;
-}
-
-.form-text {
-    visibility: hidden;
-}
-.form-text.error {
-    visibility: visible;
-}
-
-#save, #cancel {
-    visibility: hidden;
-}
-#dataUrl {
-    visibility: hidden;
-}
-
-.change-pass-btn {
-    border: 1px solid #ced4da;
-    font-size: .8rem;
-    padding: .5em 2em;
-    font-family: var(--ff-body);
-    color: var(--bg-clr);
-    background-color: var(--tertiary-clr);
-    border-radius: 6px;
-    border:0;
-    cursor:pointer;
-}
-
-.change-pass-btn:hover {
-    background-color: var(--tertiary-clr);
-    background-image: linear-gradient(rgb(0 0 0/7%) 0 0);
-    transition: 0.3s ease-in;
-}
-
-.profile-item-change-pass {
-    visibility: hidden;
-}
+    .form-text {
+        visibility: hidden;
+    }
 
 /*TYPOGRAPHY*/
 
@@ -176,12 +122,6 @@ input[type=number] {
     font-family: var(--ff-header);
     color: var(--secondary-clr);
     
-}
-
-.container a {
-    position: absolute;
-    top: 61em;
-    right: 9%;
 }
 
 .banner > h2 {
@@ -223,15 +163,32 @@ footer > p {
     text-align: center;
 }
 
+input {
+    border: none;
+}
+
+.user-info {
+    margin: 1.5em 0;
+    text-align: left;
+}
+
+/* HIDDEN FORM */
+
+/* .account {
+    position: relative;
+}
+form {
+    visibility: collapse;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.form-control-sm {
+    width: 100%;
+} */
+
 @media (min-width:320px) and (max-width:992px) {
     .col-md-4 {
         margin-bottom: 1.5em;
     }
-}
-
-@media (max-width: 767px) {
-    img{
-        top: 14%;
-    }
-    
 }

@@ -30,7 +30,7 @@
     <header>
 
         <nav class="navbar navbar-expand-md">
-            <a href="/commuter/report/missingItem" class="navbar-brand"><h2>BiyaHeroes</h2></a>
+            <a href="/commuter/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
 
             <button 
             class="navbar-toggler"
@@ -55,12 +55,12 @@
                         <a class="nav-link active" href="/commuter/report/missingItem">Report Missing Item</a>
                     </li>
 
-                    <li>
+                    <li class="history">
                         <a class="nav-link" href="/commuter/history/violation">History</a>
 
                         <ul>
                             <li><a href="/commuter/history/violation">Violations</a></li>
-                            <li><a href="missing-item-history.html">Missing Item</a></li>
+                            <li><a href="/commuter/history/missingItem">Missing Item</a></li>
                         </ul>
                     </li>
 
@@ -170,6 +170,9 @@
             </div>
 
         </form>
+        <div class="text-center">
+            <a href="/commuter/history/violation" class="history">View Report History Instead</a>
+        </div>
     </section>
 
     <footer>

@@ -3,9 +3,7 @@ const getCommuterProfile = require("../controllers/commuterProfile")
 const router = express.Router()
 
 
-
-
 router.get ('/profile', getCommuterProfile.getCommuterProfile)
-router.post('/profile', getCommuterProfile.updateCommuterProfile)
+router.patch('/profile/:id', getCommuterProfile.updateCommuterProfile)
 
 module.exports = router

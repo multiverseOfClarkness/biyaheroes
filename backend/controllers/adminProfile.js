@@ -53,9 +53,7 @@ const getProfileAfterSuccess = async (req, res) =>{
 }
 
 const updateAdminProfile = async (req, res) => {
-  const currentUser = await admin.findOne({
-    email: jwtdecode(req.cookies.token).email,
-  });
+  
   const body = req.body;
 
   const reqFname = body.fname;
@@ -105,18 +103,6 @@ const updateAdminProfile = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    // if (error.message === "Unexpected end of JSON input") {
-    //   await admin.updateOne(
-    //     { email: currentUser.email },
-    //     {
-    //       role: reqRole,
-    //       fullname: reqFullname,
-    //       email: reqEmail,
-    //     }
-    //   );
-
-    //   res.redirect("/logout");
-    // }
   }
 };
 

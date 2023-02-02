@@ -27,7 +27,7 @@
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 </head>
 
-<body>
+<body onload="errorPopout()">
 
     <header>
 
@@ -189,6 +189,13 @@
         </form>
     </div>
     <% }) %> 
+    <div id="error-popup" class="popup-box">
+        
+        <img src="/images/check-circle-fill.svg" id="success-icon" class="success-indicator">
+        <h5>Success</h5>
+        <p>Password changed successfully.</p>
+        <button class="btn btn-primary close">Okay</button>
+    </div>
     <div id="page-mask"></div>
 
     <footer>
