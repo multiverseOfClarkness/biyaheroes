@@ -47,7 +47,7 @@ app.use("/commuter", verifyJWTforCommuters, isCommuter, require("./routes/getCom
 app.use("/commuter", verifyJWTforCommuters, isCommuter, require("./routes/commuter-changepass"));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve("./", "frontend", "views", "404.html"));
+  res.render('404')
 });
 
 app.listen(3000, () => {

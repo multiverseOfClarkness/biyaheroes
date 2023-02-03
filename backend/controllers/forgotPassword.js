@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const user = require('../models/users')
 const admin = require('../models/adminUsers')
 const bcryptjs = require('bcryptjs')
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 
 
@@ -106,7 +106,7 @@ const getEmail = (req, res, result) =>{
                 //For email sending
                 const bhemail = 'biyaheroesconnect@gmail.com'
                 const receivers = [result[0].email, bhemail]
-                var transporter = nodemailer.createTransport({
+                const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
                       user: 'biyaheroesconnect@gmail.com',
@@ -114,8 +114,8 @@ const getEmail = (req, res, result) =>{
                     }
                   });
                   
-                  var mailOptions = {
-                    from: 'ladoboy92@gmail.com',
+                  const mailOptions = {
+                    from: 'biyaheroesconnect@gmail.com',
                     to: receivers[0].toString() ,
                     subject: 'BiyaHeroes: Reset password.',
                     text: `Please click this link to reset your password ${link}.`

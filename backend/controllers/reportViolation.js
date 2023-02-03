@@ -1,11 +1,10 @@
 const ViolationReport = require('../models/violationReports')
 const users = require('../models/users')
 const jwtdecode = require('jwt-decode')
-const imageMimeTypes = ['image/png', 'image/jpg', 'image/jpeg']
+const nodemailer = require('nodemailer');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-
 
 
 const getReportViolationPage = (req,res) => {
@@ -37,6 +36,9 @@ const submitViolationReport = async (req, res) => {
         
         violationReports.save((err, report) =>{
             const justReported = report.id
+            const reporter = findUser.email
+
+            //SMS Notification
             client.messages
             .create({
                 body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
@@ -44,6 +46,23 @@ const submitViolationReport = async (req, res) => {
                 to: '+639925776610'
             })
             .then(message => console.log(message));
+            
+            //Email notification
+            const mailOptions = {
+            from: 'biyaheroesconnect@gmail.com',
+            to: reporter ,
+            subject: 'BiyaHeroes report.',
+            text: `Thanks for reaching out. Your report number is ${justReported}. Please wait for our response regarding this.`
+            };
+            
+            transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error.message);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+            });
+            
         })
          
         
@@ -59,6 +78,9 @@ const submitViolationReport = async (req, res) => {
             
             violationReports.save((err, report) => {
                 const justReported = report.id
+                const reporter = findUser.email
+
+                //SMS Notification
                 client.messages
                 .create({
                     body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
@@ -66,6 +88,30 @@ const submitViolationReport = async (req, res) => {
                     to: '+639925776610'
                 })
                 .then(message => console.log(message));
+
+                //Email notification
+                const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'biyaheroesconnect@gmail.com',
+                  pass: 'eehntnjcdbowbdko'
+                }
+                });
+              
+                const mailOptions = {
+                from: 'biyaheroesconnect@gmail.com',
+                to: reporter ,
+                subject: 'BiyaHeroes report.',
+                text: `Thanks for reaching out. Your report number is ${justReported}. Please wait for our response regarding this.`
+                };
+              
+                transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error.message);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+                });
                 })
 
             
