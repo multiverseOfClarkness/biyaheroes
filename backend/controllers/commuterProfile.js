@@ -67,7 +67,7 @@ const updateCommuterProfile = async (req, res) => {
             }
         } else {
             const reqProfile = await JSON.parse(body.profile);
-            await admin.updateOne({ email: currentUser.email },
+            await user.updateOne({ email: currentUser.email },
             {
             profileImage: new Buffer.from(reqProfile.data, "base64"),
             profileImageType: reqProfile.type

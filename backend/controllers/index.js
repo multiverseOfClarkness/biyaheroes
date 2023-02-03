@@ -48,7 +48,7 @@ const login = async (req, res) => {
                 if (user2.role === 'admin') {
                     return res.redirect('/admin/dashboard')
                 } else {
-                    return res.redirect('/super-admin/dashboard')
+                    return res.redirect('/SA/dashboard')
                 }
                 
                 

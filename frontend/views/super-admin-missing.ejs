@@ -21,7 +21,7 @@
     <header>
 
         <nav class="navbar navbar-expand-md">
-            <a href="/admin/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
+            <a href="/SA/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
 
             <button 
             class="navbar-toggler"
@@ -39,27 +39,31 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li>
-                        <a class="nav-link" href="/admin/complaints">Complaints</a>
+                        <a class="nav-link" href="/SA/complaints">Complaints</a>
                     </li>
 
                     <li>
-                        <a class="nav-link active" href="/admin/missing">Missing Items</a>
+                        <a class="nav-link active" href="/SA/missing">Missing Items</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/TODA">TODA</a>
+                        <a class="nav-link" href="/SA/TODA">TODA</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/drivers">Drivers</a>
+                        <a class="nav-link" href="/SA/drivers">Drivers</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/newAdmin">Admins</a>
+                        <a class="nav-link" href="/SA/newAdmin">Admins</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/profile">Profile</a>
+                        <a class="nav-link" href="/SA/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/logs">Logs</a>
                     </li>
 
                     <li>
@@ -112,7 +116,7 @@
                             <td data-label="Date"><%= missing.dateOfIncident %></td>
                             <td data-label="Status"><%= missing.status %></td>
                             <td data-label="View">
-                                <a href="/admin/missing/<%= missing.id %>">
+                                <a href="/SA/missing/<%= missing.id %>">
                                     <img src="/images/view.svg" alt="" class="table-btn view-btn">
                                 </a>
                             </td>

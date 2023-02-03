@@ -170,6 +170,7 @@ input {
 
 .user-info {
     margin: 1.5em 0;
+    text-align: left;
 }
 
 /* HIDDEN FORM */

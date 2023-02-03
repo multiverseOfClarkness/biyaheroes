@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Reports</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin-complaint-reports.css">
+    <link rel="stylesheet" href="/css/pagination.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-md">
+            <a href="/SA/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
+
+            <button 
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#toggleMobileMenu"
+            aria-controls="toggleMobileMenu"
+            aria-expanded="false"
+            aria-label="Toggle Navigation">
+
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                <ul class="navbar-nav ms-auto">
+
+                    <li>
+                        <a class="nav-link active" href="/SA/complaints">Complaints</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/missing">Missing Items</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/TODA">TODA</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/drivers">Drivers</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/newAdmin">Admins</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/logs">Logs</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link logout" href="/logout">Logout</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner">
+            <h2>Complaint Reports</h2>
+        </div>
+    </header>
+
+    <section class="container">
+
+    <div class="sort-search">
+        <label for="show">Show</label>
+        <select name="show" id="show" onchange="tableFilter()">
+            <option value="all">All</option>
+            <option value="solved">Solved</option>
+            <option value="pending">Pending</option>
+            <option value="overdue">Overdue</option>
+        </select>
+
+        <label for="search">Search</label>
+        <input type="text" name="search" id="search" placeholder="Search" onkeyup="tableSearch()">
+    </div>
+
+    <div class="list-page">
+        <table class="table table-hover text-center" id="table">
+            <thead >
+                <tr class="item" id="table-head">
+                    <th>Report ID</th>
+                    <th>Body No.</th>
+                    <th>Driver's Name</th>
+                    <th>TODA</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% violationList.forEach(violation => { %> 
+                    <tr class="item">
+                        <td data-label="Report ID" style="font-weight: bold"><%= violation.id %></td>
+                        <td data-label="Body No."><%= violation.bodyNum %></td>
+                        <td data-label="Driver's Name"><%= violation.driverName %></td>
+                        <td data-label="TODA"><%= violation.TODA %></td>
+                        <td data-label="Date"><%= violation.dateOfIncident %></td>
+                        <td data-label="Status"><%= violation.status %></td>
+                        <td data-label="View">
+                            <a href="/SA/complaints/<%= violation.id %>">
+                                <img src="/images/view.svg" alt="" class="table-btn view-btn">
+                            </a>                            
+                        </td>
+                    </tr>
+                <% }) %> 
+                
+
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="listPage pagination justify-content-end">
+             
+            </ul>
+        </nav>
+    </div>
+        
+    </section>
+
+
+    <footer>
+        <p>Commuters' Reports Management System</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="/js/pagination.js"></script>
+    <script src="/js/filtering.js"></script>
+    
+
+</body>
+</html>

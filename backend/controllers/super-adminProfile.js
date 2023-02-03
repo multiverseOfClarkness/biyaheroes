@@ -9,7 +9,7 @@ const getAdminProfilePage = async (req, res) => {
     });
 
     admin.find({ _id: currentUser._id }, (err, admin) => {
-      res.render("profile", {
+      res.render("SA-profile", {
         adminDetails: admin,
       });
     });
@@ -26,7 +26,7 @@ const getProfileAfterError = async (req, res) =>{
       });
   
       admin.find({ _id: currentUser._id }, (err, admin) => {
-        res.render("admin-change-pass-error", {
+        res.render("SA-change-pass-error", {
           adminDetails: admin,
         });
       });
@@ -42,7 +42,7 @@ const getProfileAfterSuccess = async (req, res) =>{
       });
   
       admin.find({ _id: currentUser._id }, (err, admin) => {
-        res.render("admin-change-pass-success", {
+        res.render("SA-change-pass-success", {
           adminDetails: admin,
         });
       });
@@ -70,10 +70,10 @@ const updateAdminProfile = async (req, res) => {
   try {
     if(reqFname || reqLname){
       await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {fname: reqFname, lname: reqLname});
-      res.redirect("/admin/profile");
+      res.redirect("/SA/profile");
     } else if (reqPhone || reqEmail) {
       await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {phone: reqPhone, email: reqEmail});
-      res.redirect("/admin/profile");
+      res.redirect("/SA/profile");
     } else if (reqCurrentPass || reqNewPass || reqVerifiedPass) {
       const currentUser = await admin.findOne({email: jwtdecode(req.cookies.token).email})
 
@@ -101,7 +101,7 @@ const updateAdminProfile = async (req, res) => {
           profileImageType: reqProfile.type
         }
       );
-      res.redirect("/admin/profile");
+      res.redirect("/SA/profile");
     }
   } catch (error) {
     console.log(error.message);

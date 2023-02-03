@@ -8,24 +8,6 @@ const getComplaintsPage = (req, res) =>{
     })  
 }
 
-const getPendingViolationReportsHistory = (req,res) => {
-    
-    violationReports.find({}, (err, violationReports) => {
-        res.render('admin-complaints', {
-            violationList : violationReports
-        })
-    })
-    
-}
-const getSolvedViolationReportsHistory = (req,res) => {
-    
-    violationReports.find({status: 'Solved'}, (err, violationReports) => {
-        res.render('complaints-solved', {
-            violationList : violationReports
-        })
-    })
-    
-}
 
 const getIndividualComplaintReport = async(req, res) => {
     violationReports.find({_id: req.params.id}, (err, violationReports) => {
@@ -34,13 +16,7 @@ const getIndividualComplaintReport = async(req, res) => {
         })
     }) 
 }
-const getIndividualSolvedComplaintReport = async(req, res) => {
-    violationReports.find({_id: req.params.id}, (err, violationReports) => {
-        res.render('complaint-solved-report', {
-            violationList : violationReports
-        })
-    }) 
-}
+
 
 const updateIndividualPendingComplaintReport = async (req, res) =>{
     await violationReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {
@@ -52,9 +28,6 @@ const updateIndividualPendingComplaintReport = async (req, res) =>{
 
 module.exports = {
     getComplaintsPage,
-    getPendingViolationReportsHistory,
-    getSolvedViolationReportsHistory,
     getIndividualComplaintReport,
-    getIndividualSolvedComplaintReport,
     updateIndividualPendingComplaintReport
 }

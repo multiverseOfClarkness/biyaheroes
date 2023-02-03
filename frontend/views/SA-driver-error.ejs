@@ -20,7 +20,7 @@
     <header>
 
         <nav class="navbar navbar-expand-md">
-            <a href="/admin/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
+            <a href="/SA/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
 
             <button 
             class="navbar-toggler"
@@ -38,27 +38,31 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li>
-                        <a class="nav-link" href="/admin/complaints">Complaints</a>
+                        <a class="nav-link" href="/SA/complaints">Complaints</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/missing">Missing Items</a>
+                        <a class="nav-link" href="/SA/missing">Missing Items</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/TODA">TODA</a>
+                        <a class="nav-link" href="/SA/TODA">TODA</a>
                     </li>
 
                     <li>
-                        <a class="nav-link active" href="/admin/drivers">Drivers</a>
+                        <a class="nav-link active" href="/SA/drivers">Drivers</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/newAdmin">Admins</a>
+                        <a class="nav-link" href="/SA/newAdmin">Admins</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/profile">Profile</a>
+                        <a class="nav-link" href="/SA/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/logs">Logs</a>
                     </li>
 
                     <li>
@@ -157,7 +161,7 @@
                         </td>
                         <td data-label="Delete">
                             
-                            <form method="post" action="/admin/drivers/<%= driver.id %>?_method=PATCH" >
+                            <form method="post" action="/SA/drivers/<%= driver.id %>?_method=PATCH" >
                             
                             <input type="image" src="/images/trash.svg" class="table-btn delete-btn">
                             
@@ -182,7 +186,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Driver</h5>
-        <form action="/admin/drivers/new" method="post">
+        <form action="/SA/drivers/new" method="post">
             <select class="form-control" name="toda" id="toda">
                 <% todaList.forEach(toda =>{ %> 
                 <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
@@ -204,7 +208,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Upload</h5>
-        <form method="post" action="/admin/drivers" enctype="multipart/form-data">
+        <form method="post" action="/SA/drivers" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -217,7 +221,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Edit</h5>
-        <form method="post" action="/admin/drivers/edit?_method=PATCH">
+        <form method="post" action="/SA/drivers/edit?_method=PATCH">
             <input type="hidden" id="driver-id" name="driverid">
             <input type="text" name="firstname" id="edit-driver-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-driver-lastname" placeholder="Last Name" class="form-control" required>

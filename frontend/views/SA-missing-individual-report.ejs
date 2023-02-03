@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint</title>
+    <title>Missing</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/popup-modal.css">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/admin-report-view.css">
-    <link rel="stylesheet" href="/css/popup-modal.css">
+    
 </head>
 
 <body>
@@ -20,7 +21,7 @@
     <header>
 
         <nav class="navbar navbar-expand-md">
-            <a href="/admin/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
+            <a href="/SA/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
 
             <button 
             class="navbar-toggler"
@@ -38,27 +39,31 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li>
-                        <a class="nav-link" href="/admin/complaints">Complaints</a>
+                        <a class="nav-link" href="/SA/complaints">Complaints</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/missing">Missing Items</a>
+                        <a class="nav-link" href="/SA/missing">Missing Items</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/TODA">TODA</a>
+                        <a class="nav-link" href="/SA/TODA">TODA</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/drivers">Drivers</a>
+                        <a class="nav-link" href="/SA/drivers">Drivers</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/newAdmin">Admins</a>
+                        <a class="nav-link" href="/SA/newAdmin">Admins</a>
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/profile">Profile</a>
+                        <a class="nav-link" href="/SA/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/logs">Logs</a>
                     </li>
 
                     <li>
@@ -73,53 +78,54 @@
         </div>
     </header>
 
-    <% violationList.forEach(violation =>{ %> 
+    <% missingReportData.forEach(missing =>{ %> 
         <section class="container" id="report">
 
             <div class="important-details">
-                <h5>Report ID: <%= violation.id %> </h5>
-                <p id="date">Date of Incident: <%= violation.dateOfIncident %> </p>
+                <h5>Report ID: <%= missing.id %> </h5>
+                <p id="date">Date of Incident: <%= missing.dateOfIncident %> </p>
             </div>
     
             <div class="details">
                 <div class="box complainant">
                     <p class="detail-title">Complainant Details</p>
-                    <p id="complainantname" class="detail-item"><%= violation.author.fname %> <%= violation.author.lname %></p>
-                    <p class="detail-item"><%= violation.author.phone %></p>
+                    <p id="complainantname" class="detail-item"><%= missing.author.fname %> <%= missing.author.lname %></p>
+                    <p class="detail-item"><%= missing.author.phone %></p>
                 </div>
                 <div class="box report">
                     <p class="detail-title">Driver & Report Details</p>
-                    <p class="detail-item">Driver Name: <%= violation.driverName %></p>
-                    <p class="detail-item">TODA: <%= violation.TODA %></p>
-                    <p class="detail-item">Body #: <%= violation.bodyNum %></p>
-                    <p class="detail-item">Violation Type: <%= violation.violation %></p>
+                    <p class="detail-item">Driver Name: <%= missing.driverName %></p>
+                    <p class="detail-item">TODA: <%= missing.TODA %></p>
+                    <p class="detail-item">Body #: <%= missing.bodyNum %></p>
+                    <p class="detail-item">Violation Type: <%= missing.violation %></p>
                 </div>
             </div>
     
-            <div class="description-box mt-3 box">
+            <div class="description-box mt-3 box" >
                 <div class="desc driver">
                     <p class="detail-title">Driver Description</p>
                     <p class="description">
-                        <%= violation.driverDescription %>
+                        <%= missing.driverDescription %>
                     </p>
                 </div>
                 <div class="desc incident box">
-                    <div class="incident-title mb-2">
+                    <div class="incident-title mb-2" >
                         <p class="detail-title">Incident Description</p>
+                        
                         <small data-html2canvas-ignore id="evidence-btn">See Attached Evidence/s</small>
                     </div>
                     <p class="description">
-                        <%= violation.incidentDescription %>
+                        <%= missing.itemDescription %>
                     </p>
                 </div>
-                <% if(violation.status === 'Solved'){ %> 
+                <% if(missing.status === 'Solved'){ %> 
                     <div data-html2canvas-ignore class="btns mt-4 mb-4">
                         <button class="btn btn-primary" id="dl-btn">Download</button>
                     </div>
                 <% } else {  %> 
                     <div data-html2canvas-ignore class="btns mt-4 mb-4">
                         <button class="btn btn-primary" id="dl-btn">Download</button>
-                        <form method="post" action="/admin/complaints/pending/<%= violation.id %>?_method=PATCH">
+                        <form method="post" action="/SA/missing/pending/<%= missing.id %>?_method=PATCH">
                             <button type="submit" class="btn btn-primary">Resolved</button>
                         </form>
                     </div>
@@ -135,7 +141,7 @@
 
         <h5>Attached Evidence/s</h5>
         <div class="evidence">
-            <img src="<%= violation.evidenceImagePath %>" alt="">
+            <img src="<%= missing.evidenceImagePath %>" alt="">
         </div>
     </div>
     <% }) %> 

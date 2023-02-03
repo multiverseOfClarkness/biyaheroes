@@ -184,7 +184,6 @@
         <h5>Driver</h5>
         <form action="/admin/drivers/new" method="post">
             <select class="form-control" name="toda" id="toda">
-                <option value="">Select TODA</option>
                 <% todaList.forEach(toda =>{ %> 
                 <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
                 <% }) %> 

@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/fare-calc.css">
 
+    <!-- LEAFLET CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+
+    <!-- LEAFLET ROUTING MACHINE -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 </head>
 
 <body>
@@ -49,7 +56,7 @@
                         <a class="nav-link" href="/commuter/history/violation">History</a>
 
                         <ul>
-                            <li><a href="/commuter/history/violation">Violations</a></li>
+                            <li><a href="/commuter/historu/violation">Violations</a></li>
                             <li><a href="/commuter/history/missing-item">Missing Item</a></li>
                         </ul>
                     </li>
@@ -88,7 +95,7 @@
                     <!--PICK-UP POINT FIELD-->
                     <div class="input-group mb-3">
                         <input type="text" id="pick-up" class="form-control" placeholder="Pick-up" aria-label="Pick-up" aria-describedby="basic-addon2">
-                        <input type="hidden" id="latlng-pickup" value="">
+
                         <div class="input-group-append">
                           <button class="geo-btn btn btn-outline-secondary" id="pick-up-btn" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
@@ -101,7 +108,7 @@
                     <!--DROP-OFF POINT FIELD-->
                     <div class="input-group mb-3">
                         <input type="text" id="drop-off" class="form-control" placeholder="Drop-off" aria-label="Drop-off" aria-describedby="basic-addon2">
-                        <input type="hidden" id="latlng-dropoff" value="">
+
                         <div class="input-group-append">
                           <button class="geo-btn btn btn-outline-secondary" id="drop-off-btn" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
@@ -110,30 +117,20 @@
                           </button>
                         </div>
                     </div>
-                    
-                    <!--CALCULATE BUTTON-->
-                    <div class="input-loc mb-3">
-                        <button class="btn btn-primary" type="button" id="calculate">Calculate</button>
-                    </div>
 
                     <!--CLEAR AND STOP BUTTONS-->
                     <div class="input-loc mb-3 inline-btns">
-                        <!-- <input id="to_places" type="text" class="form-control">
-                        <input type="hidden" id="destination" name="destination" required> -->
-                        <!-- <small class="form-text">Error Message</small>                     -->
-                        <button class="btn btn-outline-primary" type="button" id="clear">Clear</button>
-                        <button class="btn btn-outline-primary" type="button" id="stop" disabled>Stop</button>
+                        <button class="btn btn-outline-primary" type="reset" id="stop">Stop</button>
                     </div>
                 </form>
 
                 <div class="box">
-                    <p> <span>Base Fare (First 1 METER or less): </span>15.00</p>
-                    <div class="fare-matrix">
-                        <h1> <span id="fare">0</span> Pesos</h1>
-                        <p> <span id="discount">0</span> Pesos (20% discount)</p>
 
-                        <p id="display-distance">0 km</p>
-                        <p id="km" value = " "hidden></p>
+                    <em><small class="small" id="message">Turn on your Geolocator to monitor your distance and fare.</small></em>
+                        
+                    <div class="fare-matrix mt-5">
+                        <h1>P<span id="fare">0</span> / <span id="distance">0</span> km</h1>
+                        <p> <span id="discount">0</span> Pesos (20% discount)</p>
                     </div>
                 </div>
 
@@ -147,14 +144,17 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    
-    <script src="/js/watchloc.js"></script>
-    <!-- <script src="js/watchPosition.js"></script> -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnwiqM3Iyf3GKxwq2yyFd2xNtpJnGdVHg&libraries=directions,places&callback=initMap" async defer>
-    </script>
 
-    
+    <!-- LEAFLET JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+
+    <!-- LEAFLET ROUTING MACHINE -->
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <!-- GEOLIB -->
+    <script src="node_modules/geolib/lib/index.js"></script>
+    <script src="/js/leaflet-map.js"></script>
 </body>
-
 </html>

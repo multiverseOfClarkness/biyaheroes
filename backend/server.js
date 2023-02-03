@@ -25,16 +25,21 @@ app.use("/", require("./routes/logout"));
 app.use("/", require("./routes/forgotPass"));
 
 
-app.use("/super-admin", verifyJWTforAdmin, isSuper, require('./routes/superadmindashboard'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminDashboard'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminComplaints'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminMissing'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminToda'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminDrivers'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superNewAdmin'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminProfile'))
+app.use("/SA", verifyJWTforAdmin, isSuper, require('./routes/superAdminLogs'))
+
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/admindashboard"));
-
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminComplaints"));
-app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminMissingItemReports"));
-
+app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminMissing"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminToda"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminDrivers"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/adminProfile"));
-app.use("/admin", verifyJWTforAdmin, isSuper, require("./routes/newAdmin"));
 app.use("/admin", verifyJWTforAdmin, isAdmin, require("./routes/admin-changepass"));
 
 
