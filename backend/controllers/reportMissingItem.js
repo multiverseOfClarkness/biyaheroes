@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+const nodeCron = require('node-cron')
 
 const getReportMissingPage = (req,res) => {
     res.render('report-missing')
@@ -33,6 +34,7 @@ const reportMissingItem = async (req, res) => {
         missingItemReports.save((err, report) => {
             const justReported = report.id
             const reporter = findUser.email
+
             //SMS Notification
             client.messages
             .create({
@@ -40,7 +42,23 @@ const reportMissingItem = async (req, res) => {
                 from: '+15732847492',
                 to: '+639925776610'
             })
-            .then(message => console.log(message));
+            .then(message => console.log(message.body));
+
+
+            //Logic for updating report status to overdue.
+            nodeCron.schedule('*/20 * * * * *', () => {
+                ViolationReport.findById(justReported, (err, result) => {
+                    console.log(result.status)
+                    
+                    if(result.status === 'Pending'){
+                        MissingItemReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
+                            return;
+                        });
+                    } return;
+                    
+                    
+                })
+            })
 
             //Email notification
             const transporter = nodemailer.createTransport({
@@ -78,13 +96,30 @@ const reportMissingItem = async (req, res) => {
             missingItemReports.save((err, report) => {
                 const justReported = report.id
                 const reporter = findUser.email
+
+                //Logic for updating report status to overdue.
+                nodeCron.schedule('*/20 * * * * *', () => {
+                    ViolationReport.findById(justReported, (err, result) => {
+                        console.log(result.status)
+                        
+                        if(result.status === 'Pending'){
+                            MissingItemReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
+                                return;
+                            });
+                        } return;
+                        
+                        
+                    })
+                })
+                
+                //SMS Notif
                 client.messages
                 .create({
                     body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
                     from: '+15732847492',
                     to: '+639925776610'
                 })
-                .then(message => console.log(message));
+                .then(message => console.log(message.body));
 
                 //Email notification
                 const transporter = nodemailer.createTransport({

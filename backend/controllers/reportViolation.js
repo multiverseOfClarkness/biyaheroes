@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-
+const nodeCron = require('node-cron')
 
 const getReportViolationPage = (req,res) => {
     res.render('report-violation')
@@ -33,11 +33,26 @@ const submitViolationReport = async (req, res) => {
             evidenceType: evidence.type,
             author 
         })
-        
+        // await ViolationReport.deleteMany()
         violationReports.save((err, report) =>{
             const justReported = report.id
             const reporter = findUser.email
 
+            //Logic for updating report status to overdue.
+            nodeCron.schedule('*/20 * * * * *', () => {
+                ViolationReport.findById(justReported, (err, result) => {
+                    console.log(result.status)
+                    
+                    if(result.status === 'Pending'){
+                        ViolationReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
+                            return;
+                        });
+                    } return;
+                    
+                    
+                })
+            })
+            
             //SMS Notification
             client.messages
             .create({
@@ -75,10 +90,25 @@ const submitViolationReport = async (req, res) => {
             const violationReports = new ViolationReport({
                 bodyNum, driverName, TODA, driverDescription, violation, dateOfIncident, incidentDescription, complainant, author 
             })
-            
+            // await ViolationReport.deleteMany()
             violationReports.save((err, report) => {
                 const justReported = report.id
                 const reporter = findUser.email
+
+                //Logic for updating report status to overdue.
+                nodeCron.schedule('*/20 * * * * *', () => {
+                    ViolationReport.findById(justReported, (err, result) => {
+                        console.log(result.status)
+                        
+                        if(result.status === 'Pending'){
+                            ViolationReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
+                                return;
+                            });
+                        } return;
+                        
+                        
+                    })
+                })
 
                 //SMS Notification
                 client.messages
@@ -87,7 +117,7 @@ const submitViolationReport = async (req, res) => {
                     from: '+15732847492',
                     to: '+639925776610'
                 })
-                .then(message => console.log(message));
+                .then(message => console.log(message.body));
 
                 //Email notification
                 const transporter = nodemailer.createTransport({

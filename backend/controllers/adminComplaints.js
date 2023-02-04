@@ -19,9 +19,7 @@ const getIndividualComplaintReport = async(req, res) => {
 
 
 const updateIndividualPendingComplaintReport = async (req, res) =>{
-    await violationReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {
-    new: true
-    });
+    await violationReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {new: true});
     res.redirect('/admin/complaints')
 
 }
