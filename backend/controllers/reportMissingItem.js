@@ -46,16 +46,16 @@ const reportMissingItem = async (req, res) => {
 
 
             //Logic for updating report status to overdue.
-            nodeCron.schedule('*/20 * * * * *', () => {
-                ViolationReport.findById(justReported, (err, result) => {
-                    console.log(result.status)
+            nodeCron.schedule('0 0 0 */3 * *', async () => {
+                await MissingItemReport.findById(justReported, async (err, resultA) => {
+                    await console.log(`Before: ${resultA.id} ${resultA.status}`)
                     
-                    if(result.status === 'Pending'){
-                        MissingItemReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
-                            return;
+                    if(resultA.status == 'Pending'){
+                        MissingItemReport.updateOne(resultA, {status: "Overdue"}, {new: true}, (err, result)=>{
+                            
                         });
-                    } return;
-                    
+                        
+                    }; 
                     
                 })
             })
@@ -98,16 +98,16 @@ const reportMissingItem = async (req, res) => {
                 const reporter = findUser.email
 
                 //Logic for updating report status to overdue.
-                nodeCron.schedule('*/20 * * * * *', () => {
-                    ViolationReport.findById(justReported, (err, result) => {
-                        console.log(result.status)
+                nodeCron.schedule('0 0 0 */3 * *', async () => {
+                    await MissingItemReport.findById(justReported, async (err, resultA) => {
+                        await console.log(`Before: ${resultA.id} ${resultA.status}`)
                         
-                        if(result.status === 'Pending'){
-                            MissingItemReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
-                                return;
+                        if(resultA.status == 'Pending'){
+                            MissingItemReport.updateOne(resultA, {status: "Overdue"}, {new: true}, (err, result)=>{
+                                
                             });
-                        } return;
-                        
+                            
+                        }; 
                         
                     })
                 })

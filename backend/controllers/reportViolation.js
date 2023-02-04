@@ -39,16 +39,16 @@ const submitViolationReport = async (req, res) => {
             const reporter = findUser.email
 
             //Logic for updating report status to overdue.
-            nodeCron.schedule('*/20 * * * * *', () => {
-                ViolationReport.findById(justReported, (err, result) => {
-                    console.log(result.status)
+            nodeCron.schedule('0 0 0 */3 * *', async () => {
+                await ViolationReport.findById(justReported, async (err, resultA) => {
+                    await console.log(`Before: ${resultA.id} ${resultA.status}`)
                     
-                    if(result.status === 'Pending'){
-                        ViolationReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
-                            return;
+                    if(resultA.status == 'Pending'){
+                        ViolationReport.updateOne(resultA, {status: "Overdue"}, {new: true}, (err, result)=>{
+                            
                         });
-                    } return;
-                    
+                        
+                    }; 
                     
                 })
             })
@@ -60,9 +60,16 @@ const submitViolationReport = async (req, res) => {
                 from: '+15732847492',
                 to: '+639925776610'
             })
-            .then(message => console.log(message));
+            .then(message => console.log(message.body));
             
             //Email notification
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'biyaheroesconnect@gmail.com',
+                  pass: 'eehntnjcdbowbdko'
+                }
+                });
             const mailOptions = {
             from: 'biyaheroesconnect@gmail.com',
             to: reporter ,
@@ -96,16 +103,16 @@ const submitViolationReport = async (req, res) => {
                 const reporter = findUser.email
 
                 //Logic for updating report status to overdue.
-                nodeCron.schedule('*/20 * * * * *', () => {
-                    ViolationReport.findById(justReported, (err, result) => {
-                        console.log(result.status)
+                nodeCron.schedule('0 0 0 */3 * *', async () => {
+                    await ViolationReport.findById(justReported, async (err, resultA) => {
+                        await console.log(`Before: ${resultA.id} ${resultA.status}`)
                         
-                        if(result.status === 'Pending'){
-                            ViolationReport.findOneAndUpdate(result, {status: "Overdue"}, {new: true}, (err, result) =>{
-                                return;
+                        if(resultA.status == 'Pending'){
+                            ViolationReport.updateOne(resultA, {status: "Overdue"}, {new: true}, (err, result)=>{
+                                
                             });
-                        } return;
-                        
+                            
+                        }; 
                         
                     })
                 })
