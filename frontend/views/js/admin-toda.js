@@ -1,6 +1,7 @@
 const add_btn = document.getElementById('add');
 const upload_btn = document.getElementById('upload');
 const edit_btns = document.getElementsByClassName('edit-btn')
+const edit_btns_toda = document.getElementsByClassName('edit-btn-toda')
 const popups = document.getElementsByClassName('popup-box');
 const add_popup = document.getElementById('add-popup');
 const upload_popup = document.getElementById('upload-popup');
@@ -16,6 +17,12 @@ const toda = document.getElementById('toda')
 const driverid = document.getElementById('driver-id')
 const driveridval = document.getElementById('driver-id-val')
 
+const presfname = document.getElementById('edit-TODA-pres-firstname')
+const preslname = document.getElementById('edit-TODA-pres-lastname')
+const prescontact = document.getElementById('edit-TODA-contact')
+const todaid = document.getElementById('toda-id')
+
+
 
 const editInfo = (e) =>{
   var tds = e.getElementsByClassName('driver-data');
@@ -30,6 +37,25 @@ const editInfo = (e) =>{
   
   contact.setAttribute('value', tds[2].innerHTML.trim().replace("+63", ""))
   driverid.setAttribute('value', tds[3].innerHTML.trim())
+  //
+  const x_btns = document.getElementsByClassName('close');
+
+  for(var x of x_btns) {
+    x.addEventListener('click', ClosePopup);
+  }
+} 
+
+const editTODAInfo = (e) =>{
+  var tds = e.getElementsByClassName('TODA-data');
+  console.log('clicked')
+  edit_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+
+  const myArray = tds[0].innerHTML.trim().split(" ");
+  presfname.setAttribute('value', myArray[0])
+  preslname.setAttribute('value', myArray[1]) 
+  prescontact.setAttribute('value', tds[1].innerHTML.trim().replace("+63", ""))
+  todaid.setAttribute('value', tds[2].innerHTML.trim())
   //
   const x_btns = document.getElementsByClassName('close');
 
@@ -93,4 +119,8 @@ upload_btn.addEventListener('click', UploadExcel);
 
 for(var edit_btn of edit_btns) {
   edit_btn.addEventListener('click', editInfo);
+}
+
+for(var edit_button of edit_btns_toda) {
+  edit_button.addEventListener('click', editTODAInfo);
 }

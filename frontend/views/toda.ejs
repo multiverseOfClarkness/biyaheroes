@@ -100,16 +100,18 @@
 
             <tbody>
                 <% todaList.forEach(toda =>{ %> 
-                    <tr>
+                    <tr onclick="editTODAInfo(this)">
                         <th scope="row" data-label="TODA"><%= toda.TODA %></th>
-                        <td data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
-                        <td data-label="Contact">+63<%= toda.contact %></td>
+                        <td class="TODA-data" data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
+                        <td class="TODA-data" data-label="Contact">+63<%= toda.contact %></td>
+                        <td class="TODA-data" data-label="Contact" style="display: none;" >
+                            <%= toda.id %>
+                        </td>
                         <td data-label="Edit">
-                            <a href="">
-                                <img src="/images/edit.svg" alt="" class="table-btn edit-btn">
-                            </a>
+                            <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda">
                             
                         </td>
+                        
                         <form method="post" action="/admin/TODA/<%= toda.id %>?_method=PATCH">
                             <td data-label="Delete">
                                 
@@ -151,7 +153,25 @@
         </form>
     </div>
 
+    <div class="popup-box" id="edit-popup">
 
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+
+        <h5>Edit</h5>
+        <form method="post" action="/admin/TODA/edit?_method=PATCH">
+            <input type="hidden" id="toda-id" name="todaid">
+            <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
+            <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
+            <select class="form-control" name="toda">
+                <% todaList.forEach(toda =>{ %> 
+                <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
+                <% }) %> 
+            </select>
+            <input type="text" name="contact" id="edit-TODA-contact" placeholder="Contact Number" class="form-control" required>
+
+            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
+        </form>
+    </div>
     <div id="page-mask"></div>
 
     <footer>

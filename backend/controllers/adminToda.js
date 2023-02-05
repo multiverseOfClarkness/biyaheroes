@@ -97,9 +97,35 @@ await archived.save()
 res.redirect("/admin/TODA");
 };
 
+const updateToda = async (req, res) => {
+  const body = req.body
+  const todaid = body.todaid
+  var id = mongoose.Types.ObjectId(todaid);
+  const presFname = body.firstname
+  const presLname = body.lastname
+  const presTODA = body.toda
+  const presContact = body.contact
+  
+  try {
+    
+    await todaModel.findByIdAndUpdate(id, {
+      presidentfname: presFname,
+      presidentlname: presLname,
+      TODA: presTODA,
+      phone: presContact
+    }, {new: true})
+    
+    res.redirect('/admin/TODA')
+  } catch (error) {
+    getTodaPageAfterError(req, res)
+    console.log(error.message)
+  }
+}
+
 module.exports = {
 getTODApage,
 addNewToda,
 uploadNewToda,
-deleteToda
+deleteToda,
+updateToda
 };

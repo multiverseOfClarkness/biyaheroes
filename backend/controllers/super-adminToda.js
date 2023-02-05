@@ -1,6 +1,7 @@
 const todaModel = require("../models/toda");
 const todaArchived = require("../models/todaArchived");
 const XLSX = require("xlsx");
+const mongoose = require('mongoose')
 
 const getTODApage = async (req, res) => {
 todaModel.find({}, (err, todaModel) => {
@@ -97,9 +98,36 @@ await archived.save()
 res.redirect("/SA/TODA");
 };
 
+const updateToda = async (req, res) => {
+  const body = req.body
+  const todaid = body.todaid
+  var id = mongoose.Types.ObjectId(todaid);
+  const presFname = body.firstname
+  const presLname = body.lastname
+  const presTODA = body.toda
+  const presContact = body.contact
+  
+  try {
+    
+    await todaModel.findByIdAndUpdate(id, {
+      presidentfname: presFname,
+      presidentlname: presLname,
+      TODA: presTODA,
+      phone: presContact
+    }, {new: true})
+    
+    res.redirect('/SA/TODA')
+  } catch (error) {
+    getTodaPageAfterError(req, res)
+    console.log(error.message)
+  }
+}
+
 module.exports = {
+
   getTODApage,
   addNewToda,
   uploadNewToda,
-  deleteToda
+  deleteToda,
+  updateToda
 };

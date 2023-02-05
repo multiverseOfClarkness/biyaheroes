@@ -4,7 +4,6 @@ const driverSchema = mongoose.Schema({
   bodyNum: {
     type: String,
     required: [true, "Body number is required"],
-    
   },
   fname: {
     type: String,
