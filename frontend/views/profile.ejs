@@ -166,8 +166,8 @@
 
         <h5>Account Information</h5>
         <form form method="post" action="/admin/profile/<%= admin.id %>?_method=PATCH">
-            <input type="number" name="phone" id="phone" placeholder="Phone Number" class="form-control" required>
-            <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+            <input type="number" name="phone" id="phone" placeholder="Phone Number" class="form-control" value="<%= admin.phone %>" required>
+            <input type="email" name="email" id="email" placeholder="Email" class="form-control" value="<%= admin.email %>" required>
 
             <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
         </form>

@@ -26,6 +26,7 @@ section {
     display: flex;
     justify-content: center;
     margin: 2em 0;
+    height: 100vh;
 }
 
 
@@ -43,7 +44,8 @@ section {
     border-radius: .5em;
     box-shadow: 3px 3px 5px #D6D6D1;
     text-align: center;
-    padding: 1em 0;
+    padding: 1em;
+    height: fit-content;
     cursor: pointer;
 }
 
@@ -157,6 +159,10 @@ footer > p {
         grid-template-columns: 1fr 1fr;
     }
 
+        footer {
+            position: absolute;
+            bottom: 0;
+        }
     .grid-item {
         margin-bottom: 1em;
     }

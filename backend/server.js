@@ -23,7 +23,7 @@ app.use(methodOverride("_method"));
 app.use(express.json());
 app.use(cookieParser());
 
-
+app.use(reqResLogger)
 
 app.use("/", require("./routes/indexRoute"));
 app.use("/", require("./routes/commuterRegister"));

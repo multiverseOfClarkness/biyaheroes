@@ -1,4 +1,5 @@
 const violationReports = require('../models/violationReports')
+const userModel = require('../models/users')
 
 
 const getComplaintsPage = (req, res) => {
@@ -10,14 +11,34 @@ const getComplaintsPage = (req, res) => {
 }
 
 const getIndividualComplaint = (req, res) => {
-  violationReports.find({_id: req.params.id}, (err, violationReports) => {
-    res.render('SA-complaint-individual-report', {
-        violationList : violationReports
+  const violationAuthor = req.body.violationAuthor
+  const userArray = []
+  
+  userModel.find((err, result) => {
+    result.forEach(data => {
+      userArray.push(data.id)
     })
-  }) 
+  })
+
+  userModel.findOne({id: violationAuthor}, (err, result) => {
+
+    const authFname = result.fname
+    const authLname = result.lname
+
+    violationReports.find({_id: req.params.id}, (err, violationReports) => {
+      res.render('SA-complaint-individual-report', {
+          violationList : violationReports,
+          userArray,
+          authFname, authLname
+      })
+    }) 
+  })
+
+  
 }
 
 const updateIndividualComplaints = async (req, res) => {
+  
   await violationReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {
     new: true
     });

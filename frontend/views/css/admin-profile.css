@@ -25,6 +25,7 @@ body {
 .container {
     margin-top: 2em;
     margin-bottom: 2em;
+    height: 100vh;
 }
 
 .header {

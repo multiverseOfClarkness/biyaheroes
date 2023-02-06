@@ -54,10 +54,6 @@
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/newAdmin">Admins</a>
-                    </li>
-
-                    <li>
                         <a class="nav-link" href="/admin/profile">Profile</a>
                     </li>
 
@@ -84,6 +80,7 @@
             <div class="details">
                 <div class="box complainant">
                     <p class="detail-title">Complainant Details</p>
+                    <input class="detail-item" type="text" value="<%= violation.author.id %> ">
                     <p id="complainantname" class="detail-item"><%= violation.author.fname %> <%= violation.author.lname %></p>
                     <p class="detail-item"><%= violation.author.phone %></p>
                 </div>

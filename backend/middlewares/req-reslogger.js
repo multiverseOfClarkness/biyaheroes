@@ -2,15 +2,12 @@ const logger = require ('../config/logger')
 
 const reqResLogger = (req, res, next) => {
     let errorMessage = null;
-    
-   
-    
 
     const { rawHeaders, httpVersion, method, socket, url, body} = req;
     const { remoteAddress, remoteFamily } = socket;
     const data = (
         JSON.stringify({
-            timestamp: Date.now(),
+            timestamp: new Date(),
             rawHeaders,
             httpVersion,
             body,

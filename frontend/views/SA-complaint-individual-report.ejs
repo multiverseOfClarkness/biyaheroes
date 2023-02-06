@@ -88,7 +88,9 @@
             <div class="details">
                 <div class="box complainant">
                     <p class="detail-title">Complainant Details</p>
-                    <p id="complainantname" class="detail-item"><%= violation.author.fname %> <%= violation.author.lname %></p>
+                    <input type="hidden" value="<%= userArray %>">
+                    <input type="hidden" name="violationAuthor" value="<%= violation.author._id %>">
+                    <p id="complainantname" class="detail-item"><%= authFname %> <%= authLname %></p>
                     <p class="detail-item"><%= violation.author.phone %></p>
                 </div>
                 <div class="box report">
