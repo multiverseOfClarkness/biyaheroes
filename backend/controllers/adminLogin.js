@@ -3,6 +3,9 @@ const path = require ('path')
 const bcryptjs =require('bcryptjs')
 const adminUsers = require('../models/adminUsers.js')
 const jwt = require('jsonwebtoken')
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
+
 
 
 
@@ -30,6 +33,16 @@ const login = async (req, res) => {
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
                 res.cookie('token', accessToken, {httpOnly: true})
+
+                const currentUser = await adminUsers.findOne({
+                    email: jwtdecode(req.cookies.token).email,
+                });
+                logs.create({
+                    author: `${currentUser.fname} ${currentUser.lname}`,
+                    section: 'Login',
+                    action: 'Logged in.',
+                    userID: `${currentUser.id}`
+                })
                 return res.redirect('/admin/dashboard')
                 
             }else {

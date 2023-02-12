@@ -2,23 +2,30 @@ const todaModel = require("../models/toda");
 const todaArchived = require("../models/todaArchived");
 const XLSX = require("xlsx");
 const mongoose = require('mongoose')
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
+const admin = require("../models/adminUsers");
+
 
 const getTODApage = async (req, res) => {
-todaModel.find({}, (err, todaModel) => {
-  res.render("SA-toda", {
-    todaList: todaModel,
+  todaModel.find({}, (err, todaModel) => {
+    res.render("SA-toda", {
+      todaList: todaModel,
+    });
   });
-});
 };
 const getTodaPageAfterError = (req, res) => {
-todaModel.find({}, (err, todaModel) => {
-  res.render("SA-toda-error", {
-    todaList: todaModel,
+  todaModel.find({}, (err, todaModel) => {
+    res.render("SA-toda-error", {
+      todaList: todaModel,
+    });
   });
-});
 };
 
 const addNewToda = async (req, res) => {
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
 try {
   const body = req.body;
   const TODA = body.toda;
@@ -34,6 +41,14 @@ try {
   });
   
   await newToda.save();
+
+  logs.create({
+    author: `${currentUser.fname} ${currentUser.lname}`,
+    section: 'Super admin/ TODA',
+    action: 'Inserted a TODA.',
+    userID: `${currentUser.id}`
+  })
+
   res.redirect("/SA/TODA");
 } catch (e) {
   if (e.code === 11000) getTodaPageAfterError(req, res);
@@ -41,7 +56,10 @@ try {
 };
 
 const uploadNewToda = async (req, res) => {
-  
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
+
   const existingTODA = await todaModel.find();
 
   const allData = [];
@@ -73,6 +91,15 @@ const uploadNewToda = async (req, res) => {
           
         }
         x++;
+
+
+        logs.create({
+          author: `${currentUser.fname} ${currentUser.lname}`,
+          section: 'Super admin/ TODA',
+          action: 'Uploaded TODA file.',
+          userID: `${currentUser.id}`
+        })
+
         res.redirect("/SA/TODA");
       });
     } catch (error) {}
@@ -81,24 +108,39 @@ const uploadNewToda = async (req, res) => {
 };
 
 const deleteToda = async (req, res) => {
-const thisToda = await todaModel.findByIdAndUpdate(req.params.id, {status: "Archived"}, {new: true});
-const archived = new todaArchived ({
-  id: thisToda.id,
-  presidentlname: thisToda.presidentlname,
-  presidentfname: thisToda.presidentfname,
-  TODA: thisToda.TODA,
-  contact: thisToda.contact,
-  status: thisToda.status
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
 
-})
+  const thisToda = await todaModel.findByIdAndUpdate(req.params.id, {status: "Archived"}, {new: true});
 
-await todaModel.deleteOne(thisToda)
-await archived.save()
+  const archived = new todaArchived ({
+    id: thisToda.id,
+    presidentlname: thisToda.presidentlname,
+    presidentfname: thisToda.presidentfname,
+    TODA: thisToda.TODA,
+    contact: thisToda.contact,
+    status: thisToda.status
 
-res.redirect("/SA/TODA");
+  })
+
+  await todaModel.deleteOne(thisToda)
+  await archived.save()
+
+  logs.create({
+    author: `${currentUser.fname} ${currentUser.lname}`,
+    section: 'Super admin/ TODA',
+    action: 'Deleted a TODA.',
+    userID: `${currentUser.id}`
+  })
+
+  res.redirect("/SA/TODA");
 };
 
 const updateToda = async (req, res) => {
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
   const body = req.body
   const todaid = body.todaid
   var id = mongoose.Types.ObjectId(todaid);
@@ -116,6 +158,14 @@ const updateToda = async (req, res) => {
       phone: presContact
     }, {new: true})
     
+
+    logs.create({
+      author: `${currentUser.fname} ${currentUser.lname}`,
+      section: 'Super admin/ TODA',
+      action: 'Updated a TODA.',
+      userID: `${currentUser.id}`
+    })
+
     res.redirect('/SA/TODA')
   } catch (error) {
     getTodaPageAfterError(req, res)

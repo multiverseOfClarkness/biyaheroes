@@ -1,6 +1,7 @@
 const user = require('../models/users')
 const jwtdecode = require('jwt-decode')
 const bcryptjs = require('bcryptjs')
+const logs = require('../models/logs')
 
 
 const getChangePass = async (req, res) => {
@@ -29,6 +30,14 @@ const changePass = async (req, res) => {
                     verifiedpass: newHashedPassword
 
                 })
+
+                logs.create({
+                    author: `${currentUser.fname} ${currentUser.lname}`,
+                    section: 'Commuter / profile',
+                    action: 'Changed password.',
+                    userID: `${currentUser.id}`
+                })
+
                 res.redirect('/logout')
             } else {
                 console.log('ey')
@@ -46,7 +55,8 @@ const changePass = async (req, res) => {
 
 
 module.exports = {
-    getChangePass, changePass
+    getChangePass, 
+    changePass
 }
 
 

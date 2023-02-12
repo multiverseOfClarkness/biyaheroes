@@ -4,12 +4,15 @@ const todaModel = require("../models/toda");
 const archivedToda = require('../models/todaArchived') 
 const archivedDrivers = require('../models/driverArchived') 
 const mongoose = require('mongoose');
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
+const admin = require('../models/adminUsers')
 
 
 
 const getDriversPage =  (req, res) => {
   let TODA = []
-  archivedToda.find((err, data)=>{
+  todaModel.find((err, data)=>{
     data.forEach(x =>{
       TODA.push(x.TODA)
     })
@@ -28,7 +31,7 @@ const getDriversPage =  (req, res) => {
 
 const getDriversPageAfterError = (req, res) => {
   let TODA = []
-  archivedToda.find((err, data)=>{
+  todaModel.find((err, data)=>{
     data.forEach(x =>{
       TODA.push(x.TODA)
     })
@@ -46,7 +49,9 @@ const getDriversPageAfterError = (req, res) => {
 };
 
 const uploadDriverFile = async (req, res) => {
-  
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
   const existingDriver = await driverModel.find();
 
   const allData = [];
@@ -74,14 +79,21 @@ const uploadDriverFile = async (req, res) => {
         } 
         for (let x in xlData) {
           
-          todaModel.insertMany([xlData[x]]);
+          driverModel.insertMany([xlData[x]]);
           
         }
         x++;
+        logs.create({
+          author: `${currentUser.fname} ${currentUser.lname}`,
+          section: 'Admin / drivers',
+          action: 'Uploaded drivers file.',
+          userID: `${currentUser.id}`
+        })
         res.redirect("/admin/drivers");
       });
     } catch (error) {
-      console.log(error.message)
+      getDriversPageAfterError(req, res)
+
     }
     
   });
@@ -89,6 +101,11 @@ const uploadDriverFile = async (req, res) => {
 
 const addNewDriver = async (req, res) => {
   try {
+    const currentUser = await admin.findOne({
+      email: jwtdecode(req.cookies.token).email,
+    });
+
+    
     const body = req.body;
     const reqTODA = body.toda;
     const reqbodyNum = body.bodyNum;
@@ -105,6 +122,12 @@ const addNewDriver = async (req, res) => {
     });
     
     await newDriver.save();
+    logs.create({
+      author: `${currentUser.fname} ${currentUser.lname}`,
+      section: 'Admin / drivers',
+      action: 'Added single driver data.',
+      userID: `${currentUser.id}`
+    })
     res.redirect("/admin/drivers");
   } catch (error) {
     if (error.code === 11000) {
@@ -118,6 +141,10 @@ const addNewDriver = async (req, res) => {
 
 const deleteDriver = async (req, res) => {
   try {
+    const currentUser = await admin.findOne({
+      email: jwtdecode(req.cookies.token).email,
+    });
+
     const currentDriver = await driverModel.findByIdAndUpdate(req.params.id, {status: "Terminated"}, {new: true})
 
     const newArchived = new archivedDrivers({
@@ -133,7 +160,12 @@ const deleteDriver = async (req, res) => {
     await driverModel.deleteOne(currentDriver)
     await newArchived.save()
   
-
+    logs.create({
+      author: `${currentUser.fname} ${currentUser.lname}`,
+      section: 'Admin / drivers',
+      action: 'Deleted single driver data.',
+      userID: `${currentUser.id}`
+    })
     res.redirect("/admin/drivers");
   } catch (error) {
     console.log(error.message)
@@ -142,6 +174,9 @@ const deleteDriver = async (req, res) => {
 };
 
 const updateDriver = async (req, res) => {
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
   const body = req.body
   const driverid = body.driverid
   var id = mongoose.Types.ObjectId(driverid);
@@ -160,7 +195,14 @@ const updateDriver = async (req, res) => {
       TODA: driverTODA,
       phone: driverContact
     }, {new: true})
-    
+
+    logs.create({
+      author: `${currentUser.fname} ${currentUser.lname}`,
+      section: 'Admin / drivers',
+      action: 'Updated single driver data.',
+      userID: `${currentUser.id}`
+    })
+
     res.redirect('/admin/drivers')
   } catch (error) {
     console.log(error.message)

@@ -2,7 +2,7 @@ const admin = require("../models/adminUsers");
 const violationsModel = require('../models/violationReports')
 const missingModel = require('../models/missingItemReports')
 const jwtdecode = require("jwt-decode");
-
+const logs = require('../models/logs')
 
 
 const getLogsPage = async (req, res) => {
@@ -29,17 +29,21 @@ const getLogsPage = async (req, res) => {
                   missingModel.countDocuments({status: 'Overdue'}, (err, count) =>{
                     let missingOverdue = count
                     admin.find({ _id: currentUser._id }, (err, admin) => {
-                      res.render("logs", {
-                        violationCount,
-                        violationPending,
-                        violationSolved,
-                        violationOverdue,
-                        missingCount,
-                        missingPending,
-                        missingSolved,
-                        missingOverdue,
-
-                      });
+                      logs.find((err, data) => {
+                        res.render("logs", {
+                          violationCount,
+                          violationPending,
+                          violationSolved,
+                          violationOverdue,
+                          missingCount,
+                          missingPending,
+                          missingSolved,
+                          missingOverdue,
+                          logs: data
+  
+                        });
+                      })
+                      
                     });
 
                   })

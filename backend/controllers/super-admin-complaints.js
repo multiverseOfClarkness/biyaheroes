@@ -1,5 +1,9 @@
 const violationReports = require('../models/violationReports')
 const userModel = require('../models/users')
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
+const admin = require("../models/adminUsers");
+
 
 
 const getComplaintsPage = (req, res) => {
@@ -38,10 +42,19 @@ const getIndividualComplaint = (req, res) => {
 }
 
 const updateIndividualComplaints = async (req, res) => {
-  
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
   await violationReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {
     new: true
     });
+
+    logs.create({
+      author: `${currentUser.fname} ${currentUser.lname}`,
+      section: 'Super admin/ complaints',
+      action: 'Updated report status.',
+      userID: `${currentUser.id}`
+    })
     res.redirect('/SA/complaints')
 }
 

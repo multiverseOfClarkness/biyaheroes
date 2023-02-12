@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODA</title>
+    <title>TODAS</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +54,7 @@
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/SA/newAdmin">Admins</a>
+                        <a class="nav-link" href="/SA/admins">Admins</a>
                     </li>
 
                     <li>
@@ -64,6 +64,11 @@
                     <li>
                         <a class="nav-link" href="/SA/logs">Logs</a>
                     </li>
+
+                    <li>
+                        <a class="nav-link" href="/SA/maintenance">Maintenance</a>
+                    </li>
+                    
 
                     <li>
                         <a class="nav-link logout" href="/logout">Logout</a>
@@ -136,12 +141,12 @@
 
         <h5>TODA</h5>
         <form method="post" action="/SA/TODA/new">
-            <input type="text" name="toda" id="toda" placeholder="TODA Name" class="form-control" required>
-            <input type="text" name="fname" id="fname" placeholder="TODA President First name" class="form-control" required>
-            <input type="text" name="lname" id="lname" placeholder="TODA President Last name" class="form-control" required>
-            <input type="number" name="contact" id="contact" placeholder="Contact Number" class="form-control" required>
+            <input type="text" name="toda" id="add-toda" placeholder="TODA Name" class="form-control" required>
+            <input type="text" name="fname" id="add-pres-fname" placeholder="TODA President First name" class="form-control" required>
+            <input type="text" name="lname" id="add-pres-lname" placeholder="TODA President Last name" class="form-control" required>
+            <input type="number" name="contact" id="add-pres-contact" placeholder="Contact Number" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" id="submit-toda-btn" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 
@@ -153,7 +158,7 @@
         <form action="/SA/TODA" method="post" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" id="upload-excel" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 
@@ -165,7 +170,7 @@
         <form method="post" action="/SA/TODA/edit?_method=PATCH">
             <input type="hidden" id="toda-id" name="todaid">
             <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
-            <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
+            <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control success" required>
             <select class="form-control" name="toda">
                 <% todaList.forEach(toda =>{ %> 
                 <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
@@ -173,7 +178,7 @@
             </select>
             <input type="text" name="contact" id="edit-TODA-contact" placeholder="Contact Number" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Save Changes</button>
         </form>
     </div>
 
@@ -185,7 +190,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    <script src="/js/admin-toda.js"></script>
+    <!-- NEW JS FOR SA-ADMIN-TODA -->
+    <script type="module" src="/js/sa-admin-toda.js"></script>
     <script src="/js/search.js"></script>
     
 </body>

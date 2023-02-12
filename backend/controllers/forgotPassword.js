@@ -4,6 +4,7 @@ const user = require('../models/users')
 const admin = require('../models/adminUsers')
 const bcryptjs = require('bcryptjs')
 const nodemailer = require('nodemailer');
+const logs = require('../models/logs')
 
 
 
@@ -61,11 +62,11 @@ const getResetPassPage = (req, res) => {
 const resetPass = async (req, res) => {
     const {id, token} = req.params
     const {retypepass} = req.body
-    console.log(id)
+    
     try {
 
         user.findById(id, async (err, result) => {
-            
+            const currentUser= result
             if(result == ''){
                 res.send('Invalid id.')
                 return;
@@ -76,7 +77,14 @@ const resetPass = async (req, res) => {
                     const salt = await bcryptjs.genSalt(10);
                     const newPass = await bcryptjs.hash(retypepass, salt)
                     user.findByIdAndUpdate(id, {password: newPass},{new: true}, (err, result) =>{
-                        res.send(result)
+                        logs.create({
+                            author: `${currentUser.fname} ${currentUser.lname}`,
+                            section: 'Registration',
+                            action: 'Reset password.',
+                            userID: `${currentUser.id}`
+                          })
+
+                        res.redirect('/')
                     })
                     
                     
@@ -95,6 +103,7 @@ const resetPass = async (req, res) => {
 const getEmail = (req, res, result) =>{
     
     const secret = process.env.ACCESS_TOKEN_SECRET + result[0].password
+    const currentUser= result[0]
                 const payload = {
                     email: result[0].email,
                     id: result[0].id
@@ -128,6 +137,13 @@ const getEmail = (req, res, result) =>{
                       console.log('Email sent: ' + info.response);
                     }
                   });
+
+                  logs.create({
+                    author: `${currentUser.fname} ${currentUser.lname}`,
+                    section: 'Registration',
+                    action: 'Requested password reset link.',
+                    userID: `${currentUser.id}`
+                  })
                   res.render('email-sent')
                   
 }

@@ -9,7 +9,6 @@ const missingItemReportsSchema = new Schema({
     },
     driverName : {
         type: String,
-        required: [true, 'Driver name is required']
     },
     TODA : {
         type: String,
@@ -17,7 +16,6 @@ const missingItemReportsSchema = new Schema({
     },
     driverDescription : {
         type: String,
-        required: [true, 'Driver description is required']
     },
     itemType : {
         type: String,
@@ -31,13 +29,7 @@ const missingItemReportsSchema = new Schema({
         type: String,
         required: [true, 'Additional description about the incident is required']
     },
-    complainant : {
-        type: String,
-        required: [true, 'Identity of complainant is required']
-    },
-    evidence : {
-        type: Buffer
-    },
+    evidence : [Buffer],
     evidenceType : {
         type: String
     },
@@ -56,6 +48,18 @@ missingItemReportsSchema.virtual('evidenceImagePath').get(function(){
         return `data:${this.evidenceType};charset=utf-8;base64,${this.evidence.toString('base64')}`
     }
 })
+missingItemReportsSchema.virtual('evidenceImagePathArray').get(function(){
+    if(this.evidence != null){
+        const array = []
+        const vv = this.evidence
+        
+        vv.forEach(element => {
+            array.push(`data:${this.evidenceType};charset=utf-8;base64,${element.toString('base64')}`)
+        })
+        return array
+    }
+})
+
 
 const missingItemReports = mongoose.model('missingItemReports', missingItemReportsSchema, 'missingItemReports')
 module.exports = missingItemReports

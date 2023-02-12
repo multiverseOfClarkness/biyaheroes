@@ -18,6 +18,8 @@
     <link
     href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
     rel="stylesheet"/>
+    <script defer src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/report-violation.css">
     <script defer src="/js/fileUpload.js"></script>
@@ -104,10 +106,9 @@
                     <div class="form-item">
                         <label> TODA </label>
                         <select class="form-select" name="toda" id="toda" aria-label="Default select example">
-                            <option value="Select the Driver's TODA">Select the Driver's TODA</option>
-                            <option name="delpatoda" value="delpatoda">Dela Paz Toda</option>
-                            <option name="zapote-toda" value="zapote-toda">Zapote Toda</option>
-                            <option name="malaban-toda" value="malaban-toda">Malaban Toda</option>
+                            <% todaList.forEach(toda => { %>
+                                <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
+                            <% }) %>
                         </select>
                         <small class="form-text">Error Message</small>
                     </div>
@@ -125,10 +126,10 @@
                     <div class="form-item">
                         <label>Violation</label>
                         <select id="violation" name="violation" class="form-select" aria-label="Default select example">
-                            <option selected>Select Type of Violation</option>
-                            <option name="overspeeding" value="overspeeding">Overspeeding</option>
-                            <option name="overcharging" value="overcharging">Overcharging</option>
-                            <option name="drunk-driving" value="drunk-driving">Drunk Driving</option>
+                            <% violationTypes.forEach(violation => { %>
+                                <option value="<%= violation.violation %>"><%= violation.violation %></option>
+                            <% }) %>
+                            
                         </select>
                         <small class="form-text">Error Message</small>
                     </div>
@@ -145,21 +146,9 @@
                         <small class="form-text">Error Message</small>
                     </div>
 
-                    <div class="form-item-radio">
-                        <label for="">Complainant: </label>
-                        <br>
-                        <input type="radio" name="complainant" id="me" class="form-check-input" value="me">
-                        <label>Me</label>
-                        <small class="form-text" id="form-text">Error Message</small>
-
-                        <input type="radio" name="complainant" id="someone-else" class="form-check-input" value="someone-else">
-                        <label >Someone Else</label>
-                        <small class="form-text" id="form-text" >Error Message</small>
-                    </div>
 
                     <div class="form-item">
-                        <label for="attach-evidence" class="form-label" name="evidence" id="evidence">Attach Evidence/s</label>
-                        <input name="evidence" class="filepond" type="file" id="evidence" multiple />
+                        <input name="evidence" class="filepond" data-max-file-size="3MB" type="file" id="evidence" multiple="true" data-max-files="3"/>
                         <small class="form-text">Error Message</small>
                     </div>
 

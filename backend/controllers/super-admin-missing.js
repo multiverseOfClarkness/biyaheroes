@@ -1,5 +1,10 @@
 const missingItemReports = require('../models/missingItemReports')
 const userModel = require('../models/users')
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
+const admin = require("../models/adminUsers");
+
+
 
 const getMissingItemPage = (req, res) =>{
     missingItemReports.find({}, (err, data) => {
@@ -37,9 +42,20 @@ const getIndividualMissingReport = async(req, res) => {
 
 
 const updateIndividualPendingMissingReport = async (req, res) =>{
+    const currentUser = await admin.findOne({
+        email: jwtdecode(req.cookies.token).email,
+    });
+
     await missingItemReports.findOneAndUpdate({_id: req.params.id}, {status: "Solved"}, {
     new: true
     });
+
+    logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Super admin/ missing',
+        action: 'Updated report status.',
+        userID: `${currentUser.id}`
+      })
     res.redirect('/SA/missing')
 
 }

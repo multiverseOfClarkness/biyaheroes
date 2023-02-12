@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/filter-pagination.css">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/admin-complaint-reports.css">
-    <link rel="stylesheet" href="/css/pagination.css">
 
 </head>
 
@@ -73,23 +73,25 @@
 
     <section class="container">
 
-    <div class="sort-search">
-        <label for="show">Show</label>
-        <select name="show" id="show" onchange="tableFilter()">
-            <option value="all">All</option>
-            <option value="solved">Solved</option>
-            <option value="pending">Pending</option>
-            <option value="overdue">Overdue</option>
-        </select>
+    <form  id="filters" class="max-w-3xl mx-auto flex justify-center p-4">
+        <div class="sort-search">
+            <label for="show">Show</label>
+            <select name="show" id="show">
+                <option value="" selected>All</option>
+                <option value="Solved">Solved</option>
+                <option value="Pending">Pending</option>
+                <option value="Overdue">Overdue</option>
+            </select>
+    
+            <!-- <label for="search">Search</label> -->
+            <input type="text" name="search" id="search" placeholder="Search">
+        </div>
+    </form>
+    
 
-        <label for="search">Search</label>
-        <input type="text" name="search" id="search" placeholder="Search" onkeyup="tableSearch()">
-    </div>
-
-    <div class="list-page">
         <table class="table table-hover text-center" id="table">
             <thead >
-                <tr class="item" id="table-head">
+                <tr id="thead">
                     <th>Report ID</th>
                     <th>Body No.</th>
                     <th>Driver's Name</th>
@@ -100,7 +102,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="tbody">
                 <% violationList.forEach(violation => { %> 
                     <tr class="item">
                         <td data-label="Report ID" style="font-weight: bold"><%= violation.id %></td>
@@ -108,7 +110,7 @@
                         <td data-label="Driver's Name"><%= violation.driverName %></td>
                         <td data-label="TODA"><%= violation.TODA %></td>
                         <td data-label="Date"><%= violation.dateOfIncident %></td>
-                        <td data-label="Status"><%= violation.status %></td>
+                        <td data-label="Status" class="status"><%= violation.status %></td>
                         <td data-label="View">
                             <a href="/admin/complaints/<%= violation.id %>">
                                 <img src="/images/view.svg" alt="" class="table-btn view-btn">
@@ -116,17 +118,12 @@
                         </td>
                     </tr>
                 <% }) %> 
-                
-
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="listPage pagination justify-content-end">
-             
-            </ul>
-        </nav>
-    </div>
-        
+        <div class="pagination d-flex justify-content-end justify-center my-5">
+            <div class="page" id="page">
+            </div>
+        </div>   
     </section>
 
 
@@ -136,9 +133,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    <script src="/js/pagination.js"></script>
-    <script src="/js/filtering.js"></script>
-    
-
+    <script src="/js/report-nav.js"></script>
 </body>
 </html>

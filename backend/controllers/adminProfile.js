@@ -1,6 +1,9 @@
 const admin = require("../models/adminUsers");
 const jwtdecode = require("jwt-decode");
 const bcryptjs = require('bcryptjs')
+const logs = require('../models/logs')
+
+
 
 const getAdminProfilePage = async (req, res) => {
   try {
@@ -42,6 +45,12 @@ const getProfileAfterSuccess = async (req, res) =>{
       });
   
       admin.find({ _id: currentUser._id }, (err, admin) => {
+        logs.create({
+          author: `${currentUser.fname} ${currentUser.lname}`,
+          section: 'Admin / profile',
+          action: 'Editted phone/email.',
+          userID: `${currentUser.id}`
+        })
         res.render("admin-change-pass-success", {
           adminDetails: admin,
         });
@@ -70,9 +79,25 @@ const updateAdminProfile = async (req, res) => {
   try {
     if(reqFname || reqLname){
       await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {fname: reqFname, lname: reqLname});
+
+      logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Admin / profile',
+        action: 'Editted name.',
+        userID: `${currentUser.id}`
+      })
+
       res.redirect("/admin/profile");
     } else if (reqPhone || reqEmail) {
       await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {phone: reqPhone, email: reqEmail});
+
+      logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Admin / profile',
+        action: 'Editted phone/email.',
+        userID: `${currentUser.id}`
+      })
+
       res.redirect("/admin/profile");
     } else if (reqCurrentPass || reqNewPass || reqVerifiedPass) {
       const currentUser = await admin.findOne({email: jwtdecode(req.cookies.token).email})
@@ -101,10 +126,18 @@ const updateAdminProfile = async (req, res) => {
           profileImageType: reqProfile.type
         }
       );
+
+      logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Admin / profile',
+        action: 'Editted profile picture.',
+        userID: `${currentUser.id}`
+      })
+
       res.redirect("/admin/profile");
     }
   } catch (error) {
-    console.log(error.message);
+    getProfileAfterError(req, res)
   }
 };
 
@@ -112,6 +145,5 @@ const updateAdminProfile = async (req, res) => {
 
 module.exports = {
   getAdminProfilePage,
-  updateAdminProfile,
- 
+  updateAdminProfile
 };

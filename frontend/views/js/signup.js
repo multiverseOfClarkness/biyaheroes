@@ -21,9 +21,10 @@ function InputValidation() {
     let birthdayVal = birthday.value.trim();
     let addressVal = address.value.trim();
     let phoneNumVal = phonenum.value.trim();
-    let emailVal = email.value;
+    let emailVal = email.value.trim();
     let passwordVal = password.value.trim();
     let confirmPassVal = confirm_pass.value.trim();
+    let firstDigit = phoneNumVal.slice(0,1);
     
     let valid = true
 
@@ -50,10 +51,14 @@ function InputValidation() {
     if(phoneNumVal === '') {
         errorMsg(phonenum, 'Please provide phone number.');
         return valid = false;
-    } else if (!isPhoneNum(phoneNumVal)) {
-        errorMsg(phonenum, 'Please provide valid phone number (Format: 09---).');
+    } else if (phoneNumVal.length !== 10) {
+        errorMsg(phonenum, 'Invalid phone number.')
         return valid = false;
-    } successMsg(phonenum);
+    } else if(parseInt(firstDigit) !== 9) {
+        errorMsg(phonenum, `Please begin with "9".`)
+        return valid = false;
+    }   successMsg(phonenum);
+    
 
     if(emailVal === '') {
         errorMsg(email, 'Please provide email.');
@@ -100,11 +105,10 @@ function successMsg(input) {
 
 }
 
-function isPhoneNum(phoneNum) {
-    return /((^(\+)(\d){12}$)|(^\d{11}$))/.test(phoneNum);
-}
-
 function isEmail(email) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
     
 }
+
+
+

@@ -54,7 +54,7 @@
                     </li>
 
                     <li>
-                        <a class="nav-link active" href="/SA/newAdmin">Admins</a>
+                        <a class="nav-link active" href="/SA/admins">Admins</a>
                     </li>
 
                     <li>
@@ -63,6 +63,11 @@
 
                     <li>
                         <a class="nav-link" href="/SA/logs">Logs</a>
+                    </li>
+
+                    
+                    <li>
+                        <a class="nav-link" href="/SA/maintenance">Maintenance</a>
                     </li>
 
                     <li>
@@ -91,7 +96,7 @@
                     <p class="name"><%= admin.fname %> <%= admin.lname %></p>
                     <p class="position"><%= admin.role %></p>
                     
-                    <form method="post" action="/SA/newAdmin/<%= admin.id %>?_method=PATCH">
+                    <form method="post" action="/SA/admins/<%= admin.id %>?_method=PATCH">
                     <button type="submit" class="btn btn-outline-primary mb-2">Terminate Account</button>
                     </form>
                 </div>
@@ -109,7 +114,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Add New Admin</h5>
-        <form method="post" action="/SA/newAdmin">
+        <form method="post" action="/SA/admins">
             <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lname" id="lname" placeholder="Last Name" class="form-control" required>
             <select class="form-control" name="position" id="">

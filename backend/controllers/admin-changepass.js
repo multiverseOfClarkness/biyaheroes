@@ -1,6 +1,8 @@
 const admin = require('../models/adminUsers')
 const jwtdecode = require('jwt-decode')
 const bcryptjs = require('bcryptjs')
+const logs = require('../models/logs')
+
 
 
 
@@ -26,6 +28,13 @@ const changePass = async (req, res) => {
                     
                     password: newHashedPassword
 
+                })
+
+                logs.create({
+                    author: `${currentUser.fname} ${currentUser.lname}`,
+                    section: 'Admin / profile',
+                    action: 'Change pass.',
+                    userID: `${currentUser.id}`
                 })
                 res.redirect('/logout')
             } else {

@@ -43,7 +43,7 @@
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/admin/missing">Missing Items</a>
+                        <a class="nav-link active" href="/admin/missing">Missing Items</a>
                     </li>
 
                     <li>
@@ -82,14 +82,14 @@
                 <div class="box complainant">
                     <p class="detail-title">Complainant Details</p>
                     <p id="complainantname" class="detail-item"><%= missing.author.fname %> <%= missing.author.lname %></p>
-                    <p class="detail-item"><%= missing.author.phone %></p>
+                    <p class="detail-item">+63<%= missing.author.phone %></p>
                 </div>
                 <div class="box report">
                     <p class="detail-title">Driver & Report Details</p>
                     <p class="detail-item">Driver Name: <%= missing.driverName %></p>
                     <p class="detail-item">TODA: <%= missing.TODA %></p>
                     <p class="detail-item">Body #: <%= missing.bodyNum %></p>
-                    <p class="detail-item">Violation Type: <%= missing.violation %></p>
+                    <p class="detail-item">Item Type: <%= missing.itemType %></p>
                 </div>
             </div>
     
@@ -117,7 +117,7 @@
                 <% } else {  %> 
                     <div data-html2canvas-ignore class="btns mt-4 mb-4">
                         <button class="btn btn-primary" id="dl-btn">Download</button>
-                        <form method="post" action="/admin/complaints/pending/<%= missing.id %>?_method=PATCH">
+                        <form method="post" action="/admin/missing/pending/<%= missing.id %>?_method=PATCH">
                             <button type="submit" class="btn btn-primary">Resolved</button>
                         </form>
                     </div>
@@ -133,7 +133,9 @@
 
         <h5>Attached Evidence/s</h5>
         <div class="evidence">
-            <img src="<%= missing.evidenceImagePath %>" alt="">
+            <img src="<%= missing.evidenceImagePathArray[0] %>" alt="">
+            <img src="<%= missing.evidenceImagePathArray[1] %>" alt="">
+            <img src="<%= missing.evidenceImagePathArray[2] %>" alt="">
         </div>
     </div>
     <% }) %> 

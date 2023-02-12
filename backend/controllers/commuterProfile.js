@@ -2,6 +2,7 @@ const user = require('../models/users')
 const jwtdecode = require('jwt-decode')
 const moment = require('moment')
 const bcryptjs = require('bcryptjs')
+const logs = require('../models/logs')
 
 
 
@@ -43,9 +44,25 @@ const updateCommuterProfile = async (req, res) => {
     try {
         if(reqFname || reqLname || reqAddress|| reqBirthday){
             await user.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {fname: reqFname, lname: reqLname, address: reqAddress, birthday: reqBirthday});
+
+            logs.create({
+              author: `${currentUser.fname} ${currentUser.lname}`,
+              section: 'Commuter / profile',
+              action: 'Editted personal data.',
+              userID: `${currentUser.id}`
+            })
+
             res.redirect("/commuter/profile");
         } else if (reqPhone || reqEmail) {
             await user.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {phone: reqPhone, email: reqEmail});
+
+            logs.create({
+              author: `${currentUser.fname} ${currentUser.lname}`,
+              section: 'Commuter / profile',
+              action: 'Editted phone/email.',
+              userID: `${currentUser.id}`
+            })
+
             res.redirect("/commuter/profile");
         } else if (reqCurrentPass || reqNewPass ||reqVerifiedPass ) {
             const currentUser = await user.findOne({email: jwtdecode(req.cookies.token).email})
@@ -109,6 +126,14 @@ const getProfileAfterSuccess = async (req, res) =>{
         });
         const formattedDate = moment(currentUser.birthday).format('MM/DD/YYYY')
         user.find({ _id: currentUser._id }, (err, user) => {
+
+          logs.create({
+            author: `${currentUser.fname} ${currentUser.lname}`,
+            section: 'Commuter / profile',
+            action: 'Changed password.',
+            userID: `${currentUser.id}`
+          })
+
           res.render("commuter-change-pass-success", {
             userDetails: user,
             formattedDate

@@ -1,5 +1,6 @@
 const path = require('path')
 const User = require('../models/users')
+const logs = require('../models/logs')
 const bcryptjs = require('bcryptjs')
 
 
@@ -17,6 +18,7 @@ const getRegisterForm = async (req, res) => {
 
 const createNewUser = async (req, res) => {
     try {
+        
         const body = await req.body
         const salt = await bcryptjs.genSalt(10);
         
@@ -33,13 +35,19 @@ const createNewUser = async (req, res) => {
         password: hashedPassword
         });
         
-        await newUser.save()
+        newUser.save((err, user) => {
+            const currentUser = user
+            logs.create({
+                author: `${currentUser.fname} ${currentUser.lname}`,
+                section: 'Registration',
+                action: 'Created new account.',
+                userID: `${currentUser.id}`
+              })
+        })
         res.redirect('/')
     } catch (error) {
-        // if (error.code === 11000) {
-        //     res.render('resend-user-register-page.ejs')
-        // }
-        console.log(error)
+        
+        console.log(error.message)
     }
                     
         

@@ -1,6 +1,9 @@
 const admin = require("../models/adminUsers");
 const jwtdecode = require("jwt-decode");
 const bcryptjs = require('bcryptjs')
+const logs = require('../models/logs')
+
+
 
 const getAdminProfilePage = async (req, res) => {
   try {
@@ -70,9 +73,25 @@ const updateAdminProfile = async (req, res) => {
   try {
     if(reqFname || reqLname){
       await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {fname: reqFname, lname: reqLname});
+
+      logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Super admin/ profile',
+        action: 'Updated name.',
+        userID: `${currentUser.id}`
+      })
+
       res.redirect("/SA/profile");
     } else if (reqPhone || reqEmail) {
       await admin.findOneAndUpdate({email: jwtdecode(req.cookies.token).email}, {phone: reqPhone, email: reqEmail});
+
+      logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Super admin/ profile',
+        action: 'Updated phone/email.',
+        userID: `${currentUser.id}`
+      })
+
       res.redirect("/SA/profile");
     } else if (reqCurrentPass || reqNewPass || reqVerifiedPass) {
       const currentUser = await admin.findOne({email: jwtdecode(req.cookies.token).email})
@@ -87,7 +106,17 @@ const updateAdminProfile = async (req, res) => {
               await admin.updateOne({email : currentUser.email}, {
                   password: newHashedPassword
               })
+
+              logs.create({
+                author: `${currentUser.fname} ${currentUser.lname}`,
+                section: 'Super admin/ profile',
+                action: 'Updated password.',
+                userID: `${currentUser.id}`
+              })
+
               getProfileAfterSuccess(req, res)
+
+              
           } else {
               getProfileAfterError(req, res)
           }
@@ -101,6 +130,14 @@ const updateAdminProfile = async (req, res) => {
           profileImageType: reqProfile.type
         }
       );
+
+      logs.create({
+        author: `${currentUser.fname} ${currentUser.lname}`,
+        section: 'Super admin/ profile',
+        action: 'Updated profile picture.',
+        userID: `${currentUser.id}`
+      })
+
       res.redirect("/SA/profile");
     }
   } catch (error) {

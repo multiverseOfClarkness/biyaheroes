@@ -1,6 +1,8 @@
 const bcryptjs = require("bcryptjs");
 const admin = require("../models/adminUsers");
 const adminArchived = require("../models/adminArchived");
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
 
 const getAddNewAdmin = async (req, res) => {
   admin.find({status: "Continuing"}, (err, admin) => {
@@ -11,6 +13,9 @@ const getAddNewAdmin = async (req, res) => {
 };
 
 const addNewAdmin = async (req, res) => {
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+});
   const body = await req.body;
   const salt = await bcryptjs.genSalt(10);
   const hashedPassword = await bcryptjs.hash(body.password, salt);
@@ -24,12 +29,20 @@ const addNewAdmin = async (req, res) => {
     password: hashedPassword,
   });
 
+  logs.create({
+    author: `${currentUser.fname} ${currentUser.lname}`,
+    section: 'Super admin/ admins',
+    action: 'Created new admin account.',
+    userID: `${currentUser.id}`
+  })
   newUser.save();
   res.redirect("/admin/newAdmin");
 };
 
 const deleteAdmin = async (req, res) => {
-
+  const currentUser = await admin.findOne({
+    email: jwtdecode(req.cookies.token).email,
+  });
   const currentAdmin = await admin.findByIdAndUpdate(req.params.id, {status: "Terminated"}, {new: true});
   const archivedAdmin = new adminArchived ({
     id: currentAdmin.id,
@@ -47,7 +60,13 @@ const deleteAdmin = async (req, res) => {
   await admin.remove(currentAdmin);
   await archivedAdmin.save();
 
-  
+  logs.create({
+    author: `${currentUser.fname} ${currentUser.lname}`,
+    section: 'Super admin/ admins',
+    action: 'Created new admin account.',
+    userID: `${currentUser.id}`
+  })
+
   res.redirect("/admin/newAdmin");
 };
 

@@ -51,12 +51,6 @@ function formValidation() {
         successMsg(bodyNum);
     }
     
-    if(driverNameVal === '') {
-        errorMsg(driverName, `Please provide driver's name or alias.`);
-        return valid = false
-    } else {
-        successMsg(driverName);
-    }
 
     if(todaVal === `Select the Driver's TODA`) {
         errorMsg(toda, `Please choose the toda.`)
@@ -65,12 +59,6 @@ function formValidation() {
         successMsg(toda);
     }
 
-    if(driverDescVal === '') {
-        errorMsg(driverDesc, 'Please provide further information.');
-        return valid = false
-    } else {
-        successMsg(driverDesc);
-    }
 
     if(violationVal === 'Select Type of Violation') {
         errorMsg(violation, 'Please choose type of violation.');
@@ -93,14 +81,6 @@ function formValidation() {
         successMsg(incidentDesc);
     }
 
-    if(complainantMe.checked){
-        successMsgRadioButton(complainantMe)
-    }else if (complainantSomeoneElse.checked){
-        successMsgRadioButton(complainantSomeoneElse)
-    }else {
-       errorMsgRadioButton(complainantSomeoneElse, 'Please indicate complainant.')
-       return valid = false
-    }
 
 }
 

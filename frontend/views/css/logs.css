@@ -194,6 +194,10 @@ thead {
 }
 
 @media (max-width: 700px) {
+
+    .container {
+        height: auto;
+    }
     .sort-search {
         display: block;
     }

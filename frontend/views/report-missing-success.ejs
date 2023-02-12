@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Missing Item</title>
+    <title>Report a Missing Item</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,11 +18,15 @@
     <link
     href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
     rel="stylesheet"/>
+    <script defer src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/report-missing-item.css">
+    <link rel="stylesheet" href="/css/report-violation.css">
     <link rel="stylesheet" href="/css/popup-modal.css">
+    <link rel="stylesheet" href="/css/report-missing-item.css">
     <script defer src="/js/fileUpload.js"></script>
     <script defer src="/js/missingItemValidation.js"></script>
+
     
 
 
@@ -105,13 +109,12 @@
                     </div>
 
                     <div class="form-item">
-                        <label for="" class="form-label">TODA</label>
+                        <label> TODA </label>
                         <select class="form-select" name="toda" id="toda" aria-label="Default select example">
-                            <option selected>Select the Driver's TODA</option>
-                            <option name="delpatoda" value="delpatoda">Dela Paz Toda</option>
-                            <option name="zapote-toda" value="zapote-toda">Zapote Toda</option>
-                            <option name="malaban-toda" value="malaban-toda">Malaban Toda</option>
-                          </select>
+                            <% todaList.forEach(toda => { %>
+                                <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
+                            <% }) %>
+                        </select>
                         <small class="form-text">Error Message</small>
                     </div>
                     
@@ -127,11 +130,10 @@
                     <h3>Item Information</h3>
                     <div class="form-item">
                         <label for="" class="form-label">Item Type</label>
-                        <select class="form-select" name="itemType" id="itemType" aria-label="Default select example">
-                            <option selected>Gadget</option>
-                            <option name="food" value="food">Food</option>
-                            <option name="money" value="money">Money</option>
-                            <option name="important documents" value="important documents">Important Documents</option>
+                            <select class="form-select" name="itemType" id="itemType" aria-label="Default select example">
+                            <% itemList.forEach(item => { %>
+                                <option value="<%= item.item %>"><%= item.item %></option>
+                            <% }) %>
                             </select>
                         <small class="form-text">Error Message</small>
                     </div>
@@ -148,18 +150,10 @@
                         <small class="form-text">Error Message</small>
                     </div>
 
-                    <div class="form-item-radio">
-                        <label for="">Complainant</label>
-                        <input type="radio" name="complainant" value="me" id="me" class="form-check-input">
-                        <label for="me" class="form-check-label">Me</label>
-                        
-                        <input type="radio" name="complainant" id="someone-else" class="form-check-input" value="someone else">
-                        <label for="someone-else" class="form-check-label">Someone Else</label>
-                        <small class="form-text">Error Message</small>
-                    </div>
+                    
 
                     <div class="form-item">
-                        <label for="attach-evidence" class="form-label" id="evidence" name="evidence">Attach Item Image/s</label>
+                        
                         <input type="file" name="evidence" class="filepond" id="evidence" multiple />
                         <small class="form-text">Error Message</small>
                     </div>

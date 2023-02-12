@@ -22,6 +22,32 @@ const preslname = document.getElementById('edit-TODA-pres-lastname')
 const prescontact = document.getElementById('edit-TODA-contact')
 const todaid = document.getElementById('toda-id')
 
+//ADD TODA POPUP INPUT FIELDS
+const submit_new_toda = document.getElementById('submit-toda-btn')
+const add_toda = document.getElementById('add-toda');
+const add_pres_fname = document.getElementById('add-pres-fname');
+const add_pres_lname = document.getElementById('add-pres-lname');
+const add_pres_contact = document.getElementById('add-pres-contact');
+
+//ADD DRIVER
+
+//UPLOAD EXCEL POPUP
+const excel = document.getElementById('excel')
+const upload_excel = document.getElementById('upload-excel')
+
+
+import {ValidateNum} from '/js/validate.js'
+
+
+function errorMsg(input, msg) {
+  const formItem = input.parentElement;
+  const small = formItem.querySelector('small');
+  
+  small.innerHTML = msg;
+  formItem.className = 'form-item error'
+  input.className = 'form-control error';
+}
+
 
 
 const editInfo = (e) =>{
@@ -64,6 +90,7 @@ const editTODAInfo = (e) =>{
   }
 } 
 
+//CREATE SEPARARE JS SOLELY FOR THIS POPUP ERROR
 function errorPopout() {
 error_popup.style.display = 'block';
 mask.style.visibility = 'visible';
@@ -80,6 +107,15 @@ function ClosePopup() {
   for(var popup of popups) {
     popup.style.display = 'none';
   }
+
+  const inputs = document.getElementsByClassName('form-control');
+
+  //REMOVES THE ERROR CLASS
+  for(var input of inputs) {
+    if(input.classList.contains('error')) {
+      input.classList.remove('error');
+    }
+  }
 }
 
 function AddToda() {
@@ -90,6 +126,28 @@ function AddToda() {
 
   for(var x of x_btns) {
     x.addEventListener('click', ClosePopup);
+  }
+
+  submit_new_toda.addEventListener('click', AddTodaValidation);
+}
+
+function AddTodaValidation() {
+
+  //ADD TODA (SA TODA)
+  if(add_toda.value === "") {
+    Err(add_toda);
+  }
+
+  if(add_pres_fname.value === "") {
+    Err(add_pres_fname);
+  }
+
+  if(add_pres_lname.value === "") {
+    Err(add_pres_lname);
+  }
+
+  if(add_pres_contact.value === "") {
+    ValidateNum(add_pres_contact);
   }
 }
 
@@ -102,16 +160,22 @@ function UploadExcel() {
   for(var x of x_btns) {
     x.addEventListener('click', ClosePopup);
   }
+
+  upload_excel.addEventListener('click', ValidateExcel)
 }
 
-
-function ClosePopup() {
-  mask.style.visibility = 'hidden';
-  
-
-  for(var popup of popups) {
-    popup.style.display = 'none';
+function ValidateExcel() {
+  if(excel.value === "") {
+    Err(excel);
   }
+}
+
+function Success(input) {
+  input.className = 'form-control success';
+}
+
+function Err(input) {
+  input.className = 'form-control error';  
 }
 
 add.addEventListener('click', AddToda);

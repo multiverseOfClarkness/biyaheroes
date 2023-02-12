@@ -10,8 +10,7 @@ const violationReportsSchema = new Schema({
         required: [true, 'Body number is required']
     },
     driverName : {
-        type: String,
-        required: [true, 'Driver name is required']
+        type: String
     },
     TODA : {
         type: String,
@@ -19,7 +18,6 @@ const violationReportsSchema = new Schema({
     },
     driverDescription : {
         type: String,
-        required: [true, 'Driver description is required']
     },
     violation : {
         type: String,
@@ -33,13 +31,7 @@ const violationReportsSchema = new Schema({
         type: String,
         required: [true, 'Additional description about the incident is required']
     },
-    complainant : {
-        type: String,
-        required: [true, 'Identity of complainant is required']
-    },
-    evidence : {
-        type: Buffer
-    },
+    evidence : [Buffer],
     evidenceType: {
         type: String
     },
@@ -54,8 +46,19 @@ const violationReportsSchema = new Schema({
 }, {timestamps: true}) 
 
 violationReportsSchema.virtual('evidenceImagePath').get(function(){
-    if(this.evidence != null && this.evidenceType != null){
-        return `data:${this.evidenceType};charset=utf-8;base64,${this.evidence.toString('base64')}`
+    if(this.evidence != null){
+        return `data:${this.evidenceType};charset=utf-8;base64,${this.evidence[0].toString('base64')}`
+    }
+})
+violationReportsSchema.virtual('evidenceImagePathArray').get(function(){
+    if(this.evidence != null){
+        const array = []
+        const vv = this.evidence
+        
+        vv.forEach(element => {
+            array.push(`data:${this.evidenceType};charset=utf-8;base64,${element.toString('base64')}`)
+        })
+        return array
     }
 })
 

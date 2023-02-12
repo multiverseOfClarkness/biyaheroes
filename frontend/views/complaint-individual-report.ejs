@@ -80,9 +80,9 @@
             <div class="details">
                 <div class="box complainant">
                     <p class="detail-title">Complainant Details</p>
-                    <input class="detail-item" type="text" value="<%= violation.author.id %> ">
+                    <input class="detail-item" type="hidden" value="<%= violation.author.id %> ">
                     <p id="complainantname" class="detail-item"><%= violation.author.fname %> <%= violation.author.lname %></p>
-                    <p class="detail-item"><%= violation.author.phone %></p>
+                    <p class="detail-item">+63<%= violation.author.phone %></p>
                 </div>
                 <div class="box report">
                     <p class="detail-title">Driver & Report Details</p>
@@ -132,7 +132,9 @@
 
         <h5>Attached Evidence/s</h5>
         <div class="evidence">
-            <img src="<%= violation.evidenceImagePath %>" alt="">
+            <img src="<%= violation.evidenceImagePathArray[0] %>" alt="">
+            <img src="<%= violation.evidenceImagePathArray[1] %>" alt="">
+            <img src="<%= violation.evidenceImagePathArray[2] %>" alt="">
         </div>
     </div>
     <% }) %> 

@@ -3,6 +3,7 @@ const commonUsers = require('../models/users')
 const admin = require('../models/adminUsers')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const logs = require('../models/logs')
 
 
 const getLoginForm = (req, res) => {
@@ -31,6 +32,13 @@ const login = async (req, res) => {
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
                 res.cookie('token', accessToken, {httpOnly: true})
+
+                logs.create({
+                    author: `${user1.fname} ${user1.lname}`,
+                    section: 'Index',
+                    action: 'Logged in.',
+                    userID: `${user1.id}`
+                  })
                 return res.redirect('/commuter/dashboard')
                 
             }else{
@@ -46,8 +54,20 @@ const login = async (req, res) => {
                 const accessToken = generateAccessToken(user)
                 res.cookie('token', accessToken, {httpOnly: true})
                 if (user2.role === 'admin') {
+                    logs.create({
+                        author: `${user2.fname} ${user2.lname}`,
+                        section: 'Index',
+                        action: 'Logged in.',
+                        userID: `${user2.id}`
+                      })
                     return res.redirect('/admin/dashboard')
                 } else {
+                    logs.create({
+                        author: `${user2.fname} ${user2.lname}`,
+                        section: 'Index',
+                        action: 'Logged in.',
+                        userID: `${user2.id}`
+                      })
                     return res.redirect('/SA/dashboard')
                 }
                 

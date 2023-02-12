@@ -39,6 +39,7 @@ function validate() {
     const driverDescVal = driverDesc.value.trim();
     const dateVal = date.value.trim();
     const itemDescriptionVal = itemDescription.value.trim();
+    const itemTypeVal = itemType.value.trim();
     
     if(bodyNumVal === '') {
         errorMsg(bodyNum, 'Please provide body number.');
@@ -51,12 +52,6 @@ function validate() {
         successMsg(bodyNum);
     }
     
-    if(driverNameVal === '') {
-        errorMsg(driverName, `Please provide driver's name or alias.`);
-        return valid = false
-    } else {
-        successMsg(driverName);
-    }
 
     if(todaVal === `Select the Driver's TODA`) {
         errorMsg(toda, `Please choose the toda.`)
@@ -65,19 +60,12 @@ function validate() {
         successMsg(toda);
     }
 
-    if(driverDescVal === '') {
-        errorMsg(driverDesc, 'Please provide further information.');
+    if(itemTypeVal === '') {
+        errorMsg(itemType, 'Please choose type of violation.');
         return valid = false
     } else {
-        successMsg(driverDesc);
+        successMsg(itemType);
     }
-
-    // if(itemTypeVal === 'Select Type of Violation') {
-    //     errorMsg(violation, 'Please choose type of violation.');
-    //     return valid = false
-    // } else {
-    //     successMsg(violation);
-    // }
     
     if(dateVal === '') {
         errorMsg(date, 'Please provide date of incident.');
@@ -93,14 +81,6 @@ function validate() {
         successMsg(itemDescription);
     }
 
-    if(complainantMe.checked){
-        successMsgRadioButton(complainantMe)
-    }else if (complainantSomeoneElse.checked){
-        successMsgRadioButton(complainantSomeoneElse)
-    }else {
-       errorMsgRadioButton(complainantSomeoneElse, 'Please indicate complainant.')
-       return valid = false
-    }
 
 }
 
