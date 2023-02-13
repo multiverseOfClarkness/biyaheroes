@@ -4,6 +4,7 @@ const XLSX = require("xlsx");
 const logs = require('../models/logs')
 const jwtdecode = require("jwt-decode");
 const admin = require('../models/adminUsers')
+const mongoose = require('mongoose')
 
 const getTODApage = async (req, res) => {
 todaModel.find({}, (err, todaModel) => {
@@ -132,11 +133,13 @@ const updateToda = async (req, res) => {
 
   const body = req.body
   const todaid = body.todaid
-  var id = mongoose.Types.ObjectId(todaid);
+  const id = mongoose.Types.ObjectId(todaid)
+  
   const presFname = body.firstname
   const presLname = body.lastname
   const presTODA = body.toda
   const presContact = body.contact
+  
   
   try {
     
@@ -144,18 +147,19 @@ const updateToda = async (req, res) => {
       presidentfname: presFname,
       presidentlname: presLname,
       TODA: presTODA,
-      phone: presContact
+      contact: presContact
     }, {new: true})
+
     logs.create({
-    author: `${currentUser.fname} ${currentUser.lname}`,
-    section: 'Admin / TODA',
-    action: 'Update TODA data.',
-    userID: `${currentUser.id}`
-  })
+      author: `${currentUser.fname} ${currentUser.lname}`,
+      section: 'Admin / TODA',
+      action: 'Update TODA data.',
+      userID: `${currentUser.id}`
+    })
+
     res.redirect('/admin/TODA')
   } catch (error) {
     getTodaPageAfterError(req, res)
-    console.log(error.message)
   }
 }
 

@@ -38,7 +38,7 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li>
-                        <a class="nav-link" href="/admin/complaints">Complaints</a>
+                        <a class="nav-link active" href="/admin/complaints">Complaints</a>
                     </li>
 
                     <li>
@@ -131,10 +131,16 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Attached Evidence/s</h5>
-        <div class="evidence">
-            <img src="<%= violation.evidenceImagePathArray[0] %>" alt="">
-            <img src="<%= violation.evidenceImagePathArray[1] %>" alt="">
-            <img src="<%= violation.evidenceImagePathArray[2] %>" alt="">
+        <div class="evidence-container evidence">
+            <div class="images">
+                <img src="<%= violation.evidenceImagePathArray[0] %>" class="evi" alt="">
+            </div>
+            <div class="images">
+                <img src="<%= violation.evidenceImagePathArray[1] %>" class="evi" alt="">
+            </div>
+            <div class="images">
+                <img src="<%= violation.evidenceImagePathArray[2] %>" class="evi" alt="">
+            </div>
         </div>
     </div>
     <% }) %> 

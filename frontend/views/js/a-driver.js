@@ -11,12 +11,7 @@ const mask = document.getElementById('page-mask');
 const edit_popup = document.getElementById('edit-popup');
 
 //ADD DRIVER
-const submit_driver = document.getElementById('submit-new-driver');
-const driver_fname = document.getElementById('fname');
-const driver_lname = document.getElementById('lname');
-const driver_bodyNum = document.getElementById('bodynum');
-const driver_contact = document.getElementById('contact');
-const driver_toda = document.getElementById('toda');
+
 
 //UPLOAD EXCEL POPUP
 const excel = document.getElementById('excel')
@@ -31,26 +26,7 @@ function errorMsg(input, msg) {
     input.className = 'form-control error';
   }
   
-  const editInfo = (e) =>{
-    var tds = e.getElementsByClassName('driver-data');
-    
-    edit_popup.style.display = 'block';
-    mask.style.visibility = 'visible';
   
-    const myArray = tds[0].innerHTML.trim().split(" ");
-    fname.setAttribute('value', myArray[0])
-    lname.setAttribute('value', myArray[1])
-    bodynum.setAttribute('value', tds[1].innerHTML.trim())
-    
-    contact.setAttribute('value', tds[2].innerHTML.trim().replace("+63", ""))
-    driverid.setAttribute('value', tds[3].innerHTML.trim())
-    
-    const x_btns = document.getElementsByClassName('close');
-  
-    for(var x of x_btns) {
-      x.addEventListener('click', ClosePopup);
-    }
-  } 
   
   const editTODAInfo = (e) =>{
     var tds = e.getElementsByClassName('TODA-data');
@@ -139,9 +115,9 @@ function errorMsg(input, msg) {
         Err(driver_bodyNum);
       }
   
-    if(driver_contact.value === "") {
-      ValidateNum(driver_contact);
-    }
+    
+    ValidateNum(driver_contact);
+    
   }
 
   function Success(input) {
@@ -152,9 +128,7 @@ function errorMsg(input, msg) {
     input.className = 'form-control error';  
   }
 
-for(var edit_btn of edit_btns) {
-    edit_btn.addEventListener('click', editInfo);
-  }
+
   
   for(var edit_button of edit_btns_toda) {
     edit_button.addEventListener('click', editTODAInfo);

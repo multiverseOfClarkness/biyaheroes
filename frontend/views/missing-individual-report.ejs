@@ -132,10 +132,16 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Attached Evidence/s</h5>
-        <div class="evidence">
-            <img src="<%= missing.evidenceImagePathArray[0] %>" alt="">
-            <img src="<%= missing.evidenceImagePathArray[1] %>" alt="">
-            <img src="<%= missing.evidenceImagePathArray[2] %>" alt="">
+        <div class="evidence-container evidence">
+            <div class="images">
+                <img src="<%= missing.evidenceImagePathArray[0] %>" class="evi" alt="">
+            </div>
+            <div class="images">
+                <img src="<%= missing.evidenceImagePathArray[1] %>" class="evi" alt="">
+            </div>
+            <div class="images">
+                <img src="<%= missing.evidenceImagePathArray[2] %>" class="evi" alt="">
+            </div>
         </div>
     </div>
     <% }) %> 

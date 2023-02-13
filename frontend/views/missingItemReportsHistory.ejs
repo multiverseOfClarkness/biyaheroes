@@ -55,7 +55,7 @@
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/commuter/fareCalculator">Fare Calculator</a>
+                        <a class="nav-link" href="/commuter/fareCalculator">Fare Meter</a>
                     </li>
 
                     <li>
@@ -79,15 +79,16 @@
     <div class="title">
         <h5>Missing Item Reports History</h5>
 
-        <div class="search">
-            <input type="text" class="form-control" placeholder="Search">
-            <img src="/images/search.svg">
+        <div id="filters" class="max-w-3xl">
+            <div class="search">
+                <input type="text" name="search" class="text-center" id="search" placeholder="Search">
+            </div>
         </div>
     </div>
 
         <table class="table table-hover text-center">
             <thead>
-                <tr>
+                <tr id="thead">
                     <th>Report ID</th>
                     <th>Body No.</th>
                     <th>Driver's Name</th>
@@ -97,20 +98,24 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="tbody">
                 <% missingItemList.forEach(missingItem => { %>  
-                    <tr>
-                        <th scope="row" data-label="Report ID"> <%= missingItem._id %></th>
+                    <tr class="item">
+                        <td data-label="TODA" style="font-weight: bold;" class="report-id" class="id"><%= missingItem._id %></td>
                         <td data-label="Body No."><%= missingItem.bodyNum %></td>
                         <td data-label="Driver's Name"><%= missingItem.driverName %></td>
                         <td data-label="TODA"><%= missingItem.TODA %></td>
                         <td data-label="Date"><%= missingItem.dateOfIncident %></td>
-                        <td data-label="Status"><%= missingItem.status %> </td>
+                        <td data-label="Status"><%= missingItem.status %></td>
                     </tr>
                 <% }) %>  
 
             </tbody>
         </table>
+
+        <div class="pagination d-flex justify-content-end justify-center my-5">
+            <div class="page" id="page"></div>
+        </div>
     </section>
 
     <footer>
@@ -119,6 +124,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="/js/toda-nav"></script>
 
 </body>
 </html>

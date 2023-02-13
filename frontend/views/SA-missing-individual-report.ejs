@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/popup-modal.css">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/admin-report-view.css">
+    <link rel="stylesheet" href="/css/popup-modal.css">
     
 </head>
 
@@ -43,7 +43,7 @@
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/SA/missing">Missing Items</a>
+                        <a class="nav-link active" href="/SA/missing">Missing Items</a>
                     </li>
 
                     <li>
@@ -146,8 +146,16 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Attached Evidence/s</h5>
-        <div class="evidence">
-            <img src="<%= missing.evidenceImagePath %>" alt="">
+        <div class="evidence-container evidence">
+            <div class="images">
+                <img src="<%= missing.evidenceImagePathArray[0] %>" class="evi" alt="">
+            </div>
+            <div class="images">
+                <img src="<%= missing.evidenceImagePathArray[1] %>" class="evi" alt="">
+            </div>
+            <div class="images">
+                <img src="<%= missing.evidenceImagePathArray[2] %>" class="evi" alt="">
+            </div>
         </div>
     </div>
     <% }) %> 

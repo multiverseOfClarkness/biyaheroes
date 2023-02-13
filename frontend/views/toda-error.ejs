@@ -98,6 +98,7 @@
 
             <tbody>
                 <% todaList.forEach(toda =>{ %> 
+                    
                     <tr onclick="editTODAInfo(this)">
                         <th scope="row" data-label="TODA"><%= toda.TODA %></th>
                         <td class="TODA-data" data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
@@ -109,7 +110,6 @@
                             <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda">
                             
                         </td>
-                        
                         <form method="post" action="/admin/TODA/<%= toda.id %>?_method=PATCH">
                             <td data-label="Delete">
                                 
@@ -156,7 +156,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Edit</h5>
-        <form method="post" action="/admin/TODA/edit?_method=PATCH">
+        <form method="post" action="/admin/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="toda-id" name="todaid">
             <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
@@ -185,9 +185,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
     <!-- <script src="/js/admin-toda.js"></script> -->
+    <script src="/js/editInfo_copy.js"></script>
     <script type="module" src="/js/a-toda.js"></script>
     <script src="/js/search.js"></script>
     <script src="/js/errorPopout.js"></script>
+    
+    
     
 </body>
 </html>

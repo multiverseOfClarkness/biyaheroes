@@ -96,15 +96,13 @@
 
             <tbody>
                 <% todaList.forEach(toda =>{ %> 
-                    <tr onclick="editTODAInfo(this)">
-                        <th scope="row" data-label="TODA"><%= toda.TODA %></th>
+                    <tr onclick="editTODAInfo(this)" >
+                        <th style="font-weight: bold;" data-label="TODA"><%= toda.TODA %></th>
                         <td class="TODA-data" data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
                         <td class="TODA-data" data-label="Contact">+63<%= toda.contact %></td>
-                        <td class="TODA-data" data-label="Contact" style="display: none;" >
-                            <%= toda.id %>
-                        </td>
+                        <td class="TODA-data" style="display: none;"><%= toda.id %></td>
                         <td data-label="Edit">
-                            <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda">
+                            <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda" id="editt">
                             
                         </td>
                         
@@ -154,7 +152,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Edit</h5>
-        <form method="post" action="/admin/TODA/edit?_method=PATCH">
+        <form method="post" action="/admin/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="toda-id" name="todaid">
             <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
@@ -179,6 +177,7 @@
     <!-- <script src="/js/admin-toda.js"></script> -->
     <script type="module" src="/js/a-toda.js"></script>
     <script src="/js/search.js"></script>
+    <script src="/js/editInfo.js"></script>
     
 </body>
 </html>

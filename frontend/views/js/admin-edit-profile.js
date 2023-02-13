@@ -20,31 +20,34 @@ dataUrl.style.display = 'none'
 const dataUrlVal = dataUrl.value.trim()
 
 const btn = document.querySelectorAll('#btn');
+document.addEventListener('DOMContentLoaded', function() {
+  //FILEPOND SETUP
+  FilePond.registerPlugin(
+    FilePondPluginImagePreview,
+    FilePondPluginImageCrop,
+    FilePondPluginImageResize,
+    FilePondPluginFileEncode
+  );
 
-//FILEPOND SETUP
-FilePond.registerPlugin(
-  FilePondPluginImagePreview,
-  FilePondPluginImageCrop,
-  FilePondPluginImageResize,
-  FilePondPluginFileEncode
-);
+  const pond = FilePond.create(profile);
+  pond.addFile(dataUrlVal)
+  pond.setOptions({
+    imageCropAspectRatio: '1:1',
+    imageResizeTargetWidth: 180,
+    imageResizeTargetHeight: 180,
+    stylePanelLayout: 'compact circle',
+    styleLoadIndicatorPosition: 'center',
+    styleProgressIndicatorPosition: 'center',
+    styleButtonRemoveItemPosition: 'center',
+    styleButtonProcessItemPosition: 'center',
+    allowBrowse: false,
+    allowDrop: false,
+    allowPaste: false,
+    allowRemove: true
+  });
 
-const pond = FilePond.create(profile);
-pond.addFile(dataUrlVal)
-pond.setOptions({
-  imageCropAspectRatio: '1:1',
-  imageResizeTargetWidth: 180,
-  imageResizeTargetHeight: 180,
-  stylePanelLayout: 'compact circle',
-  styleLoadIndicatorPosition: 'center',
-  styleProgressIndicatorPosition: 'center',
-  styleButtonRemoveItemPosition: 'center',
-  styleButtonProcessItemPosition: 'center',
-  allowBrowse: false,
-  allowDrop: false,
-  allowPaste: false,
-  allowRemove: true
-});
+})
+
 
 function EditProfile() {
 
@@ -150,86 +153,12 @@ function errorPopout() {
     }
   }
 
-function FormValidation() {
 
-  const firstname = document.getElementById('edit-firstname');
-  const lastname = document.getElementById('edit-lastname');
-  const address = document.getElementById('edit-address');
-  const birthday = document.getElementById('edit-birthday');
-  const phone = document.getElementById('edit-phone');
-  const email = document.getElementById('edit-email');
-  const current_pass = document.getElementById('current-pass');
-  const new_pass = document.getElementById('new-pass');
-  const retype_pass = document.getElementById('retype-pass');
-
-  if(firstname.value === '') {
-    Err(firstname);
-  } else {
-    Success(firstname);
-  }
-
-  if(lastname.value === '') {
-    Err(lastname);
-  } else {
-    Success(lastname);
-  }
-
-  if(address.value === '') {
-    Err(address);
-  } else {
-    Success(address);
-  }
-
-  if(birthday.value === '') {
-    Err(birthday);
-  } else {
-    Success(birthday);
-  }
-
-  if(phone.value === '') {
-    Err(phone);
-  } else {
-    Success(phone);
-  }
-
-  if(email.value === '') {
-    Err(email);
-  } else {
-    Success(email);
-  }
-
-  if(current_pass.value === '') {
-    Err(current_pass);
-  } else {
-    Success(current_pass);
-  }
-
-  if(new_pass.value === '') {
-    Err(new_pass);
-  } else {
-    Success(new_pass);
-  }
-
-  if(retype_pass.value === '') {
-    Err(retype_pass);
-  } else {
-    Success(retype_pass);
-  }
-}
-
-function Success(input) {
-  input.className = 'form-control success';
-}
-
-function Err(input) {
-  input.className = 'form-control error';  
-}
 
 edit_profile.addEventListener('click', EditProfile);
 edit_personal.addEventListener('click', EditPersonal);
 edit_account.addEventListener('click', EditAccount);
 change_pass.addEventListener('click', ChangePassword);
 
-for(var b of btn) {
-  b.addEventListener('click', FormValidation);
-}
+
+

@@ -117,7 +117,7 @@
                 
                 <input type="hidden" id="close-button" value="/images/x-lg.svg">
                 <% driverList.forEach(driver => { %> 
-                    <tr onclick="editInfo(this)">
+                    <tr onclick="editDriverInfo(this)">
                         <div>
                             <input type="hidden" class="driversArray" value="<%= JSON.stringify(driver) %>">            
                             
@@ -143,9 +143,7 @@
                             +63<%= driver.phone %>
                             
                         </td>
-                        <td class="driver-data" data-label="Contact" style="display: none;" >
-                            <%= driver.id %>
-                        </td>
+                        <td class="driver-data" data-label="Contact" style="display: none;" ><%= driver.id %></td>
 
                         <td  data-label="Edit">
                             <input type="image" src="/images/edit.svg" class="table-btn edit-btn">
@@ -212,7 +210,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Edit</h5>
-        <form method="post" action="/admin/drivers/edit?_method=PATCH">
+        <form method="post" action="/admin/drivers/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="driver-id" name="driverid">
             <input type="text" name="firstname" id="edit-driver-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-driver-lastname" placeholder="Last Name" class="form-control" required>
@@ -222,10 +220,9 @@
                 <% }) %> 
             </select>
             <input type="text" name="bodynum" id="edit-driver-bodynum" class="form-control" required>
-            <div class="form-item">
-                <input type="text" name="contact" id="edit-driver-contact" placeholder="Contact Number" class="form-control" required>
-                <!-- <small id="error-msg">Error Message</small> -->
-            </div>
+            
+            <input type="text" name="contact" id="edit-driver-contact" placeholder="Contact Number" class="form-control" required>
+            
             
 
             <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
@@ -242,6 +239,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
     <script type="module" src="/js/a-driver.js"></script>
     <script src="/js/search.js"></script>
+    <script src="/js/editDriverInfo.js"></script>
 
 </body>
 </html>

@@ -47,6 +47,12 @@ footer {
     margin: .5em 0;
 }
 
+#search {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+
 img{
     filter: invert(39%) sepia(99%) saturate(2327%) hue-rotate(2deg) brightness(101%) contrast(106%);
     margin: 0 1em;
@@ -86,6 +92,14 @@ p {
 
 h5 {
     color: var(--secondary-clr);
+}
+thead {
+    background-color: var(--tertiary-clr);
+    color: #FFFFFF;
+}
+
+td {
+    padding: 5px;
 }
 
 @media (min-width:320px) and (max-width:992px) {

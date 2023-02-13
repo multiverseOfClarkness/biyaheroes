@@ -7,7 +7,7 @@ const popups = document.getElementsByClassName('popup-box');
 const add_popup = document.getElementById('add-popup');
 const upload_popup = document.getElementById('upload-popup');
 const mask = document.getElementById('page-mask');
-const edit_popup = document.getElementById('edit-popup');
+
 
 
 //ADD TODA POPUP INPUT FIELDS
@@ -54,26 +54,6 @@ const editInfo = (e) =>{
   }
 } 
 
-
-
-const editTODAInfo = (e) =>{
-  var tds = e.getElementsByClassName('TODA-data');
-  console.log('clicked')
-  edit_popup.style.display = 'block';
-  mask.style.visibility = 'visible';
-
-  const myArray = tds[0].innerHTML.trim().split(" ");
-  presfname.setAttribute('value', myArray[0])
-  preslname.setAttribute('value', myArray[1]) 
-  prescontact.setAttribute('value', tds[1].innerHTML.trim().replace("+63", ""))
-  todaid.setAttribute('value', tds[2].innerHTML.trim())
-  //
-  const x_btns = document.getElementsByClassName('close');
-
-  for(var x of x_btns) {
-    x.addEventListener('click', ClosePopup);
-  }
-}
 
 function ClosePopup() {
     mask.style.visibility = 'hidden';

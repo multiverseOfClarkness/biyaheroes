@@ -212,7 +212,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Edit</h5>
-        <form method="post" action="/admin/drivers/edit?_method=PATCH">
+        <form method="post" action="/admin/drivers/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="driver-id" name="driverid">
             <input type="text" name="firstname" id="edit-driver-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-driver-lastname" placeholder="Last Name" class="form-control" required>
