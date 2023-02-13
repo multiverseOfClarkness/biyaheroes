@@ -7,6 +7,16 @@ const edit_btns = document.getElementsByTagName('small');
 const error_popup = document.getElementById('error-popup');
 const mask = document.getElementById('page-mask');
 
+// SUBMIT BUTTON
+const submit = document.getElementById('create-new-admin');
+
+//NEW ADMIN FORM INPUT FIELDS
+const new_admin_fname = document.getElementById('new-admin-fname');
+const new_admin_lname = document.getElementById('new-admin-lname');
+const new_admin_position = document.getElementById('new-admin-position');
+const new_admin_email = document.getElementById('new-admin-email');
+const new_admin_password = document.getElementById('new-admin-password');
+
 function errorPopout() {
   error_popup.style.display = 'block';
   mask.style.visibility = 'visible';
@@ -26,9 +36,41 @@ function NewAdmin() {
     for(var x of x_btns) {
       x.addEventListener('click', ClosePopup);
     }
+
+    //ADD EVENT LISTENER TO THE SUBMIT BUTTON INSIDE THE POPUP
+    submit.addEventListener('click', AdminValidation);
 }
 
+function AdminValidation() {
 
+  if(new_admin_fname.value === '') {
+    Err(new_admin_fname);
+  }
+
+  if(new_admin_lname.value === '') {
+    Err(new_admin_lname);
+  }
+
+  if(new_admin_position.value === '') {
+    Err(new_admin_position);
+  }
+
+  if(new_admin_email.value === '') {
+    Err(new_admin_email);
+  }
+
+  if(new_admin_password.value === '') {
+    Err(new_admin_password);
+  }
+}
+
+function Success(input) {
+  input.className = 'form-control success';
+}
+
+function Err(input) {
+  input.className = 'form-control error';  
+}
 
 function ClosePopup() {
     mask.style.visibility = 'hidden';
@@ -36,14 +78,6 @@ function ClosePopup() {
     for(var popup of popups) {
       popup.style.display = 'none';
     }
-}
-
-// for(var admin of admins) {
-//     admin.addEventListener('click', EditAdmin)
-// }
-
-for(var edit of edit_btns) {
-  edit.addEventListener('click', EditAdmin)
 }
 
 add_btn.addEventListener('click', NewAdmin);

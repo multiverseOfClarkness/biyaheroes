@@ -140,7 +140,7 @@
                     </div>
     
                     <div class="profile-item">
-                        <p class="user-info" id="email"><span>E-mail: </span><%= admin.email %> </p>
+                        <p class="user-info" id="sa-admin-email"><span>E-mail: </span><%= admin.email %> </p>
                     </div>
     
                     <div class="profile-item password-field">
@@ -162,10 +162,11 @@
 
         <h5>Personal Information</h5>
         <form method="post" action="/SA/profile/<%= admin.id %>?_method=PATCH">
+            <!-- CHANGE ID OF INPUT FIELDS -->
             <input type="text" name="fname" id="first-name" placeholder="First Name" value="<%= admin.fname %> " class="form-control" required>
             <input type="text" name="lname" id="last-name" placeholder="Last Name" value="<%= admin.lname %> " class="form-control" required>
-            
-            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
+            <!-- CHANGE ID OF BUTTON -->
+            <button type="submit" class="btn btn-primary" id="save-personal-btn">Save Changes</button>
         </form>
     </div>
 
@@ -174,11 +175,13 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Account Information</h5>
+        <!-- ADD ID TO INPUT FIELDS -->
         <form form method="post" action="/SA/profile/<%= admin.id %>?_method=PATCH">
             <input type="number" name="phone" id="phone" placeholder="Phone Number" class="form-control" value="<%= admin.phone %>" required>
             <input type="email" name="email" id="email" placeholder="Email" class="form-control" value="<%= admin.email %>" required>
 
-            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
+            <!-- CHANGE ID OF BUTTON -->
+            <button type="submit" class="btn btn-primary" id="save-acc-btn">Save Changes</button>
         </form>
     </div>
 
@@ -192,7 +195,7 @@
             <input type="password" name="newPass" id="new-pass" placeholder="New Password" class="form-control" required>
             <input type="password" name="verifiedNewPass" id="retype-pass" placeholder="Re-type Password" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
+            <button type="submit" class="btn btn-primary" id="save-pass-btn">Save Changes</button>
         </form>
     </div>
     <% }) %>

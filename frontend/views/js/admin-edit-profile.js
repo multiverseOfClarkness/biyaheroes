@@ -19,7 +19,12 @@ const dataUrl = document.getElementById('dataUrl')
 dataUrl.style.display = 'none'
 const dataUrlVal = dataUrl.value.trim()
 
-const btn = document.querySelectorAll('#btn');
+const btn = document.querySelectorAll('.btn');
+
+//SUBMIT BUTTONS
+const save_personal = document.getElementById('save-personal-btn');
+const save_acc = document.getElementById('save-acc-btn');
+const save_pass = document.getElementById('save-pass-btn');
 
 //FILEPOND SETUP
 FilePond.registerPlugin(
@@ -116,51 +121,13 @@ function EditPersonal() {
   for(var x of x_btns) {
     x.addEventListener('click', ClosePopup);
   }
+
+  save_personal.addEventListener('click', ValidatePersonal);
 }
 
-function EditAccount() {
-  account_popup.style.display = 'block';
-  mask.style.visibility = 'visible';
-
-  const x_btns = document.getElementsByClassName('close');
-
-  for(var x of x_btns) {
-    x.addEventListener('click', ClosePopup);
-  }
-}
-
-function ChangePassword() {
-  password_popup.style.display = 'block';
-  mask.style.visibility = 'visible';
-
-  const x_btns = document.getElementsByClassName('close');
-
-  for(var x of x_btns) {
-    x.addEventListener('click', ClosePopup);
-  }
-}
-
-function errorPopout() {
-  error_popup.style.display = 'block';
-  mask.style.visibility = 'visible';
-  const x_btns = document.getElementsByClassName('close');
-  
-    for(var x of x_btns) {
-      x.addEventListener('click', ClosePopup);
-    }
-  }
-
-function FormValidation() {
-
-  const firstname = document.getElementById('edit-firstname');
-  const lastname = document.getElementById('edit-lastname');
-  const address = document.getElementById('edit-address');
-  const birthday = document.getElementById('edit-birthday');
-  const phone = document.getElementById('edit-phone');
-  const email = document.getElementById('edit-email');
-  const current_pass = document.getElementById('current-pass');
-  const new_pass = document.getElementById('new-pass');
-  const retype_pass = document.getElementById('retype-pass');
+function ValidatePersonal() {
+  const firstname = document.getElementById('first-name');
+  const lastname = document.getElementById('last-name');
 
   if(firstname.value === '') {
     Err(firstname);
@@ -173,23 +140,29 @@ function FormValidation() {
   } else {
     Success(lastname);
   }
+}
 
-  if(address.value === '') {
-    Err(address);
-  } else {
-    Success(address);
+function EditAccount() {
+  account_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+
+  const x_btns = document.getElementsByClassName('close');
+
+  for(var x of x_btns) {
+    x.addEventListener('click', ClosePopup);
   }
 
-  if(birthday.value === '') {
-    Err(birthday);
-  } else {
-    Success(birthday);
-  }
+  save_acc.addEventListener('click', ValidateAccount);
+}
+
+function ValidateAccount() {
+  const phone = document.getElementById('phone');
+  const email = document.getElementById('email');
 
   if(phone.value === '') {
     Err(phone);
   } else {
-    Success(phone);
+    ValidateNum(phone);
   }
 
   if(email.value === '') {
@@ -197,6 +170,35 @@ function FormValidation() {
   } else {
     Success(email);
   }
+}
+
+function ChangePassword() {
+  password_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+
+  const x_btns = document.getElementsByClassName('close');
+
+  for(var x of x_btns) {
+    x.addEventListener('click', ClosePopup);
+  }
+
+  save_pass.addEventListener('click', PassValidation);
+}
+
+function errorPopout() {
+  error_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+  const x_btns = document.getElementsByClassName('close');
+  
+    for(var x of x_btns) {
+      x.addEventListener('click', ClosePopup);
+    }
+  }
+
+function PassValidation() {
+  const current_pass = document.getElementById('current-pass');
+  const new_pass = document.getElementById('new-pass');
+  const retype_pass = document.getElementById('retype-pass');
 
   if(current_pass.value === '') {
     Err(current_pass);
@@ -213,7 +215,36 @@ function FormValidation() {
   if(retype_pass.value === '') {
     Err(retype_pass);
   } else {
-    Success(retype_pass);
+    // Success(retype_pass);
+    if(new_pass.value !== retype_pass.value) {
+      Err(retype_pass);
+    } else {
+      Success(retype_pass);
+    }
+  }
+}
+
+//HINDI KO NA NA-IMPORT AS MODULE KASI SAME LANG NAMAN CONTENT NG SA PROFILE AT ADMIN PROFILE
+function ValidateNum(inputNum) {
+
+  if(inputNum.value !== null && inputNum.value != "") {
+      var counter = inputNum.value;
+
+    if(counter.length !== 10) {
+        //CHECK MUNA IF SAKTONG 10 DIGITS YUNG INPUT
+        Err(inputNum);
+    } else {
+    //KINUKUHA YUNG FIRST DIGIT NG INPUT
+      var firstDigit = counter.slice(0,1);
+      
+      if(parseInt(firstDigit) !== 9) {
+          Err(inputNum);
+      } else {
+        Success(inputNum);
+      }
+    }
+  } else {
+      Err(inputNum);
   }
 }
 
@@ -229,7 +260,3 @@ edit_profile.addEventListener('click', EditProfile);
 edit_personal.addEventListener('click', EditPersonal);
 edit_account.addEventListener('click', EditAccount);
 change_pass.addEventListener('click', ChangePassword);
-
-for(var b of btn) {
-  b.addEventListener('click', FormValidation);
-}
