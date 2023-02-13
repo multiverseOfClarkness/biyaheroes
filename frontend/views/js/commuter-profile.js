@@ -13,12 +13,39 @@ const personal_popup = document.getElementById('personal-popup');
 const account_popup = document.getElementById('account-popup');
 const password_popup = document.getElementById('password-popup');
 const mask = document.getElementById('page-mask');
+const phone = document.getElementById('edit-phone')
 
 const dataUrl = document.getElementById('dataUrl')
 const profileImage = document.getElementById('profileImage')
 
 const error_popup = document.getElementById('error-popup');
 const btn = document.querySelectorAll('#btn');
+
+function ValidateNum() {
+  let valid = true
+  if(phone.value !== null && phone.value != "") {
+      var counter = phone.value;
+    
+    if(counter.length !== 10) {
+        //CHECK MUNA IF SAKTONG 10 DIGITS YUNG INPUT
+        Err(phone);
+        return valid = false
+    } else {
+    //KINUKUHA YUNG FIRST DIGIT NG INPUT
+      var firstDigit = counter.slice(0,1);
+      
+      if(parseInt(firstDigit) !== 9) {
+          Err(phone);
+          return valid = false
+      } else {
+        Success(phone);
+      }
+    }
+  } else {
+      Err(phone);
+      return valid = false
+  }
+}
 
 //FILEPOND SETUP
 FilePond.registerPlugin(
@@ -155,63 +182,69 @@ FilePond.registerPlugin(
     const lastname = document.getElementById('edit-lastname');
     const address = document.getElementById('edit-address');
     const birthday = document.getElementById('edit-birthday');
-    const phone = document.getElementById('edit-phone');
     const email = document.getElementById('edit-email');
     const current_pass = document.getElementById('current-pass');
     const new_pass = document.getElementById('new-pass');
     const retype_pass = document.getElementById('retype-pass');
 
+    let valid = true
+
     if(firstname.value === '') {
       Err(firstname);
+      return valid = false
     } else {
       Success(firstname);
     }
 
     if(lastname.value === '') {
       Err(lastname);
+      return valid = false
     } else {
       Success(lastname);
     }
 
     if(address.value === '') {
       Err(address);
+      return valid = false
     } else {
       Success(address);
     }
 
     if(birthday.value === '') {
       Err(birthday);
+      return valid = false
     } else {
       Success(birthday);
     }
 
-    if(phone.value === '') {
-      Err(phone);
-    } else {
-      Success(phone);
-    }
-
     if(email.value === '') {
       Err(email);
+      return valid = false
     } else {
       Success(email);
     }
 
     if(current_pass.value === '') {
       Err(current_pass);
+      return valid = false
     } else {
       Success(current_pass);
     }
 
     if(new_pass.value === '') {
       Err(new_pass);
+      return valid = false
     } else {
       Success(new_pass);
     }
 
     if(retype_pass.value === '') {
       Err(retype_pass);
-    } else {
+      return valid = false
+    } else if(retype_pass.value !== new_pass.value){
+      Err(retype_pass);
+      return valid = false
+    }else {
       Success(retype_pass);
     }
   }
@@ -228,6 +261,7 @@ FilePond.registerPlugin(
   edit_personal.addEventListener('click', EditPersonal);
   edit_account.addEventListener('click', EditAccount);
   change_pass.addEventListener('click', ChangePassword);
+
 
   for(var b of btn) {
     b.addEventListener('click', FormValidation);

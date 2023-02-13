@@ -1,10 +1,13 @@
 const edit_popup = document.getElementById('edit-popup');
-
+const mask = document.getElementById('page-mask');
+const popups = document.getElementsByClassName('popup-box');
 
 const presfname = document.getElementById('edit-TODA-pres-firstname')
 const preslname = document.getElementById('edit-TODA-pres-lastname')
 const prescontact = document.getElementById('edit-TODA-contact')
 const todaid = document.getElementById('toda-id')
+
+const add_pres_contact = document.getElementById('add-pres-contact');
 
 
 
@@ -23,9 +26,9 @@ const editTODAInfo = (e) =>{
     //
     const x_btns = document.getElementsByClassName('close');
   
-    for(var x of x_btns) {
-      x.addEventListener('click', ClosePopup);
-    }
+    // for(var x of x_btns) {
+    //   x.addEventListener('click', window.location.reload())
+    // }
   }
 
 
@@ -43,6 +46,33 @@ const editTODAInfo = (e) =>{
       if(input.classList.contains('error')) {
         input.classList.remove('error');
       }
+    }
+  }
+
+  function ValidateNumAdd() {
+    
+    let valid = true
+    if(add_pres_contact.value !== null && add_pres_contact.value != "") {
+        var counter = add_pres_contact.value;
+      
+      if(counter.length !== 10) {
+          //CHECK MUNA IF SAKTONG 10 DIGITS YUNG INPUT
+          Err(add_pres_contact);
+          return valid = false
+      } else {
+      //KINUKUHA YUNG FIRST DIGIT NG INPUT
+        var firstDigit = counter.slice(0,1);
+        
+        if(parseInt(firstDigit) !== 9) {
+            Err(add_pres_contact);
+            return valid = false
+        } else {
+          Success(add_pres_contact);
+        }
+      }
+    } else {
+        Err(add_pres_contact);
+        return valid = false
     }
   }
 

@@ -132,15 +132,12 @@
 
         <h5>Attached Evidence/s</h5>
         <div class="evidence-container evidence">
-            <div class="images">
-                <img src="<%= violation.evidenceImagePathArray[0] %>" class="evi" alt="">
-            </div>
-            <div class="images">
-                <img src="<%= violation.evidenceImagePathArray[1] %>" class="evi" alt="">
-            </div>
-            <div class="images">
-                <img src="<%= violation.evidenceImagePathArray[2] %>" class="evi" alt="">
-            </div>
+            <% for(let i = 0; i < violation.evidenceImagePathArray.length; i++){ %>
+                <div class="images">
+                    <img src="<%= violation.evidenceImagePathArray[i] %>" class="evi" alt="">
+                </div>
+            <% } %>
+                
         </div>
     </div>
     <% }) %> 

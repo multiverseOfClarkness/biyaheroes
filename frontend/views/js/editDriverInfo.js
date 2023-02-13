@@ -27,12 +27,8 @@ const editDriverInfo = (e) =>{
   
   driver_contact.setAttribute('value', tds[2].innerHTML.trim().replace("+63", ""))
   driverid.setAttribute('value', tds[3].innerHTML.trim())
-  
-  const x_btns = document.getElementsByClassName('close');
 
-  for(var x of x_btns) {
-    x.addEventListener('click', ClosePopup);
-  }
+  
 } 
 
 

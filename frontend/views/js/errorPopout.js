@@ -1,6 +1,5 @@
 const error_popup = document.getElementById('error-popup');
-const mask = document.getElementById('page-mask');
-const popups = document.getElementsByClassName('popup-box');
+
 
 const errorPopout = () => {
     error_popup.style.display = 'block';

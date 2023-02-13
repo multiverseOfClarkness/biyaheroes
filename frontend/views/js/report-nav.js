@@ -109,19 +109,19 @@ function setHTML(items) {
 
   //previous button
   let paginationHTML = ""
-  paginationHTML += `<button ${currentPage === 1 && 'disabled'} class=" ${currentPage === 1 ? 'cursor-not-allowed' : 'prev'} relative inline-flex items-center px-2 py-2  mx-1 shadow rounded rounded-l-md border border-primary bg-white text-sm font-medium text-blue-500 hover:bg-blue">Previous</button>`
+  paginationHTML += `<button ${currentPage === 1 && 'disabled'} class=" ${currentPage === 1 ? 'cursor-not-allowed' : 'prev'} relative inline-flex items-center px-2 py-2 mx-1 rounded rounded-l-md text-sm font-medium btn btn-secondary">Previous</button>`
 
   //method for the current page
   pages.forEach(page => {
     if (currentPage === page) {
-      paginationHTML += `<button class="z-10 bg-indigo-50 border-primary text-indigo-600 relative inline-flex justify-content-end items-center px-3 py-2 mx-1 shadow rounded border text-sm font-medium" page="${page}" ${currentPage === page}>${page}</button>`
+      paginationHTML += `<button class="btn btn-thirtiary z-10 relative inline-flex justify-content-end items-center px-3 py-2 mx-1 shadow rounded text-sm font-medium" page="${page}" ${currentPage === page}>${page}</button>`
     } else {
-      paginationHTML += `<button class="page bg-white border-primary text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-3 py-2 mx-1 shadow rounded border text-sm font-medium" page="${page}" ${currentPage === page}>${page}</button>`
+      paginationHTML += `<button class="btn btn-secondary  page relative inline-flex items-center px-3 py-2 mx-1 shadow rounded text-sm font-medium" page="${page}" ${currentPage === page}>${page}</button>`
     }
   })
 
   //next button
-  paginationHTML += `<button ${currentPage === endPage && 'disabled'} class="${currentPage === endPage ? 'cursor-not-allowed' : 'next'} relative inline-flex items-center px-3 py-2 mx-1 shadow rounded rounded-r-md border border-primary bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" id="next-btn">Next</button>`
+  paginationHTML += `<button ${currentPage === endPage && 'disabled'} class="${currentPage === endPage ? 'cursor-not-allowed' : 'next'} btn btn-secondary relative inline-flex items-center px-3 py-2 mx-1 shadow-sm rounded rounded-r-md text-sm font-medium">Next</button>`
 
   nav.innerHTML = paginationHTML
   pagination.append(nav)

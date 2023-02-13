@@ -8,10 +8,6 @@ const preslname = document.getElementById('edit-TODA-pres-lastname')
 const prescontact = document.getElementById('edit-TODA-contact')
 const todaid = document.getElementById('toda-id')
 
-
-
-
-
 const editTODAInfo = (e) =>{
 
     var tds = e.getElementsByClassName('TODA-data');

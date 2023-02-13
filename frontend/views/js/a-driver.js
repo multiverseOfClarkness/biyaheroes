@@ -1,14 +1,47 @@
-import {ValidateNum} from '/js/validate.js'
+
 
 const add = document.getElementById('add');
 const upload_btn = document.getElementById('upload');
 const edit_btns = document.getElementsByClassName('edit-btn')
-const edit_btns_toda = document.getElementsByClassName('edit-btn-toda')
-const popups = document.getElementsByClassName('popup-box');
 const add_popup = document.getElementById('add-popup');
 const upload_popup = document.getElementById('upload-popup');
-const mask = document.getElementById('page-mask');
+
+const driver_body = document.getElementById('bodynum')
+
+//Edit Driver
+
+
 const edit_popup = document.getElementById('edit-popup');
+const mask = document.getElementById('page-mask');
+const popups = document.getElementsByClassName('popup-box');
+
+const submit_driver = document.getElementById('submit-new-driver');
+const driver_fname = document.getElementById('edit-driver-firstname');
+const driver_lname = document.getElementById('edit-driver-lastname');
+const driver_bodyNum = document.getElementById('edit-driver-bodynum');
+const driver_contact = document.getElementById('edit-driver-contact');
+const driver_toda = document.getElementById('toda');
+const driverid = document.getElementById('driver-id');
+
+
+
+const editDriverInfo = (e) =>{
+  var tds = e.getElementsByClassName('driver-data');
+  edit_popup.style.display = 'block';
+  mask.style.visibility = 'visible';
+
+  const myArray = tds[0].innerHTML.trim().split(" ");
+  
+  driver_fname.setAttribute('value', myArray[0])
+  driver_lname.setAttribute('value', myArray[1])
+  driver_bodyNum.setAttribute('value', tds[1].innerHTML.trim())
+  
+  driver_contact.setAttribute('value', tds[2].innerHTML.trim().replace("+63", ""))
+  driverid.setAttribute('value', tds[3].innerHTML.trim())
+
+  
+} 
+
 
 //ADD DRIVER
 
@@ -101,22 +134,22 @@ function errorMsg(input, msg) {
     //ADD Driver
     if(driver_fname.value === "") {
       Err(driver_fname);
+    } else {
+      Success(driver_fname)
     }
   
     if(driver_lname.value === "") {
       Err(driver_lname);
-    }
-  
-    if(driver_toda.value === "") {
-      Err(driver_toda);
+    }else {
+      Success(driver_lname)
     }
 
-    if(driver_bodyNum.value === "") {
-        Err(driver_bodyNum);
-      }
+    if(driver_body.value === "") {
+        Err(driver_body);
+    }else {
+      Success(driver_body)
+    }
   
-    
-    ValidateNum(driver_contact);
     
   }
 
@@ -128,11 +161,6 @@ function errorMsg(input, msg) {
     input.className = 'form-control error';  
   }
 
-
-  
-  for(var edit_button of edit_btns_toda) {
-    edit_button.addEventListener('click', editTODAInfo);
-  }
 
   add.addEventListener('click', AddDriver);
   upload_btn.addEventListener('click', UploadExcel);

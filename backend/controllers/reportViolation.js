@@ -73,8 +73,8 @@ const submitViolationReport = async (req, res) => {
                 client.messages
                 .create({
                     body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
-                    from: '+15732847492',
-                    to: '+639925776610'
+                    from: '+17124235120',
+                    to: '+639215125385'
                 })
                 .then(message => console.log(message.body));
                 
@@ -151,8 +151,8 @@ const submitViolationReport = async (req, res) => {
             client.messages
             .create({
                 body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
-                from: '+15732847492',
-                to: '+639925776610'
+                from: '+17124235120',
+                to: '+639215125385'
             })
             .then(message => console.log(message.body));
             
@@ -223,8 +223,8 @@ const submitViolationReport = async (req, res) => {
                 client.messages
                 .create({
                     body: `Thanks for reaching out! Your report number is: ${justReported}. Please wait for our response regarding this.  `,
-                    from: '+15732847492',
-                    to: '+639925776610'
+                    from: '+17124235120',
+                    to: '+639215125385'
                 })
                 .then(message => console.log(message.body));
 

@@ -33,26 +33,26 @@ function errorMsg(input, msg) {
   input.className = 'form-control error';
 }
 
-const editInfo = (e) =>{
-  var tds = e.getElementsByClassName('driver-data');
+// const editInfo = (e) =>{
+//   var tds = e.getElementsByClassName('driver-data');
   
-  edit_popup.style.display = 'block';
-  mask.style.visibility = 'visible';
+//   edit_popup.style.display = 'block';
+//   mask.style.visibility = 'visible';
 
-  const myArray = tds[0].innerHTML.trim().split(" ");
-  fname.setAttribute('value', myArray[0])
-  lname.setAttribute('value', myArray[1])
-  bodynum.setAttribute('value', tds[1].innerHTML.trim())
+//   const myArray = tds[0].innerHTML.trim().split(" ");
+//   fname.setAttribute('value', myArray[0])
+//   lname.setAttribute('value', myArray[1])
+//   bodynum.setAttribute('value', tds[1].innerHTML.trim())
   
-  contact.setAttribute('value', tds[2].innerHTML.trim().replace("+63", ""))
-  driverid.setAttribute('value', tds[3].innerHTML.trim())
+//   contact.setAttribute('value', tds[2].innerHTML.trim().replace("+63", ""))
+//   driverid.setAttribute('value', tds[3].innerHTML.trim())
   
-  const x_btns = document.getElementsByClassName('close');
+//   const x_btns = document.getElementsByClassName('close');
 
-  for(var x of x_btns) {
-    x.addEventListener('click', ClosePopup);
-  }
-} 
+//   for(var x of x_btns) {
+//     x.addEventListener('click', ClosePopup);
+//   }
+// } 
 
 
 function ClosePopup() {
@@ -90,19 +90,22 @@ function AddTodaValidation() {
   //ADD TODA (SA TODA)
   if(add_toda.value === "") {
     Err(add_toda);
+  } else {
+    Success(add_toda)
   }
 
   if(add_pres_fname.value === "") {
     Err(add_pres_fname);
+  } else {
+    Success(add_pres_fname)
   }
 
   if(add_pres_lname.value === "") {
     Err(add_pres_lname);
+  } else {
+    Success(add_pres_lname)
   }
 
-  if(add_pres_contact.value === "") {
-    ValidateNum(add_pres_contact);
-  }
 }
   
 function UploadExcel() {
@@ -125,7 +128,10 @@ function ValidateExcel() {
     Err(excel);
   }
 }
-  
+
+
+
+
 function Success(input) {
   input.className = 'form-control success';
 }
@@ -137,10 +143,11 @@ function Err(input) {
 add.addEventListener('click', AddToda);
 upload_btn.addEventListener('click', UploadExcel);
 
-for(var edit_btn of edit_btns) {
-  edit_btn.addEventListener('click', editInfo);
-}
+// for(var edit_btn of edit_btns) {
+//   edit_btn.addEventListener('click', editInfo);
+// }
 
-for(var edit_button of edit_btns_toda) {
-  edit_button.addEventListener('click', editTODAInfo);
-}
+// for(var edit_btn of edit_btns_toda) {
+//   edit_btn.addEventListener('click', editInfo);
+// }
+

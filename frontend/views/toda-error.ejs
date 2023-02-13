@@ -129,7 +129,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>TODA</h5>
-        <form method="post" action="/admin/TODA/new">
+        <form method="post" action="/admin/TODA/new" onsubmit="return ValidateNumAdd()">
             <input type="text" name="toda" id="add-toda" placeholder="TODA Name" class="form-control" required>
             <input type="text" name="fname" id="add-pres-fname" placeholder="TODA President First name" class="form-control" required>
             <input type="text" name="lname" id="add-pres-lname" placeholder="TODA President Last name" class="form-control" required>
@@ -153,7 +153,7 @@
 
     <div class="popup-box" id="edit-popup">
 
-        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close" onClick="window.location.reload();">
 
         <h5>Edit</h5>
         <form method="post" action="/admin/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
