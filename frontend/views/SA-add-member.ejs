@@ -115,16 +115,18 @@
 
         <h5>Add New Admin</h5>
         <form method="post" action="/SA/admins">
-            <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" required>
-            <input type="text" name="lname" id="lname" placeholder="Last Name" class="form-control" required>
-            <select class="form-control" name="position" id="">
+            <!-- ADDING ID TO INPUT FIELDS -->
+            <input type="text" name="fname" id="new-admin-fname" placeholder="First Name" class="form-control" required>
+            <input type="text" name="lname" id="new-admin-lname" placeholder="Last Name" class="form-control" required>
+            <select class="form-control" name="position" id="new-admin-position">
                 <option value="Admin">Admin</option>
                 <option value="Super Admin">Super Admin</option>
             </select>
-            <input type="email" name="email" id="new-email" placeholder="Email" class="form-control" required>
-            <input type="password" name="password" id="new-password" placeholder="Password" class="form-control" required>
+            <input type="email" name="email" id="new-admin-email" placeholder="Email" class="form-control" required>
+            <input type="password" name="password" id="new-admin-password" placeholder="Password" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Create Account</button>
+            <!-- ASSIGN NEW ID TO THE SUBMIT BUTTON -->
+            <button type="submit" id="create-new-admin" class="btn btn-primary">Create Account</button>
         </form>
     </div>
 
