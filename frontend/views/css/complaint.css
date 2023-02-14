@@ -145,6 +145,9 @@ ul {
 }
 
 @media (max-width:1000px) {
+    .container {
+        height: auto;
+    }
     .links {
         display: flex;
         flex-direction: column;

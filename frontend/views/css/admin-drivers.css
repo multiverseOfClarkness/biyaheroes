@@ -139,6 +139,9 @@ thead {
 
 @media (min-width:320px) and (max-width:992px) {
 
+    .container {
+        height: auto;
+    }
     .table-controllers {
         flex-direction: column;
     }

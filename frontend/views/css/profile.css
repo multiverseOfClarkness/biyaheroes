@@ -188,6 +188,10 @@ form {
 } */
 
 @media (min-width:320px) and (max-width:992px) {
+    .container {
+        position: relative;
+        height: auto;
+    }
     .col-md-4 {
         margin-bottom: 1.5em;
     }

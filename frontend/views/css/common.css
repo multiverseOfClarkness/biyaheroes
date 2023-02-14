@@ -96,6 +96,9 @@ table {
 }
 
 @media (min-width:300px) and (max-width:992px) {
+    .container {
+        height: auto;
+    }
     .navbar ul .history ul{
         position: relative;
         top: 0;

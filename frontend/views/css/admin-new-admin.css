@@ -143,6 +143,9 @@ footer > p {
 }
 
 @media (min-width:300px) and (max-width:500px) {
+    .container {
+        height: auto;
+    }
     .grid {
         width: 90%;
         display: block;
@@ -155,6 +158,9 @@ footer > p {
 
 @media (min-width:501px) and (max-width:800px) {
 
+    .container {
+        height: auto;
+    }
     .grid {
         width: 90%;
         grid-template-columns: 1fr 1fr;
@@ -170,6 +176,9 @@ footer > p {
 }
 
 @media (min-width:801px) and (max-width:1150px) {
+    .container {
+        height: auto;
+    }
     .grid {
         width: 90%;
         grid-template-columns: 1fr 1fr 1fr;

@@ -110,12 +110,20 @@ p {
 }
 
 @media (min-width: 768px) {
+    .container {
+        position: relative;
+        height: auto;
+    }
     .text {
       display: none;
     }
 }
 
 @media (min-width: 992px) {
+    .container {
+        position: relative;
+        height: auto;
+    }
     .text {
       display: block;
     }

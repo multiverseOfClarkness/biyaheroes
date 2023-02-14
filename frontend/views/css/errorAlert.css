@@ -152,6 +152,9 @@ label {
 
 
 @media (max-width:576px) {
+    .container {
+        height: auto;
+    }
     
     .box {
         width: 100%;

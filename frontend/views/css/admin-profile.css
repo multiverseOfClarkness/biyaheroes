@@ -190,11 +190,17 @@ form {
 } */
 
 @media (min-width:320px) and (max-width:992px) {
+    .container {
+        height: auto;
+    }
     .col-md-4 {
         margin-bottom: 1.5em;
     }
 }
 @media (max-width: 767px) {
+    .container {
+        height: auto;
+    }
     img{
         top: 14%;
     }

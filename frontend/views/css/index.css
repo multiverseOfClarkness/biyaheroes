@@ -91,6 +91,7 @@ body {
     
     .container {
         position: relative;
+        height: auto;
     }
 
     .title {

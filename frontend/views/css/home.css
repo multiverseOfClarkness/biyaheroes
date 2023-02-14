@@ -103,6 +103,9 @@ footer > p {
 }
 
 @media (min-width:320px) and (max-width:992px) {
+    .container {
+        height: auto;
+    }
     .grid {
         width: 90%;
         display: block;

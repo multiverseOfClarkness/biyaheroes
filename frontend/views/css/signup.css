@@ -118,6 +118,7 @@ form .col .form-item {
 
     .container {
         position: relative;
+        height: auto;
     }
 
     .wrapper {
