@@ -110,7 +110,7 @@ const getEmail = (req, res, result) =>{
                 }
                 
                 const token =jwt.sign(payload, secret, {expiresIn: '15m'})
-                const link = `http://localhost:3000/reset-password/${result[0].id}/${token}`
+                const link = `https://biyaheroes-qvmg.onrender.com/reset-password/${result[0].id}/${token}`
 
                 //For email sending
                 const bhemail = 'biyaheroesconnect@gmail.com'
