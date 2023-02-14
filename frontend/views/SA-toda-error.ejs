@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/toda.css">
     <link rel="stylesheet" href="/css/popup-modal.css">
+
+    
 </head>
 
 <body onload="errorPopout()">
@@ -62,10 +64,6 @@
                     </li>
 
                     <li>
-                        <a class="nav-link" href="/SA/profile">Logs</a>
-                    </li>
-
-                    <li>
                         <a class="nav-link" href="/SA/logs">Logs</a>
                     </li>
 
@@ -112,6 +110,7 @@
 
             <tbody>
                 <% todaList.forEach(toda =>{ %> 
+                    
                     <tr onclick="editTODAInfo(this)">
                         <th scope="row" data-label="TODA"><%= toda.TODA %></th>
                         <td class="TODA-data" data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
@@ -123,7 +122,6 @@
                             <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda">
                             
                         </td>
-                        
                         <form method="post" action="/SA/TODA/<%= toda.id %>?_method=PATCH">
                             <td data-label="Delete">
                                 
@@ -143,13 +141,13 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>TODA</h5>
-        <form method="post" action="/SA/TODA/new">
-            <input type="text" name="toda" id="toda" placeholder="TODA Name" class="form-control" required>
-            <input type="text" name="fname" id="fname" placeholder="TODA President First name" class="form-control" required>
-            <input type="text" name="lname" id="lname" placeholder="TODA President Last name" class="form-control" required>
-            <input type="number" name="contact" id="contact" placeholder="Contact Number" class="form-control" required>
+        <form method="post" action="/SA/TODA/new" onsubmit="return ValidateNumAdd()">
+            <input type="text" name="toda" id="add-toda" placeholder="TODA Name" class="form-control" required>
+            <input type="text" name="fname" id="add-pres-fname" placeholder="TODA President First name" class="form-control" required>
+            <input type="text" name="lname" id="add-pres-lname" placeholder="TODA President Last name" class="form-control" required>
+            <input type="number" name="contact" id="add-pres-contact" placeholder="Contact Number" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" id="submit-toda-btn" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 
@@ -161,16 +159,16 @@
         <form action="/SA/TODA" method="post" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" id="upload-excel" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 
     <div class="popup-box" id="edit-popup">
 
-        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close" onClick="window.location.reload();">
 
         <h5>Edit</h5>
-        <form method="post" action="/SA/TODA/edit?_method=PATCH">
+        <form method="post" action="/SA/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="toda-id" name="todaid">
             <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
@@ -184,23 +182,26 @@
             <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
         </form>
     </div>
-
-
     <div id="page-mask"></div>
+
     <div id="error-popup" class="popup-box">
         <img src="/images/error.png" class="close-popup-btn close alt="">
         <h5>Error</h5>
         <p>Duplicate entry detected.</p>
-        
     </div>
+
     <footer>
         <p>Commuters' Reports Management System</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    <script src="/js/admin-toda.js"></script>
+    <!-- <script src="/js/admin-toda.js"></script> -->
+    <script src="/js/editInfo_copy.js"></script>
+    <script type="module" src="/js/a-toda.js"></script>
     <script src="/js/search.js"></script>
+    <script src="/js/errorPopout.js"></script>
+    
     
     
 </body>

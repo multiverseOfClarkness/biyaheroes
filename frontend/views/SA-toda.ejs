@@ -123,7 +123,7 @@
                             <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda">
                             
                         </td>
-                        <form method="post" action="/admin/TODA/<%= toda.id %>?_method=PATCH">
+                        <form method="post" action="/SA/TODA/<%= toda.id %>?_method=PATCH">
                             <td data-label="Delete">
                                 
                             <input type="image" src="/images/trash.svg" class="table-btn delete-btn">
@@ -142,7 +142,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>TODA</h5>
-        <form method="post" action="/admin/TODA/new" onsubmit="return ValidateNumAdd()">
+        <form method="post" action="/SA/TODA/new" onsubmit="return ValidateNumAdd()">
             <input type="text" name="toda" id="add-toda" placeholder="TODA Name" class="form-control" required>
             <input type="text" name="fname" id="add-pres-fname" placeholder="TODA President First name" class="form-control" required>
             <input type="text" name="lname" id="add-pres-lname" placeholder="TODA President Last name" class="form-control" required>
@@ -157,7 +157,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Upload</h5>
-        <form action="/admin/TODA" method="post" enctype="multipart/form-data">
+        <form action="/SA/TODA" method="post" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
             <button type="submit" id="upload-excel" class="btn btn-primary">Save Changes</button>
@@ -169,7 +169,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close" onClick="window.location.reload();">
 
         <h5>Edit</h5>
-        <form method="post" action="/admin/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
+        <form method="post" action="/SA/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="toda-id" name="todaid">
             <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
