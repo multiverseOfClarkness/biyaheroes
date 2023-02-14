@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODAS</title>
+    <title>TODA</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/toda.css">
     <link rel="stylesheet" href="/css/popup-modal.css">
+
+    
 </head>
 
-<body>
+<body >
 
     <header>
 
@@ -68,7 +70,7 @@
                     <li>
                         <a class="nav-link" href="/SA/maintenance">Maintenance</a>
                     </li>
-                    
+
 
                     <li>
                         <a class="nav-link logout" href="/logout">Logout</a>
@@ -109,6 +111,7 @@
 
             <tbody>
                 <% todaList.forEach(toda =>{ %> 
+                    
                     <tr onclick="editTODAInfo(this)">
                         <th scope="row" data-label="TODA"><%= toda.TODA %></th>
                         <td class="TODA-data" data-label="President"><%= toda.presidentfname %> <%= toda.presidentlname %></td>
@@ -120,8 +123,7 @@
                             <input type="image" src="/images/edit.svg" class="table-btn edit-btn-toda">
                             
                         </td>
-                        
-                        <form method="post" action="/SA/TODA/<%= toda.id %>?_method=PATCH">
+                        <form method="post" action="/admin/TODA/<%= toda.id %>?_method=PATCH">
                             <td data-label="Delete">
                                 
                             <input type="image" src="/images/trash.svg" class="table-btn delete-btn">
@@ -140,7 +142,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>TODA</h5>
-        <form method="post" action="/SA/TODA/new">
+        <form method="post" action="/admin/TODA/new" onsubmit="return ValidateNumAdd()">
             <input type="text" name="toda" id="add-toda" placeholder="TODA Name" class="form-control" required>
             <input type="text" name="fname" id="add-pres-fname" placeholder="TODA President First name" class="form-control" required>
             <input type="text" name="lname" id="add-pres-lname" placeholder="TODA President Last name" class="form-control" required>
@@ -155,7 +157,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Upload</h5>
-        <form action="/SA/TODA" method="post" enctype="multipart/form-data">
+        <form action="/admin/TODA" method="post" enctype="multipart/form-data">
             <input type="file" name="excel" id="excel" class="form-control" required>
 
             <button type="submit" id="upload-excel" class="btn btn-primary">Save Changes</button>
@@ -164,13 +166,13 @@
 
     <div class="popup-box" id="edit-popup">
 
-        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close" onClick="window.location.reload();">
 
         <h5>Edit</h5>
-        <form method="post" action="/SA/TODA/edit?_method=PATCH">
+        <form method="post" action="/admin/TODA/edit?_method=PATCH" onsubmit="return ValidateNum()">
             <input type="hidden" id="toda-id" name="todaid">
             <input type="text" name="firstname" id="edit-TODA-pres-firstname" placeholder="First Name" class="form-control" required>
-            <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control success" required>
+            <input type="text" name="lastname" id="edit-TODA-pres-lastname" placeholder="Last Name" class="form-control" required>
             <select class="form-control" name="toda">
                 <% todaList.forEach(toda =>{ %> 
                 <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
@@ -178,11 +180,12 @@
             </select>
             <input type="text" name="contact" id="edit-TODA-contact" placeholder="Contact Number" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary" id="submit-btn">Save Changes</button>
+            <button type="submit" class="btn btn-primary" id="btn">Save Changes</button>
         </form>
     </div>
-
     <div id="page-mask"></div>
+
+   
 
     <footer>
         <p>Commuters' Reports Management System</p>
@@ -190,9 +193,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    <!-- NEW JS FOR SA-ADMIN-TODA -->
-    <script type="module" src="/js/sa-admin-toda.js"></script>
+    <!-- <script src="/js/admin-toda.js"></script> -->
+    <script src="/js/editInfo_copy.js"></script>
+    <script type="module" src="/js/a-toda.js"></script>
     <script src="/js/search.js"></script>
+   
+    
+    
     
 </body>
 </html>
