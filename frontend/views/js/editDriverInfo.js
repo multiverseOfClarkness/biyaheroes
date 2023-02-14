@@ -1,7 +1,4 @@
 
-const edit_popup = document.getElementById('edit-popup');
-const mask = document.getElementById('page-mask');
-const popups = document.getElementsByClassName('popup-box');
 
 const submit_driver = document.getElementById('submit-new-driver');
 const driver_fname = document.getElementById('edit-driver-firstname');

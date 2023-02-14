@@ -175,7 +175,7 @@
         <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
 
         <h5>Driver</h5>
-        <form action="/admin/drivers/new" method="post" onsubmit="return ValidateNum()">
+        <form action="/admin/drivers/new" method="post" onsubmit="return AddValidation()">
             <select class="form-control" name="toda" id="toda">
                 <% todaList.forEach(toda =>{ %> 
                 <option value="<%= toda.TODA %>"><%= toda.TODA %></option>
@@ -184,7 +184,7 @@
             <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" required>
             <input type="text" name="lname" id="lname" placeholder="Last Name" class="form-control" required>
             <input type="number" name="bodyNum" id="bodynum" placeholder="Body number" class="form-control" required>
-            <input type="number" name="phone" id="edit-driver-contact" placeholder="Contact Number" class="form-control" required>
+            <input type="number" name="phone" id="add-driver-contact" placeholder="Contact Number" class="form-control" required>
 
             <button type="submit" id="submit-new-driver" class="btn btn-primary">Save Changes</button>
         </form>

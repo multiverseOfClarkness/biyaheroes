@@ -22,10 +22,15 @@ const driver_bodyNum = document.getElementById('edit-driver-bodynum');
 const driver_contact = document.getElementById('edit-driver-contact');
 const driver_toda = document.getElementById('toda');
 const driverid = document.getElementById('driver-id');
+const contact_add = document.getElementById('add-driver-contact');
+
+const dfname = document.getElementById('fname')
+const dlname = document.getElementById('lname')
+const dbody = document.getElementById('bodynum')
 
 
 
-const editDriverInfo = (e) =>{
+function editDriverInfo (e) {
   var tds = e.getElementsByClassName('driver-data');
   edit_popup.style.display = 'block';
   mask.style.visibility = 'visible';
@@ -129,26 +134,91 @@ function errorMsg(input, msg) {
     submit_driver.addEventListener('click', AddValidation);
   }
 
-  function AddValidation() {
-
-    //ADD Driver
-    if(driver_fname.value === "") {
-      Err(driver_fname);
+  function ValidateNum() {
+    let valid = true
+    if(driver_contact.value !== null && driver_contact.value != "") {
+        var counter = driver_contact.value;
+      
+      if(counter.length !== 10) {
+          //CHECK MUNA IF SAKTONG 10 DIGITS YUNG INPUT
+          Err(driver_contact);
+          return valid = false
+      } else {
+      //KINUKUHA YUNG FIRST DIGIT NG INPUT
+        var firstDigit = counter.slice(0,1);
+        
+        if(parseInt(firstDigit) !== 9) {
+            Err(driver_contact);
+            return valid = false
+        } else {
+          Success(driver_contact);
+        }
+      }
     } else {
-      Success(driver_fname)
+        Err(driver_contact);
+        return valid = false
     }
-  
-    if(driver_lname.value === "") {
-      Err(driver_lname);
-    }else {
-      Success(driver_lname)
+  }
+  function ValidateNumAdd() {
+    let valid = true
+    if(contact_add.value !== null && contact_add.value != "") {
+        var counter = contact_add.value;
+      
+      if(counter.length !== 10) {
+          //CHECK MUNA IF SAKTONG 10 DIGITS YUNG INPUT
+          Err(contact_add);
+          return valid = false
+      } else {
+      //KINUKUHA YUNG FIRST DIGIT NG INPUT
+        var firstDigit = counter.slice(0,1);
+        
+        if(parseInt(firstDigit) !== 9) {
+            Err(contact_add);
+            return valid = false
+        } else {
+          Success(contact_add);
+        }
+      }
+    } else {
+        Err(contact_add);
+        return valid = false
     }
+  }
 
-    if(driver_body.value === "") {
-        Err(driver_body);
-    }else {
-      Success(driver_body)
-    }
+  function AddValidation() {
+    let firstDigit = contact_add.value.slice(0,1)
+    let valid = true
+    //ADD Driver
+    if(dfname.value === "") {
+      Err(dfname);
+      return valid = false
+    } Success(dfname)
+    
+  
+    if(dlname.value === "") {
+      Err(dlname);
+      return valid = false
+    }Success(dlname)
+    
+
+    if(dbody.value === "") {
+        Err(dbody);
+        return valid = false
+    }else if (dbody.value.length !== 4){
+      Err(dbody);
+      return valid = false
+    } Success(dbody)
+  
+    if(contact_add.value === ''){
+      Err(contact_add);
+      return valid = false
+    } else if(contact_add.value.length !== 10) {
+      Err(contact_add);
+      return valid = false
+    } else if (parseInt(firstDigit) !== 9) {
+      Err(contact_add);
+      return valid = false
+    } Success(contact_add)
   
     
   }
