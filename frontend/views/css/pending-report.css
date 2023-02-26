@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,600;1,200&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand {
+    font-size: large, 1rem;
+    font-weight: 600;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.container {
+    max-width: 1325px;
+}
+
+.report-hr {
+    max-width: 1325px;
+}
+
+.col6 {
+    max-width: 615px;
+    margin-left: 10px;
+}
+
+.wrapper {
+    margin-top: 75px;
+    /* color: black;
+    height: auto;
+    margin-top: 75px;
+    box-shadow: 5px 8px 5px #c0c0b9;
+    border: 2px  solid #e7e7db;
+    background-color: #ffffff; */
+
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 550;
+    margin-bottom: 5px;
+}
+
+h5 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+#contact {
+    font-size: 13px;
+}
+
+.btn-outline-primary {
+    background-color: #ffffff;
+    border-color: black;
+    color: black;
+}
+
+.btn-outline-success {
+    color: rgb(255, 255, 255);
+    background-color: black;
+}
+
+.btn {
+    width: auto;
+}
+
+h6 {
+    font-size: 13px;
+    font-weight: 600;
+    
+}
+
+.prooftxt {
+    visibility: hidden;
+}
+
+.vr {
+    height: auto;
+    padding: 0;
+}
+
+.desc {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 1;
+}
+
+.incident-info {
+    text-align: justify;
+}
+
+#incident-detailed-desc {
+    max-width: 600px;
+    text-align: justify;
+}
+
+#driver-detailed-desc {
+    text-align: justify;
+}
+/* p {
+    text-align: center;
+} */
+
+p {
+    word-wrap: break-word;
+}
+
+#driver-name, #toda-name, #body-no {
+    color: black;
+}
+
+@media (min-width: 768px) {
+    .container {
+        position: relative;
+        height: auto;
+    }
+    .text {
+      display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        position: relative;
+        height: auto;
+    }
+    .text {
+      display: block;
+    }
+}

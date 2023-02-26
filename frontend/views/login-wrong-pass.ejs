@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiyaHeroes</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/popup-modal.css">
+    
+</head>
+<body onload="errorPopup()">
+
+    <div class="background">
+        <h3 class="title title-mobile">Commuters Report Management System</h3>
+    </div>
+
+    <div class="container">
+
+        <h3 class="title">Commuters Report Management System</h3>
+    
+        <div class="wrapper">
+            <h3 class="title-two"><a href="/">BiyaHeroes</a></h3>
+
+            <form method="post" action="/" id="form" onsubmit="return inputValidation()">
+
+                <div class="form-item">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                    <small class="error-msg">Error</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                    <small class="error-msg">Error</small>
+                    
+                </div>
+                <small class="forgot-pass" role="button" id="forgot-pass-btn">Forgot Password?</small>
+                <div class="form-item btns">
+                    <button type="submit" class="btn btn-primary" id="login">Login</button>
+                    <p class="sign-up">Don't have an account? <a href="/commuter/register" class="sign-up-link">Create one.</a></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="popup-box" id="forgot-pass-popup">
+
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+
+        <h5>Forgot Password</h5>
+        <form method="post" action="/forgot-password" >
+            <input type="email" name="email" id="email1" placeholder="Enter your Email Address" class="form-control input" required>
+
+            <button type="submit" class="btn btn-primary" id="btn">Reset Password</button>
+        </form>
+    </div>
+    <div id="error-popup" class="popup-box-w-icon">
+        <img src="/images/x-circle-fill.svg" alt="" id="error-icon" class="icon">
+        <h5>Error</h5>
+        <p>Wrong password. Please try again.</p>
+        <button class="btn btn-primary" id="okay">Okay</button>
+    </div>
+    <div id="page-mask"></div>
+
+    <script src="/js/popup.js"></script>
+    <!-- <script src="/js/login-verify.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script defer src="/js/form.js"></script>
+</body>
+</html>

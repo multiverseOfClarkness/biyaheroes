@@ -3,7 +3,9 @@ const path = require ('path')
 const bcryptjs =require('bcryptjs')
 const adminUsers = require('../models/adminUsers.js')
 const jwt = require('jsonwebtoken')
-const { rmSync } = require('fs')
+const logs = require('../models/logs')
+const jwtdecode = require("jwt-decode");
+
 
 
 
@@ -21,42 +23,49 @@ const login = async (req, res) => {
         
         
         const admin = await adminUsers.findOne({email:email})
-        const isMatchAdmin = await bcryptjs.compare(password, admin.password)
+       
        
         if(admin) {
+            const isMatchAdmin = await bcryptjs.compare(password, admin.password)
             if(isMatchAdmin){
                 const userEmail = body.email
                 const user = { email:userEmail}
                 //GENERATE TOKEN
                 const accessToken = generateAccessToken(user)
-                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-                res.cookie('jwt', accessToken, {httpOnly: true})
-                res.redirect('/admin/dashboard')
+                res.cookie('token', accessToken, {httpOnly: true})
+
+                const currentUser = await adminUsers.findOne({
+                    email: jwtdecode(req.cookies.token).email,
+                });
+                logs.create({
+                    author: `${currentUser.fname} ${currentUser.lname}`,
+                    section: 'Login',
+                    action: 'Logged in.',
+                    userID: `${currentUser.id}`
+                })
+                return res.redirect('/admin/dashboard')
                 
             }else {
-                res.send('Invalid password/username.')
+                res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-login-wrong-pass.html'))
             }
         }else{
-            res.send('Invalid username/password.')
+            res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-login-no-email.html'))
         }
 
     }catch (error){
-        res.send('Invalid username/password')
+        console.log(error)
+        res.status(500).send('An error has occured with the server. Please try again in a few minutes.')
     }
     
 }
 
-function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '300s'})
-}
-
-const adminDashboard = (req, res) => {
-    res.sendFile(path.resolve('./', 'frontend', 'views', 'admin-add-member.html'))
-}
-
 module.exports = {
     getLoginForm,
-    login,
-    adminDashboard
+    login
+}
+
+
+function generateAccessToken(user){
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'})
 }
 

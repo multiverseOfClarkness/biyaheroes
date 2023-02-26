@@ -33,6 +33,7 @@ section {
     width: 75%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     gap: 1em;
 }
 
@@ -55,6 +56,7 @@ section {
 footer {
     background-color: var(--secondary-clr);
     color: var(--bg-clr);
+    
 }
 
 /*TYPOGRAPHY*/
@@ -91,6 +93,7 @@ footer > p {
     margin: 0;
     padding: .5em 0;
     text-align: center;
+   
 }
 
 /*IMAGES*/
@@ -100,6 +103,9 @@ footer > p {
 }
 
 @media (min-width:320px) and (max-width:992px) {
+    .container {
+        height: auto;
+    }
     .grid {
         width: 90%;
         display: block;

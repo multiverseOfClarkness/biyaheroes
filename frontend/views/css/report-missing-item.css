@@ -33,6 +33,16 @@ body {
     position: relative;
 }
 
+.form-item-radio {
+    margin: .75em 0;
+    padding-bottom: 20px;
+    position: relative;
+    border: 1px solid ;
+    border-color: #ced4da;
+    border-radius: 10px;
+    
+}
+
 footer {
     background-color: var(--secondary-clr);
     color: var(--bg-clr);
@@ -51,7 +61,32 @@ footer {
     border-color: #2ecc71;
 }
 
+.form-item.success select{
+    border-color: #2ecc71;
+}
+
+.form-item.success textarea{
+    border-color: #2ecc71;
+}
+
+.form-item-radio.success {
+    border-color: #2ecc71;
+
+}
+
 .form-item.error input{
+    border-color: #e74c3c;
+}
+
+.form-item.error select{
+    border-color: #e74c3c;
+}
+
+.form-item.error textarea{
+    border-color: #e74c3c;
+}
+
+.form-item-radio.error {
     border-color: #e74c3c;
 }
 
@@ -61,6 +96,10 @@ footer {
 }
 
 /*TYPOGRAPHY*/
+#error-message{
+    text-align: center;
+}
+
 
 .navbar-brand {
     font-family: var(--ff-header);

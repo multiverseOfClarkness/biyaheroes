@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin-report-view.css">
+    <link rel="stylesheet" href="/css/popup-modal.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-md">
+            <a href="/admin/dashboard" class="navbar-brand"><h2>BiyaHeroes</h2></a>
+
+            <button 
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#toggleMobileMenu"
+            aria-controls="toggleMobileMenu"
+            aria-expanded="false"
+            aria-label="Toggle Navigation">
+
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                <ul class="navbar-nav ms-auto">
+
+                    <li>
+                        <a class="nav-link" href="/admin/complaints">Complaints</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link active" href="/admin/missing">Missing Items</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/admin/TODA">TODA</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/admin/drivers">Drivers</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" href="/admin/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link logout" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner">
+            <h2>Report Details</h2>
+        </div>
+    </header>
+
+    <% missingReportData.forEach(missing =>{ %> 
+        <section class="container" id="report">
+
+            <div class="important-details">
+                <h5>Report ID: <%= missing.id %> </h5>
+                <p id="date">Date of Incident: <%= missing.dateOfIncident %> </p>
+            </div>
+    
+            <div class="details">
+                <div class="box complainant">
+                    <p class="detail-title">Complainant Details</p>
+                    <p id="complainantname" class="detail-item"><%= missing.author.fname %> <%= missing.author.lname %></p>
+                    <p class="detail-item">+63<%= missing.author.phone %></p>
+                </div>
+                <div class="box report">
+                    <p class="detail-title">Driver & Report Details</p>
+                    <p class="detail-item">Driver Name: <%= missing.driverName %></p>
+                    <p class="detail-item">TODA: <%= missing.TODA %></p>
+                    <p class="detail-item">Body #: <%= missing.bodyNum %></p>
+                    <p class="detail-item">Item Type: <%= missing.itemType %></p>
+                </div>
+            </div>
+    
+            <div class="description-box mt-3 box" >
+                <div class="desc driver">
+                    <p class="detail-title">Driver Description</p>
+                    <p class="description">
+                        <%= missing.driverDescription %>
+                    </p>
+                </div>
+                <div class="desc incident box">
+                    <div class="incident-title mb-2" >
+                        <p class="detail-title">Incident Description</p>
+                        
+                        <small data-html2canvas-ignore id="evidence-btn">See Attached Evidence/s</small>
+                    </div>
+                    <p class="description">
+                        <%= missing.itemDescription %>
+                    </p>
+                </div>
+                <% if(missing.status === 'Solved'){ %> 
+                    <div data-html2canvas-ignore class="btns mt-4 mb-4">
+                        <button class="btn btn-primary" id="dl-btn">Download</button>
+                    </div>
+                <% } else {  %> 
+                    <div data-html2canvas-ignore class="btns mt-4 mb-4">
+                        <button class="btn btn-primary" id="dl-btn">Download</button>
+                        <form method="post" action="/admin/missing/pending/<%= missing.id %>?_method=PATCH">
+                            <button type="submit" class="btn btn-primary">Resolved</button>
+                        </form>
+                    </div>
+                <% } %> 
+            </div>
+        </section>
+   
+    
+
+    <div data-html2canvas-ignore class="popup-box" id="evidence-popup">
+
+        <img src="/images/x-lg.svg" alt="" class="close-popup-btn close">
+
+        <h5>Attached Evidence/s</h5>
+        <div class="evidence-container evidence">
+            <% for(let i = 0; i < missing.evidenceImagePathArray.length; i++){ %>
+                <div class="images">
+                    <img src="<%= missing.evidenceImagePathArray[i] %>" class="evi" alt="">
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <% }) %> 
+    <div id="page-mask"></div>
+
+    <footer>
+        <p>Commuters' Reports Management System</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="/js/admin-report-view.js"></script>
+    <script src="/js/report-pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>

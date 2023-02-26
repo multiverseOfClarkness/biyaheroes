@@ -1,0 +1,21 @@
+.listPage .active {
+    background-color: #aacce2;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: 3px;
+}
+
+.page-link {
+    border: none;
+    background-color: #005792;
+    color: white;
+}
+
+.page-link:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: #FD5F00;
+}

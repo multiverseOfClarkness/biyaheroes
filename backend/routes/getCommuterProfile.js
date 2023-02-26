@@ -1,7 +1,9 @@
 const express = require('express')
-const getRCommuterProfile = require("../controllers/commuterProfile")
+const getCommuterProfile = require("../controllers/commuterProfile")
 const router = express.Router()
 
-router.get ('/profile', getRCommuterProfile.getCommuterProfile)
+
+router.get ('/profile', getCommuterProfile.getCommuterProfile)
+router.patch('/profile/:id', getCommuterProfile.updateCommuterProfile)
 
 module.exports = router

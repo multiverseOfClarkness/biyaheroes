@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,600;1,200&display=swap');
+
+
+body{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+}
+
+.sidebar-menu{
+    font-family: 'Montserrat', sans-serif;
+    background-image: linear-gradient(to top, #0d3f62 , #054d7e);
+    height: 100vmax;
+}
+
+.collapse-button {
+    /* background-image: linear-gradient(to bottom, #0d3f62 , #054d7e); */
+    background-color: #0d3f62;
+    
+}
+
+.upload-excel {
+    visibility: hidden;
+}
+
+.profile-image, .account-details {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+hr {
+    color: rgb(255, 255, 255, 0.5);
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.flex-item {
+    padding: 0;
+}
+
+.container-fluid {
+    padding-left: 0;
+}
+
+.notification-icon{
+    width: 35px;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+}
+
+.account-details {
+    margin-left: -10px;
+}
+
+.navbar-brand {
+    font-size:x-large;
+    color: #f6f6e9;
+    font-weight: 600;
+}
+
+.main-menu, .account-navigation{
+    font-size: large;
+    color: #f6f6e9;
+}
+
+li:hover {
+    border-radius: 30px;
+    background-color: #f6f6e933;
+    color: #979793;
+    transition: color 500ms ease-out;
+    width: auto;
+}
+
+#submitUpload, #new-input {
+    display: none;
+}
+
+.popup {
+    width: fit-content;
+    padding: 1em;
+    border-radius: 12px;
+    background-color: var(--bg-clr);
+    visibility: hidden;
+    text-align: center;
+}
+
+.open-popup {
+    visibility: visible;
+    width: fit-content;
+    padding: 2em;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, .5) 0 0 0 1000000px;
+    position: absolute;
+    left: 40%;
+    bottom: 30%;
+}  
+
+.popup img {
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2 {
+    font-size: 45px;
+    font-weight: 500;
+    margin: 20px 0 10px;
+    font-family: var(--ff-body)
+}
+
+
+.popup button {
+    background-color: white;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.main-menu>.active>li {
+    background-color: #fd5f00;
+    color: #fd5f00;
+}
+
+.nav-pills {
+    background-color: #2770a1;
+    border-radius: 15px;
+    color: #f6f6e9;
+}
+
+.toda-hr {
+    color: rgb(0, 0, 0, 1);
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.search-icon, .sort-icon{
+    height: 25px;
+    width: 30px;
+    margin-left: 50px;
+}
+
+h5 {
+    margin-bottom: 0;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+h6 {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+small {
+    font-size: 13px;
+}
+
+#status {
+    text-align: center;
+    opacity: 0.5;
+}
+
+.view {
+    border-radius: 35px;
+    border-color: transparent;
+    height: 35px;
+    width: 100px;
+    background-color: #fd5f00;
+    color: white;
+}
+
+.pending-list {
+    padding-left: 20px;
+}
+
+.edit-icon, .delete-icon {
+    width: 22px;
+    opacity: 0.75;
+    text-align: center;
+
+}
+
+.full-name {
+    margin-bottom: 0;
+}
+
+.right-details {
+    padding-top: 50px;
+}
+
+.add {
+    width: 50px;
+    justify-content: center;
+}
+
+
+.download {
+    width: 33px;
+    margin-top:20px;
+    margin-left: 5px;
+}
+
+
+.file-input > input {
+    display: none;
+}
+
+  .search-form {
+    margin-left: 275px;
+}
+
+.search-bar {
+    margin-left: 250px;
+}
+
+.form-control {
+    margin-left: 80px;
+}
+
+.search-icon {
+    height: 25px;
+    width: 30px;
+    margin-left: 50px;
+}
+
+button {
+    height: 30px;
+    text-align: center;
+}
+
+.btn-options {
+    height: 40px;
+    width: 80px;
+}
+
+.btn-options:hover {
+    color: #fd5f00;
+}
+
+#name {
+    border: none;
+}
+
+th {
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 100;
+}
